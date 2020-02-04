@@ -1,0 +1,207 @@
+﻿@{
+    ViewBag.Title = "CurrentStatusReport";
+}
+@Html.Partial("CreateIncident")
+<div class="tab-content" ng-app="myApp3" style="float:left; width:60%;height:100%; padding-left:80px;">
+
+    <script>
+
+        var myApp3 = angular.module("myApp3", []);
+
+        myApp3.controller('MyAppCSR',
+           function ($scope) {
+               $scope.Preporter = "";
+               $scope.setreporter = function ($Getreporter) {
+                   $scope.reporter = $Getreporter;
+
+               }
+
+           });
+        myApp3.controller("CSRctrl", function ($scope, $http) {
+            $scope.CSRDetails = "";
+            $http.get("/ITSMS/GetCSRInfo")
+            .then(function (result) {
+                $scope.CSRDetails = result.data;
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+            $scope.removeRec = function (User) {
+                $http.post("/ITSMS/DeleteCSR", User)
+                 .then(function (data) {
+                     location.reload();
+                     return response;
+
+
+                 })
+            }
+            $scope.NewInsert = {
+                NewUsers: {}
+            }
+            $scope.EditRecord = function (User) {
+                $scope.NewInsert.NewUsers.reporter = User.reporter;
+                $scope.NewInsert.NewUsers.Emailid = User.Emailid;
+
+                $scope.NewInsert.NewUsers.Product = User.Product;
+                $scope.NewInsert.NewUsers.Component = User.Component;
+                $scope.NewInsert.NewUsers.Version = User.Version;
+                $scope.NewInsert.NewUsers.DOM = User.DOM;
+                $scope.NewInsert.NewUsers.Currentstatus = User.Currentstatus;
+                $scope.NewInsert.NewUsers.Resolution = User.Resolution;
+                $scope.NewInsert.NewUsers.HW = User.HW;
+                $scope.NewInsert.NewUsers.SW = User.SW;
+                $scope.NewInsert.NewUsers.Changedin = User.Changedin;
+                $scope.NewInsert.NewUsers.Remarks = User.Remarks;
+                $scope.NewInsert.NewUsers.cUpdate = user.cUpdate;
+
+                $scope.editupdate = true;
+                $scope.editAdd = false;
+                alert("Edit");
+            }
+
+            $scope.Submit = function () {
+                $http.post("/ITSMS/InsertCSR", $scope.NewInsert.NewUsers)
+                .then(function (data) {
+                    location.reload();
+                    alert("Save Record");
+
+                })
+            }
+            $scope.Update = function () {
+                $http.post("/ITSMS/UpdateCSR", $scope.NewInsert.NewUsers)
+                .then(function (data) {
+                    location.reload();
+                    alert("Save Update");
+                    $scope.editAdd = true;
+                    $scope.editupdate = false;
+
+                })
+            }
+
+
+
+        });
+
+
+    </script>
+    <div ng-controller="MyAppCSR">
+        <div ng-controller="CSRctrl">
+            <table id="CSR" ng-show="CSRDetails">
+                <b><u>Status Report</u></b>
+                <tr>
+                    <td> Name Of The Reporter</td>
+                    <td style="width:150px; ">
+                        <input type="text" ng-model="NewInsert.NewUsers.reporter" class="form-control" id="PrType" style="width:150px; ">
+                    </td>
+
+                    <td>Email Id</td>
+                    <td style="width:150px; ">
+                        <input type="text" ng-model="NewInsert.NewUsers.Emailid" class="form-control" id="PrType" style="width:150px; ">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Name Of The Product</td>
+                    <td style="width:150px; ">
+                        <input type="text" ng-model="NewInsert.NewUsers.Product" class="form-control" id="PrType" style="width:150px; ">
+                    </td>
+
+                    <td>Component</td>
+                    <td style="width:150px; ">
+                        <input type="text" ng-model="NewInsert.NewUsers.Component" class="form-control" id="PrType" style="width:150px; ">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Version</td>
+                    <td>
+                        <input type="text" ng-model="NewInsert.NewUsers.Version" class="form-control" id="PrType" style="width:150px; ">
+                    </td>
+
+                    <td>Date Of Manufacture</td>
+                    <td style="width:150px; ">
+                        <input type="text" ng-model="NewInsert.NewUsers.DOM" class="form-control" id="PrType" style="width:150px; ">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Current Status</td>
+                    <td style="width:150px; ">
+                        <input type="text" ng-model="NewInsert.NewUsers.Currentstatus" class="form-control" id="PrType" style="width:150px; ">
+                    </td>
+
+                    <td>Resolution</td>
+                    <td style="width:150px; ">
+                        <input type="text" ng-model="NewInsert.NewUsers.Resolution" class="form-control" id="PrType" style="width:150px; ">
+                    </td>
+                </tr>
+                <tr><th><u>Severity</u></th></tr>
+                <tr>
+                    <td>Hardware</td>
+                    <td style="width:150px; ">
+                        <input type="text" ng-model="NewInsert.NewUsers.HW" class="form-control" id="PrType" style="width:150px; ">
+                    </td>
+
+                    <td>Software</td>
+                    <td style="width:150px; ">
+                        <input type="text" ng-model="NewInsert.NewUsers.SW" class="form-control" id="PrType" style="width:150px; ">
+                    </td>
+                </tr>
+                <td></td>
+                <tr style="text-align:center;">
+                    <th colspan="4">Changed in <input type="number" class="form-control" id="PrType" ng-model="NewInsert.NewUsers.Changedin" />&nbsp;Days/Months/Years</th>
+                </tr>
+                <tr>
+                    <td>Please Enter The Latest Remarks </td>
+                    <td>
+                        <input type="text" ng-model="NewInsert.NewUsers.Remarks" class="form-control" id="PrType" style="width:150px;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Are you sure to update the information&save it to the repository Yes/no ?</td>
+                </tr>
+                <tr>
+                    <td>
+
+                        <input type="radio" value="yes " name="res" ng-model="NewInsert.NewUsers.cUpdate">Yes
+                        <input type="radio" value="no" name="rcvr" ng-model="NewInsert.NewUsers.cUpdate">No
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" class="btn btn-success ">
+                            submit
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <table border="1" bordercolor="black" width="765px" cellpadding="3" cellspacing="3">
+                <tr style="color:blue;">
+                <thead>
+
+                    <tr>
+                        <th class="col-md-2">Reporter Name</th>
+                        <th class="col-md-5">Email Id</th>
+                        <th class="col-md-5">Remarks</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="CSRD in CSRDetails">
+
+
+                        <td>{{CSRD.reporter}} </td>
+                        <td>{{CSRD.Emailid}} </td>
+
+                        <td>{{CSRD.Remarks}}</td>
+
+                        <td>
+                            <input type="button" value="Edit Record" id="btnEdit" class="btn btn-success" ng-model="editupdate" ng-click="EditRecord(CSRD)">
+                        </td>
+
+                        <td>
+                            <input type="button" value="Delete" class="btn btn-danger" id="btnDelete" ng-click="removeRec(CSRD)" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

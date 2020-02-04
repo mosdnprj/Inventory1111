@@ -1,0 +1,199 @@
+﻿@{
+    ViewBag.Title = "Problem";
+}
+@Html.Partial("ProblemManagement")
+<div ng-app="myApp" class="tab-content" id="tables" style="float:left;padding-left:70px;padding-top:50px; width:60%;height:100%;">
+    <script>
+
+        var myApp = angular.module("myApp", []);
+
+
+        myApp.controller("PRctrl", function ($scope, $http) {
+            $scope.PRDetails = "";
+            $http.get("/ITSMS/GetPRInfo")
+            .then(function (result) {
+                $scope.PRDetails = result.data;
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+
+            $scope.NewInsert = {
+                NewUsers: {}
+            }
+
+            $scope.removeRec = function (User) {
+                $http.post("/ITSMS/DeletePR", User)
+                 .then(function (data) {
+                     location.reload();
+                     return response;
+
+
+                 })
+            }
+
+            $scope.EditRecord = function (User) {
+                $scope.NewInsert.NewUsers.Facility = User.Facility;
+                $scope.NewInsert.NewUsers.Dept = User.Dept;
+                $scope.NewInsert.NewUsers.ReasonForSending = User.ReasonForSending;
+                $scope.NewInsert.NewUsers.Section = User.Section;
+                $scope.NewInsert.NewUsers.Information = User.Information;
+                $scope.NewInsert.NewUsers.DOD = User.DOD;
+                $scope.NewInsert.NewUsers.PInvestigator = User.PInvestigator;
+                $scope.NewInsert.NewUsers.ProblemNbr = User.ProblemNbr;
+                $scope.NewInsert.NewUsers.Problemcomments = User.Problemcomments;
+                $scope.editupdate = true;
+                $scope.editAdd = false;
+                alert("Edit");
+
+            }
+
+            $scope.Submit = function () {
+                $http.post("/ITSMS/InsertPR", $scope.NewInsert.NewUsers)
+                .then(function (data) {
+                    location.reload();
+                    alert("Save Record");
+
+                })
+            }
+
+            $scope.Update = function () {
+                $http.post("/ITSMS/UpdatePR", $scope.NewInsert.NewUsers)
+                .then(function (data) {
+                    location.reload();
+                    alert("Save Update");
+                    $scope.editAdd = true;
+                    $scope.editupdate = false;
+
+                })
+            }
+
+
+        });
+
+
+    </script>
+
+    <div ng-controller="PRctrl">
+
+        <table ng-show="PRDetails">
+            <tr>
+                <td>
+                    Facility
+                </td>
+
+
+                <td>
+                    <input type="text" ng-model="NewInsert.NewUsers.Facility" class="form-control" id="PrType" style="width:200px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Department/location
+                </td>
+
+
+                <td>
+                    <input type="text" ng-model="NewInsert.NewUsers.Dept" class="form-control" id="PrType" style="width:200px;" />
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Reason For Sending
+                </td>
+
+                <td>
+                    <input type="text" ng-model="NewInsert.NewUsers.ReasonForSending" class="form-control" id="PrType" style="width:200px;" />
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>Section To Be Addressed</td>
+                <td>
+                    <input type="text" ng-model="NewInsert.NewUsers.Section" class="form-control" id="PrType" style="width:200px;" />
+
+                </td>
+            </tr>
+            <tr>
+                <td>Information Needed</td>
+                <td>
+                    <input type="text" ng-model="NewInsert.NewUsers.Information" class="form-control" id="PrType" style="width:200px;" />
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>Date Of Discovery</td>
+                <td>
+                    <input type="date" ng-model="NewInsert.NewUsers.DOD" class="form-control" id="PrType" style="width:200px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>Problem Investigator</td>
+                <td>
+                    <input type="text" ng-model="NewInsert.NewUsers.PInvestigator" class="form-control" id="PrType" style="width:200px;" />
+
+                </td>
+            </tr>
+            <tr>
+                <td>Problem Number</td>
+                <td>
+                    <input type="text" ng-model="NewInsert.NewUsers.ProblemNbr" class="form-control" id="PrType" style="width:200px;" />
+
+                </td>
+            </tr>
+            <tr>
+                <td>Comments</td>
+                <td>
+                    <input type="text" ng-model="NewInsert.NewUsers.Problemcomments" rows="3" cols="15" class="form-control" id="PrType" style="width:200px;" />
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" class="btn btn-success" value="Update" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                </td>
+
+                <td>
+                    <input type="button" class="btn btn-success" value="Submit" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" />
+                </td>
+            </tr>
+
+        </table>
+        <table class="table table-bordered">
+            <thead>
+
+                <tr>
+                    <th class="col-md-2">Facility </th>
+                    <th class="col-md-5">Department</th>
+                    <th class="col-md-10">Date Of Discovery</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="PRM in PRDetails">
+                    <td>{{PRM.Facility}} </td>
+                    <td>{{PRM.Dept}}</td>
+                    <td>{{PRM.DOD}}</td>
+                    <td>
+                        <input type="button" class="btn btn-success" value="Edit Record" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(PRM)">
+                    </td>
+
+                    <td>
+                        <input type="button" class="btn btn-danger" value="Delete" id="btnDelete" ng-click="removeRec(PRM)" />
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+
+
+    </div>
+</div>
+
+

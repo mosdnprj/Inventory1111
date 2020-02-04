@@ -1,0 +1,184 @@
+﻿@model ERPMBA.Models.PerformanceAppraisal
+@{
+    ViewBag.Title = "PerformanceAppraisal";
+}
+@Html.Partial("DM")
+<div class="tab-content" style="float:left; width:60%;height:100%;padding-left:30px;">
+    <div id="Details" class="tab-pane fade in active" style="width:100%;height:100%;padding-left:15px;padding-top:80px;">
+        <h3><center> Performance Details</center></h3>
+        <form name="contactForm" method="post" action="" class="form-inline" role="form">
+            <b>Employee Details</b><br />
+            <div class="input-group" style="width:200px;">
+                <label for="emplid">Employee Id</label>
+                <select class="form-control" id="emplid">
+                    <option>Select </option>
+                    <option>emp1</option>
+                    <option>emp2</option>
+                    <option>emp3</option>
+                    <option>emp4</option>
+                </select>
+            </div>
+            <div class="input-group" style="width:200px;">
+                <label for="Department">Department</label>
+                <select class="form-control" id="emplid">
+                    <option>Select </option>
+                    <option>emp1</option>
+                    <option>emp2</option>
+                    <option>emp3</option>
+                    <option>emp4</option>
+                </select>
+            </div>
+            <div class="input-group" style="width:200px;">
+                <label for="Date">Date </label>
+                <input type="date" class="form-control" />
+            </div>
+            <div class="input-group" style="width:200px;">
+                <label for="PeriodofReview">Period of Review</label>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="input-group" style="width:200px;">
+                <label for="Reviewer">Reviewer</label>
+                <input type="text" class="form-control" />
+            </div>
+            <br /><br />
+            <b>Performance Details</b>
+            <style>
+                td {
+                    text-align: center;
+                }
+            </style>
+
+            <table class="table-bordered" width="100%">
+
+
+                <tr>
+                    <td>Performance</td>
+                    <td>Excellent</td>
+                    <td>Good</td>
+                    <td>Fair</td>
+                    <td>Poor</td>
+
+                </tr>
+                <tr>
+                    <td>Job Knowledge</td>
+                    <td><input type="radio" name="JobKnowledge" /></td>
+                    <td><input type="radio" name="JobKnowledge" /></td>
+                    <td><input type="radio" name="JobKnowledge" /></td>
+                    <td><input type="radio" name="JobKnowledge" /></td>
+                </tr>
+                <tr>
+                    <td>Productivity</td>
+                    <td><input type="radio" name="Productivity" /></td>
+                    <td><input type="radio" name="Productivity" /></td>
+                    <td><input type="radio" name="Productivity" /></td>
+                    <td><input type="radio" name="Productivity" /></td>
+                </tr>
+                <tr>
+                    <td>Work Quality</td>
+                    <td><input type="radio" name="WorkQuality" /></td>
+                    <td><input type="radio" name="WorkQuality" /></td>
+                    <td><input type="radio" name="WorkQuality" /></td>
+                    <td><input type="radio" name="WorkQuality" /></td>
+                </tr>
+                <tr>
+                    <td>Technical Skils</td>
+                    <td><input type="radio" name="TechnicalSkils" /></td>
+                    <td><input type="radio" name="TechnicalSkils" /></td>
+                    <td><input type="radio" name="TechnicalSkils" /></td>
+                    <td><input type="radio" name="TechnicalSkils" /></td>
+                </tr>
+                <tr>
+                    <td>Work Consistency</td>
+                    <td><input type="radio" name="WorkConsistency" /></td>
+                    <td><input type="radio" name="WorkConsistency" /></td>
+                    <td><input type="radio" name="WorkConsistency" /></td>
+                    <td><input type="radio" name="WorkConsistency" /></td>
+                </tr>
+                <tr>
+                    <td>Enthusiasm</td>
+                    <td><input type="radio" name="Enthusiasm" /></td>
+                    <td><input type="radio" name="Enthusiasm" /></td>
+                    <td><input type="radio" name="Enthusiasm" /></td>
+                    <td><input type="radio" name="Enthusiasm" /></td>
+                </tr>
+                <tr>
+                    <td>Cooperation</td>
+                    <td><input type="radio" name="Cooperation" /></td>
+                    <td><input type="radio" name="Cooperation" /></td>
+                    <td><input type="radio" name="Cooperation" /></td>
+                    <td><input type="radio" name="Cooperation" /></td>
+                </tr>
+                <tr>
+                    <td>Attitude</td>
+                    <td><input type="radio" name="Attitude" /></td>
+                    <td><input type="radio" name="Attitude" /></td>
+                    <td><input type="radio" name="Attitude" /></td>
+                    <td><input type="radio" name="Attitude" /></td>
+                </tr>
+                <tr>
+                    <td>Intiative</td>
+                    <td><input type="radio" name="Intiative" /></td>
+                    <td><input type="radio" name="Intiative" /></td>
+                    <td><input type="radio" name="Intiative" /></td>
+                    <td><input type="radio" name="Intiative" /></td>
+                </tr>
+                <tr>
+                    <td>Work Relations</td>
+                    <td><input type="radio" name="WorkRelations" /></td>
+                    <td><input type="radio" name="WorkRelations" /></td>
+                    <td><input type="radio" name="WorkRelations" /></td>
+                    <td><input type="radio" name="WorkRelations" /></td>
+                </tr>
+                <tr>
+                    <td>Creativity</td>
+                    <td><input type="radio" name="Creativity" /></td>
+                    <td><input type="radio" name="Creativity" /></td>
+                    <td><input type="radio" name="Creativity" /></td>
+                    <td><input type="radio" name="Creativity" /></td>
+                </tr>
+                <tr>
+                    <td>Puntuality</td>
+                    <td><input type="radio" name="Puntuality" /></td>
+                    <td><input type="radio" name="Puntuality" /></td>
+                    <td><input type="radio" name="Puntuality" /></td>
+                    <td><input type="radio" name="Puntuality" /></td>
+                </tr>
+                <tr>
+                    <td>Attendance</td>
+                    <td><input type="radio" name="Attendance" /></td>
+                    <td><input type="radio" name="Attendance" /></td>
+                    <td><input type="radio" name="Attendance" /></td>
+                    <td><input type="radio" name="Attendance" /></td>
+                </tr>
+                <tr>
+                    <td>Dependability</td>
+                    <td><input type="radio" name="Dependability" /></td>
+                    <td><input type="radio" name="Dependability" /></td>
+                    <td><input type="radio" name="Dependability" /></td>
+                    <td><input type="radio" name="Dependability" /></td>
+                </tr>
+                <tr>
+                    <td>Communication Skills</td>
+                    <td><input type="radio" name="CommunicationSkills" /></td>
+                    <td><input type="radio" name="CommunicationSkills" /></td>
+                    <td><input type="radio" name="CommunicationSkills" /></td>
+                    <td><input type="radio" name="CommunicationSkills" /></td>
+                </tr>
+                <tr>
+                    <td>Overal Rating</td>
+                    <td><input type="radio" name="OveralRating" /></td>
+                    <td><input type="radio" name="OveralRating" /></td>
+                    <td><input type="radio" name="OveralRating" /></td>
+                    <td><input type="radio" name="OveralRating" /></td>
+                </tr>
+            </table>
+        </form>
+
+    </div>
+
+
+
+
+
+
+</div>

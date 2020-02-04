@@ -1,0 +1,217 @@
+﻿@{
+    ViewBag.Title = "Newsale";
+}
+
+@Html.Partial("Order")
+<script>
+    var myApp1 = angular.module("myApp1", []);
+
+
+    myApp1.controller("CSOctrl", function ($scope, $http) {
+        $scope.NewsaleDetails = "";
+
+        $http.get("/Inventory/GetNewsaleInfo")
+        .then(function (result) {
+            $scope.NewsaleDetails = result.data;
+
+            $scope.editAdd = true;
+            $scope.editupdate = false;
+            alert("success");
+
+        })
+        $scope.getTotal = function () {
+            var total = 0;
+            for (var i = 0; i < $scope.NewsaleDetails.length; i++) {
+                var icd = $scope.NewsaleDetails[i];
+                total += icd.Amount;
+            }
+            return total;
+        }
+
+        $scope.NewInsert = {
+            NewUsers: {}
+        }
+        $scope.EditRecord = function (User) {
+            $scope.NewInsert.NewUsers = User;
+
+
+            $scope.editupdate = true;
+            $scope.editAdd = false;
+            alert("Edit");
+        }
+        $scope.removeRec = function (User) {
+            $http.post("/Inventory/DeleteNewsale", User)
+             .then(function (data) {
+                 location.reload();
+                 return response;
+
+
+             })
+        }
+        $scope.Update = function () {
+            $http.post("/Inventory/UpdateNewsale", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Update");
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+        }
+        $scope.adding = function () {
+            $http.post("/Inventory/InsertNewsale", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Record");
+
+            })
+        }
+    });
+</script>
+<div ng-app="myApp1" class="tab-content" id="tables" >
+
+    <div ng-controller="CSOctrl" style="width:100%;">
+
+
+        <table class="tableSale" style="float:left;padding-left:40px;">
+            <thead>
+                <tr>
+
+
+                    <th style="width:300px;">Item </th>
+                    <th style="width:100px;" >Tax</th>
+                    <th style="width:100px;">Price</th>
+
+                    <th style="width:100px;">Quantity</th>
+                    <th style="width:100px;">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="icd in NewsaleDetails">
+
+                    <td>{{icd.Itemdetails}}</td>
+                    <td>{{icd.Price}}</td>
+                    <td>{{icd.Tax}}</td>
+                    <td>{{icd.Quantity}} </td>
+                    <td>{{icd.Amount}}</td>
+                    <td>
+                        <input type="button" value="Edit Record" class="btn btn-success" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(icd)">
+                    </td>
+
+                    <td>
+                        <input type="button" value="Delete" class="btn btn-danger" id="btnDelete" ng-click="removeRec(icd)" />
+                    </td>
+                </tr>
+
+                <tr>
+
+
+                    <td>
+                        <input type="text" class="form-control" ng-model="NewInsert.NewUsers.Itemdetails" required />
+                    </td>
+
+                    <td>
+                        <input type="text" class="form-control" ng-model="NewInsert.NewUsers.Price" required />
+                    </td>
+
+                    <td>
+                        <input type=text class="form-control" ng-model="NewInsert.NewUsers.Tax" required />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" ng-model="NewInsert.NewUsers.Quantity" required />
+                    </td>
+
+                    <td>
+                        @*   <input type="text" class="form-control" ng-model="NewInsert.NewUsers.Amount=(NewInsert.NewUsers.Tax)--(NewInsert.NewUsers.Quantity*NewInsert.NewUsers.Price)" required />*@
+                        <input type="text" class="form-control" ng-model="NewInsert.NewUsers.Amount=(((NewInsert.NewUsers.Quantity*NewInsert.NewUsers.Price)/100))*((NewInsert.NewUsers.Tax))+(NewInsert.NewUsers.Quantity*NewInsert.NewUsers.Price)" required />
+                    </td>
+                    <td>
+
+                        <input type="submit" ng-click="adding()" value="submit">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        Total: {{ getTotal() }}
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+
+
+        <br>
+
+       
+
+
+        <table class="tableresult">
+            <tr>
+                <td>Sub Total</td>
+                <td>
+                    <input type=text id="subtotal" size="20" class="form-control" value="{{ getTotal() }}">
+                </td>
+                <td></td>
+                <td>Discount</td>
+                <td>
+                    <input type=text id="discount" size="20" class="form-control" ng-model="NewInsert.NewUsers.Discount">
+                </td>
+            </tr>
+            <tr>
+
+                <td></td>
+                <td>Total(Rs.)</td>
+                <td>
+                    <input type=text id="total" size="20" class="form-control" value="{{getTotal()*((100-NewInsert.NewUsers.Discount)/100)}}">
+                </td>
+            </tr>
+            <tr>
+                <td>Terms & Conditions</td>
+                <td>
+                    <textarea rows="2" cols="28" id="terms" class="form-control" ng-model="NewInsert.NewUsers.Termscondi"></textarea>
+                </td>
+            </tr>
+        </table>
+        <div style="padding-left:180px;padding-top:20px;">
+            <table ng-show="CSOdetails">
+                <tr style="align-items:center">
+
+                    <td>
+                        <input type="button" value="Update" class="btn btn-success" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                    </td>
+
+                    <td>
+                        <input type="button" value="Submit" class="btn btn-success" id="btnSubmit" ng-show="editAdd" ng-click="Submit1()" />
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+        <br />
+        <br />
+
+    </div>
+
+    <div style="width:20%;float:left;padding-top:25px;">
+        <table>
+
+            <tr ng-repeat="CSOd in CSODetails">
+                <td>
+                    <input type="button" style="height:32px;" class="btn btn-success" value="Edit Record" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(CSOd)">
+                </td>
+                <td>
+                    <input type="button" style="height:32px;" class="btn btn-danger" value="Delete" id="btnDelete" ng-click="removeRec(CSOd)" />
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+    </div>

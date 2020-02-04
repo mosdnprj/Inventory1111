@@ -1,0 +1,74 @@
+﻿
+
+@{
+    ViewBag.Title = "TAM";
+}
+@Html.Partial("Index")
+<style>
+    ul li ul li {
+        text-decoration: none;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: relative;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .dropdown-content a:hover {
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+
+    .nav-pills nav-stacked {
+        position: relative;
+    }
+</style>
+<div style="float:left; width:200px; padding-top:100px; border-color:#333300">
+    <ul class="nav nav-pills nav-stacked" style="float:left; ">
+
+        <li class="dropdown" style="width: 200px; background : linear-gradient(to right, #ccffff, #eaecc6 100%); text-align:center">
+            @Html.ActionLink("Attendance", "Attendance", "HR", new { @style = "color:Black;" })
+
+
+    </li>
+    <li>
+        <ul class="nav nav-pills nav-stacked" style="float:left; ">
+
+            <li class="dropdown" style="width: 200px; background : linear-gradient(to right, #ccffff, #eaecc6 100%); text-align:center">
+                @Html.ActionLink("Leave", "LeaveTracker", "HR", new { @style = "color:Black;" })
+
+                <ul class="dropdown-content" style="background:">
+
+
+                    @Html.ActionLink("Add Leave", "AddLeave", "HR", new { @style = "color:Black;" })
+                    @Html.ActionLink("View Leave", "ViewLeave", "HR", new { @style = "color:Black;" })
+                    @Html.ActionLink("Leave Status", "LeaveTracker", "HR", new { @style = "color:Black;" })
+            </li>
+        </ul>
+    </li>
+    <li style="width: 200px; background : linear-gradient(to right, #ccffff, #eaecc6 100%); text-align:center">@Html.ActionLink("TimeTracker", "TimeTracker", "HR", new { @style = "color:Black;" })</li>
+</ul>
+</div>
+
+

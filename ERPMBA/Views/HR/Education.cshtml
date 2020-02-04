@@ -1,0 +1,201 @@
+﻿@model ERPMBA.Models.Education
+@{
+    ViewBag.Title = "Education";
+}
+@Html.Partial("PIM")
+
+<script>
+    var myApp1 = angular.module("myApp1", []);
+
+
+    myApp1.controller("Educationctrl", function ($scope, $http) {
+        $scope.EducationDetails = "";
+
+        $http.get("/HR/GetEducationInfo")
+        .then(function (result) {
+            $scope.EducationDetails = result.data;
+            $scope.editAdd = true;
+            $scope.editupdate = false;
+
+
+        })
+        $scope.removeRec = function (User) {
+            $http.post("/HR/DeleteEducation", User)
+             .then(function (data) {
+                 location.reload();
+                 return response;
+
+
+             })
+        }
+        $scope.NewInsert = {
+            NewUsers: {}
+        }
+        $scope.EditRecord = function (User) {
+            $scope.NewInsert.NewUsers.emplid = User.emplid;
+            $scope.NewInsert.NewUsers.SSCPassYear = User.SSCPassYear;
+            $scope.NewInsert.NewUsers.InterPassYear = User.InterPassYear;
+            $scope.NewInsert.NewUsers.DegreePassYear = User.DegreePassYear;
+            $scope.NewInsert.NewUsers.PGpassyear = User.PGpassyear;
+            $scope.NewInsert.NewUsers.SSCPercentage = User.SSCPercentage;
+            $scope.NewInsert.NewUsers.INTERPercentage = User.INTERPercentage;
+            $scope.NewInsert.NewUsers.DEGREEPercentage = User.DEGREEPercentage;
+            $scope.NewInsert.NewUsers.PGPercentage = User.PGPercentage;
+            $scope.NewInsert.NewUsers.othercertification = User.othercertification;
+            $scope.editupdate = true;
+            $scope.editAdd = false;
+            alert("Edit");
+        }
+
+        $scope.Submit = function () {
+            $http.post("/HR/InsertEducation", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Record");
+
+            })
+        }
+        $scope.Update = function () {
+            $http.post("/HR/UpdateEducation", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Update");
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+        }
+
+    });
+</script>
+<div ng-app="myApp1" style="float:left; width:60%; padding-top:50px; border-color:#333300;padding-left:50PX;">
+    <div ng-controller="Educationctrl">
+        <h3 style="text-align:center;">Education Details</h3>
+        <table ng-show="EducationDetails">
+            <tr>
+                <td>
+                    Employee Id
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.emplid, new { @class = "form-control", placeholder = "Employee Id", data_ng_model = "NewInsert.NewUsers.emplid" })
+
+
+                </td>
+                <td>
+                    SSC PassYear
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.SSCPassYear, new { @class = "form-control", placeholder = "SSCPassYear ", data_ng_model = "NewInsert.NewUsers.SSCPassYear" })
+
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Inter PassYear
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.InterPassYear, new { @class = "form-control", placeholder = "InterPassYear", data_ng_model = "NewInsert.NewUsers.InterPassYear" })
+
+
+                </td>
+                <td>
+                    Degree PassYear
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.DegreePassYear, new { @class = "form-control", placeholder = "DegreePassYear", data_ng_model = "NewInsert.NewUsers.DegreePassYear" })
+
+
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    PG passyear
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.PGpassyear, new { @class = "form-control", placeholder = "PGpassyear", data_ng_model = "NewInsert.NewUsers.PGpassyear" })
+
+
+                </td>
+                <td>
+                    SSC Percentage
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.SSCPercentage, new { @class = "form-control", placeholder = "SSCPercentage", data_ng_model = "NewInsert.NewUsers.SSCPercentage" })
+
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>
+                    INTERPercentage
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.INTERPercentage, new { @class = "form-control", placeholder = "INTERPercentage", data_ng_model = "NewInsert.NewUsers.INTERPercentage" })
+
+
+                </td>
+                <td>
+                    DEGREEPercentage
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.DEGREEPercentage, new { @class = "form-control", placeholder = "DEGREEPercentage", data_ng_model = "NewInsert.NewUsers.DEGREEPercentage" })
+
+
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    PGPercentage
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.PGPercentage, new { @class = "form-control", placeholder = "PGPercentage", data_ng_model = "NewInsert.NewUsers.PGPercentage" })
+
+
+                </td>
+                <td>
+                    Othercertification
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.othercertification, new { @class = "form-control", placeholder = "Othercertification", data_ng_model = "NewInsert.NewUsers.othercertification" })
+
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" class="btn-success" value="Update" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                </td>
+
+                <td>
+                    <input type="button" class="btn-success" value="Submit" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" />
+                </td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>emplid</th>
+                    <th>SSCPassYear</th>
+                    <th>othercertification</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="usrd in EducationDetails">
+                    <td>{{usrd.emplid}} </td>
+                    <td>{{usrd.SSCPassYear}} </td>
+                    <td>{{usrd.othercertification}} </td>
+                    <td>
+                        <input type="button" class="btn-success" value="Edit Record" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(usrd)">
+                    </td>
+                    <td>
+                        <input type="button" class="btn-danger" value="Delete" id="btnDelete" ng-click="removeRec(usrd)" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

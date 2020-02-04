@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Administration";
+}
+
+
+@Html.Partial("Index")
+<div style="float:left; width:200px; padding-top:100px; border-color:#333300">
+    <ul class="nav nav-pills nav-stacked" style=" float:left;">
+        <li style="width: 200px; background : linear-gradient(to bottom, #cc6699 4%, #993333 100%); text-align:center">@Html.ActionLink("Create Article", "CreateArticle", "ITSMS", new { @style = "color:Black;" })</li>
+
+        <li style="width: 200px; background: linear-gradient(to bottom, #666699 4%, #006666 100%); text-align:center">@Html.ActionLink("Current Status Report", "CurrentStatusReport", "ITSMS", new { @style = "color:Black;" })</li>
+
+    </ul>
+</div>>

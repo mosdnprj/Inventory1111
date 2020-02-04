@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Search";
+}
+@Html.Partial("ProblemManagement")
+<div style="float:left; width:60%; padding-top:100px; border-color:#333300">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <div ng-app="myApp" ng-controller="namesCtrl">
+        <p style="float:right;">Search&nbsp&nbsp<input type="text" ng-model="test">&nbsp<span class="glyphicon glyphicon-search"></span></p>
+        <form id="search1">
+            <table>
+                <tr>
+                    <td>Last Name:</td>
+                    <td><input type="text" /></td>
+                    <td>First Name:</td>
+                    <td><input type="text" /></td>
+                </tr>
+                <tr><td>Organization:</td><td><input type="text" /></td><td>Status:</td><td><input type="text" /></tr>
+                <tr><td>Location:</td><td><input type="text" /><td>Email Id:</td><td><input type="text" /></tr>
+                <tr><td>Phone:</td><td><input type="text" /><td>Employee Number:</td><td><input type="text" /></tr>
+                <tr><td>Manager:</td><td><input type="text" /><td>Mobile:</td><td><input type="text" /></tr>
+                <tr><td>Notification:</td><td><input type="text" />
+            </table>
+            <button type="button" class="btn btn-info" style="float:right;">Search</button>
+        </form>
+        <br /><br /><br />
+        <table border="1" bordercolor="black" width="765px" cellpadding="15" cellspacing="3">
+            <tr style="color:blue;">
+
+                <asp:Panel ID="Panel 1" runat="server">
+
+                </asp:Panel>
+
+                <td> Contact</td>
+                <td>Status</td>
+                <td> Organization</td>
+                <td> Email</td>
+                <td>Phone </td>
+                <td> Function</td>
+            </tr>
+            <tr>
+                <asp:Panel ID="Panel 1" runat="server">
+                </asp:Panel>
+                <td></td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+
+            </tr>
+
+        </table>
+    </div>
+</div>  

@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Style/MasterPage.cshtml";
+}
+
+@section featured
+    {
+    <style>
+        .ul {
+            list-style-type: none;
+        }
+
+        .dropbtn {
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            list-style-type: none;
+            display: none;
+            position: absolute;
+            background-color: #0099cc;
+            min-width: 160px;
+            padding-left: 5px;
+            box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                style ="color:black" text-decoration: none;
+                padding: 12px 16px;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: black;
+                }
+
+        .dropdown:hover .dropdown-content {
+            padding-top: 5px;
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: red;
+        }
+
+        .dropdown a {
+            color: black;
+        }
+    </style>
+
+    <div class="container" style="color:red;float:left;background-color:gainsboro;">
+        <ul class="nav nav-tabs" style="width:1150px;">
+
+            <li class="dropdown" style="width:125px;padding-top:23px;">
+                <a class="dropdown-toggle" data-toggle="dropdown">CRM Home</a>
+                <ul class="dropdown-content">
+
+                    <li> @Html.ActionLink("MMSdatabaseInf", "MMSdatabaseInf", "CRM", new { @style = "color:Black;" })</li>
+                    <li> @Html.ActionLink("AccountInf", "AccountInf", "CRM", new { @style = "color:Black;" }) </li>
+                    <li> @Html.ActionLink("AccountContacts", "AccountContacts", "CRM", new { @style = "color:Black;" })</li>
+                    <li> @Html.ActionLink("AccountTransactions", "AccountTransactions", "CRM", new { @style = "color:Black;" })</li>
+                    <li> @Html.ActionLink("AccountOpportunities", "AccountOpportunities", "CRM", new { @style = "color:Black;" })</li>
+                    <li> @Html.ActionLink("contact", "contact", "CRM", new { @style = "color:Black;" })</li>
+                    <li> @Html.ActionLink("opportunities", "opportunities", "CRM", new { @style = "color:Black;" })</li>
+                    <li> @Html.ActionLink("transaction", "transaction", "CRM", new { @style = "color:Black;" })</li>
+
+
+                </ul>
+            </li>
+
+            <li class="dropdown" style="width:125px; padding-top:23px;">
+                <a class="dropdown-toggle" data-toggle="dropdown">Chatter</a>
+                <ul class="dropdown-content">
+                </ul>
+            </li>
+            <li class="dropdown" style="width:125px; padding-top:23px;">
+                <a class="dropdown-toggle" data-toggle="dropdown">Calender</a>
+                <ul class="dropdown-content">
+                    <li style="width: 200px;">@Html.ActionLink("MMSdatabase", "MMSdatabase", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("Accounts", "Accounts", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("Leads", "Leads", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("AccountContacts", "AccountContacts", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("AccountTransactions", "AccountTransactions", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("AccountOpportunities", "AccountOpportunities", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("contact", "contact", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("opportunities", "opportunities", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("transaction", "transaction", "CRM", new { @style = "color:Black;" })</li>
+
+
+                </ul>
+            </li>
+            <li class="dropdown" style="width:125px;padding-top:23px;">
+                <a class="dropdown-toggle" data-toggle="dropdown">Lead Management</a>
+                <ul class="dropdown-content">
+                </ul>
+            </li>
+
+            <li class="dropdown" style="width:125px; padding-top:23px;">
+                <a class="dropdown-toggle" data-toggle="dropdown">Groups</a>
+                <ul class="dropdown-content">
+                    <li style="width: 200px;">@Html.ActionLink("MMSdatabase", "MMSdatabase", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("Accounts", "Accounts", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("Leads", "Leads", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("AccountContacts", "AccountContacts", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("AccountTransactions", "AccountTransactions", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("AccountOpportunities", "AccountOpportunities", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("contact", "contact", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("opportunities", "opportunities", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("transaction", "transaction", "CRM", new { @style = "color:Black;" })</li>
+
+                </ul>
+            </li>
+            <li class="dropdown" style="width:125px; padding-top:23px;">
+                <a class="dropdown-toggle" data-toggle="dropdown">Tasks</a>
+                <ul class="dropdown-content">
+                    <li style="width: 200px;">@Html.ActionLink("MMSdatabase", "MMSdatabase", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("Accounts", "Accounts", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("Leads", "Leads", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("AccountContacts", "AccountContacts", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("AccountTransactions", "AccountTransactions", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("AccountOpportunities", "AccountOpportunities", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("contact", "contact", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("opportunities", "opportunities", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 200px;">@Html.ActionLink("transaction", "transaction", "CRM", new { @style = "color:Black;" })</li>
+
+                </ul>
+            </li>
+
+
+            <li class="dropdown" style="width:125px; padding-top:23px;">
+                <a class="dropdown-toggle" data-toggle="dropdown">Product Management</a>
+                <ul class="dropdown-content">
+                </ul>
+            </li>
+
+
+
+
+        </ul>
+    </div>
+
+
+
+}

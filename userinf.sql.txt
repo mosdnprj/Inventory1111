@@ -1,0 +1,54 @@
+
+create table Userandemp       (Userid          varchar(50),
+                               empid           varchar(50))
+
+create table Login            (userid          varchar(50),
+                               userpassword    varchar(50))
+
+
+create table Userinf          (userid          varchar(50),
+                               username        varchar(50),
+                               dob             smalldatetime,
+                               email           varchar(50),
+                               firstname       varchar(50),
+                               secondname      varchar(50),
+                               moblieno        varchar(50),
+                               uspassword        varchar(50))
+
+create table Groupinf         (Groupid         varchar(50),
+                               Roleid          varchar(50),
+                               groupname       varchar(50))
+
+
+create table Roleinf          (roleid          varchar(50),
+                               menuid          varchar(50),
+                               rolename        varchar(50))
+
+create table Grantusr            (menuid          varchar(50),
+                               parentid        varchar(50),
+                               childid         varchar(50))
+
+
+create table Useridinf        (userid          varchar(50),
+                               groupid         varchar(50),
+                               passwordid      varchar(50),
+                               Loginid         varchar(50),
+                               Userinfid       varchar(50),
+                               Urlid           varchar(50))
+
+
+
+
+
+create table LoginHistory     (loginid         varchar(50),
+                               userid          varchar(50),
+                               date            smalldatetime,
+                               time            smalldatetime)
+
+
+
+
+create table Passowrdinf      (passwordid      varchar(50),
+                               passwordchange  varchar(50),
+                               changedate      smalldatetime,
+                               oldpassword     varchar(50))

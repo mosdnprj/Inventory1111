@@ -1,0 +1,14 @@
+﻿@model ERPMBA.Models.Salesperson
+@using SPR; //Add this namespace for the report
+@{
+    ViewBag.Title = "SPR";
+}
+@Html.Partial("Users")
+<h2>Report Details</h2>
+@using (Html.BeginForm())
+{
+    if (ViewBag.ReportViewer != null)
+    {
+        @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+    }
+}

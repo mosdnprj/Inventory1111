@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Knowledgebase";
+
+}
+
+@Html.Partial("Index")
+<div style="float:left; width:200px; padding-top:100px; border-color:#333300">
+    <ul class="nav nav-pills nav-stacked" style=" float:left;">
+        <li style="width: 200px; background : linear-gradient(to right,  #ccffff, #eaecc6 100%); text-align:center">@Html.ActionLink("Create Article", "CreateArticle", "ITSMS", new { @style = "color:Black;" })</li>
+        <li style="width: 200px; background: linear-gradient(to right,  #ccffff, #eaecc6 100%); text-align:center">@Html.ActionLink("  ", "", "ITSMS", new { @style = "color:Black;" })</li>
+
+    </ul>
+</div>

@@ -1,0 +1,14 @@
+﻿ @{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Style/MasterPage.cshtml";
+}
+
+@section featured
+    {
+    <ul class="nav nav-pills">
+       
+        <li style="width: 300px; background-color: #ff5c33; text-align:center">@Html.ActionLink("Order", "Index", "Procurement", new { @style = "color:Black;" })</li>
+        <li style="width: 200px; background-color: #00cc00;; text-align:center">@Html.ActionLink("Dispatch", "Index", "Procurement", new { @style = "color:Black;" })</li>
+        <li style="width: 200px; background-color: #e6e600; text-align:center">@Html.ActionLink("Invoice", "Index", "Procurement", new { @style = "color:Black;" })</li>
+       </ul>
+       }

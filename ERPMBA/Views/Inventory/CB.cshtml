@@ -1,0 +1,131 @@
+﻿
+
+@{
+    ViewBag.Title = "CB";
+}
+
+@Html.Partial("Billing")
+<script>
+    var myApp1 = angular.module("myApp1", []);
+
+
+    myApp1.controller("CBctrl", function ($scope, $http) {
+        $scope.CBDetails = "";
+
+        $http.get("/Inventory/GetCBInfo")
+        .then(function (result) {
+            $scope.CBDetails = result.data;
+            $scope.CBdetails = true;
+            $scope.editAdd = true;
+            $scope.editupdate = false;
+            alert("success");
+            $scope.CBdetails1 = true;
+        })
+
+
+
+        $scope.removeRec = function (User) {
+            $http.post("/Inventory/DeleteCB", User)
+             .then(function (data) {
+                 location.reload();
+                 return response;
+
+
+             })
+        }
+        $scope.NewInsert = {
+            NewUsers: {}
+        }
+        $scope.EditRecord = function (User) {
+            $scope.NewInsert.NewUsers = User;
+            $scope.CBdetails = true;
+            $scope.editupdate = true;
+            $scope.editAdd = false;
+            alert("Edit");
+        }
+        $scope.Update = function () {
+            $http.post("/Inventory/UpdateCB", $scope.NewInsert.NewUsers)
+         .then(function (data) {
+             location.reload();
+             alert("Save Update");
+             $scope.editAdd = true;
+             $scope.editupdate = false;
+
+         })
+        }
+        $scope.Submit = function () {
+            $http.post("/Inventory/InsertCB", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                $scope.NewItem = true;
+
+                alert("Save Record");
+                location.href = '@Url.Action("NewBill", "Inventory")'; return false;
+            })
+        }
+
+        $scope.Addnew = function () {
+            $http.post("/Inventory/InsertCB", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                $scope.NewItem = true;
+
+                alert("Save Record");
+
+            })
+        }
+    });
+</script>
+<div ng-app="myApp1" style="float:left; width:60%;height:100%;padding-top:80px;padding-left:50px;">
+
+    <div ng-controller="CBctrl">
+        <form>
+            <h3> <span class="glyphicon glyphicon-"></span>Create Bill</h3>
+            <hr />
+            <table ng-show="CBDetails">
+                <tr>
+                    <td>
+                        Name
+                    </td>
+                    <td>
+                        <input type=text name=textnames id="textname" size="38" class="form-control" ng-model="NewInsert.NewUsers.Name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Bill Number</td>
+                    <td>
+                        <input type=text name=textnames id="textname" size="38" class="form-control" ng-model="NewInsert.NewUsers.BillNo" readonly />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Bill Date
+                    </td>
+                    <td>
+                        <input type="date" name="dbthy" value="DD-MM-YYYY" style="width:321px;height:35px" class="form-control" ng-model="NewInsert.NewUsers.Billdate">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Due Date
+                    </td>
+                    <td>
+                        <input type="date" name="dbthy" value="DD-MM-YYYY" style="width:321px;height:35px" class="form-control" ng-model="NewInsert.NewUsers.Duedate">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" value="create Bill" class="btn btn-success" id="btnSubmit" ng-click="Submit()" />
+
+                    </td>
+                </tr>
+
+
+
+            </table>
+        </form>
+        <br />
+    </div>
+</div>
+
+
+

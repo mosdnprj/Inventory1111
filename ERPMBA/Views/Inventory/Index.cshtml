@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Style/MasterPage.cshtml";
+}
+
+@section featured
+    {
+   <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .ul
+        {
+            list-style-type:none;
+        }
+    .dropbtn {
+      
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        
+    }
+
+    .dropdown-content {
+        list-style-type:none;
+        display: none;
+        position: absolute;
+        background-color: #0099cc;
+        min-width: 160px;
+        padding-left: 5px;
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.3);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+           style="color:black"
+            text-decoration: none;
+         padding: 12px 16px;
+   
+            display: block;
+        }
+
+            .dropdown-content a:hover {
+                background-color: black;
+            }
+
+    .dropdown:hover .dropdown-content {
+        padding-top:5px;
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        
+        background-color: red;
+    }
+    .dropdown  a {
+        color:black;
+    }
+</style>
+<div class="container" style="color:red;float:left;background-color:gainsboro;">
+    <ul class="nav nav-tabs" style="width:1150px;">
+        <li class="dropdown" style="width:125px;padding-top:23px;">
+            <a class="dropdown-toggle" data-toggle="dropdown"  >Details</a>
+            <ul class="dropdown-content">
+                <li>@Html.ActionLink("Customer", "NewCustomer", "Inventory", new { @style = "color:White;" })</li>
+                <li>@Html.ActionLink("Supplier", "Supplier", "Inventory", new { @style = "color:White;" })</li>
+                <li>@Html.ActionLink("Sales Person", "Salesperson", "Inventory", new { @style = "color:White;" })</li>
+            </ul>
+        </li>
+        <li class="dropdown" style="width:125px; padding-top:23px;">
+            <a class="dropdown-toggle" data-toggle="dropdown" >Product</a>
+            <ul class="dropdown-content">
+                <li>@Html.ActionLink("Category", "Category", "Inventory", new { @style = "color:White;" })</li>
+                <li>@Html.ActionLink("Brand", "Brand", "Inventory", new { @style = "color:White;" })</li>
+                <li>@Html.ActionLink("Product", "Items", "Inventory", new { @style = "color:White;" })</li>
+</ul>
+        </li>
+        <li class="dropdown" style="width:125px; padding-top:23px;">
+            <a class="dropdown-toggle" data-toggle="dropdown" >Orders</a>
+            <ul class="dropdown-content">
+                <li>@Html.ActionLink("Sales Order", "CSO", "Inventory", new { @style = "color:White;" })</li>
+                <li>@Html.ActionLink("Purchase Order", "CPO", "Inventory", new { @style = "color:White;" })</li>
+            </ul>
+        </li>
+        <li class="dropdown" style="width:125px;padding-top:23px;">
+            <a class="dropdown-toggle" data-toggle="dropdown">Billing</a>
+            <ul class="dropdown-content">
+                <li>@Html.ActionLink("Invoice", "CIS", "Inventory", new { @style = "color:White;" })</li>
+                <li>@Html.ActionLink("Bill", "CB", "Inventory", new { @style = "color:White;" })</li>
+            </ul>
+        </li>
+        <li class="dropdown" style="width:125px;padding-top:23px;">
+            <a class="dropdown-toggle" data-toggle="dropdown">Packages</a>
+            <ul class="dropdown-content">
+                <li style="width:200px;">@Html.ActionLink("Shipped Packages", "Shippedpackages", "Inventory", new { @style = "color:White;" })</li>
+                <li style="width:auto;">@Html.ActionLink("Non-Shipped Packages", "NSP", "Inventory", new { @style = "color:White;" })</li>
+                <li style="width:auto;">@Html.ActionLink("Delivered Packages", "DP", "Inventory", new { @style = "color:White;" })</li>
+                <li style="width:auto;">@Html.ActionLink("Damaged Packages", "NDP", "Inventory", new { @style = "color:White;" })</li>
+
+            </ul>
+        </li>
+        <li class="dropdown" style="width:125px;padding-top:23px;">
+            <a class="dropdown-toggle" data-toggle="dropdown">Stock</a>
+            <ul class="dropdown-content">
+                <li style="width:200px;">@Html.ActionLink("Warehouse Pacement", "WHP", "Inventory", new { @style = "color:White;" })</li>
+                <li style="width:200px;">@Html.ActionLink("Stock Receive", "SP", "Inventory", new { @style = "color:White;" })</li>
+                <li style="width:200px;">@Html.ActionLink("Stock Release", "SS", "Inventory", new { @style = "color:White;" })</li>
+
+            </ul>
+        </li>
+        <li class="dropdown" style="width:125px;padding-top:23px;">
+            <a class="dropdown-toggle" data-toggle="dropdown">Integrations</a>
+            <ul class="dropdown-content">
+                
+                
+            </ul>
+        </li>
+        <li class="dropdown" style="width:125px;padding-top:23px;">
+            <a class="dropdown-toggle" data-toggle="dropdown">Reports</a>
+            <ul class="dropdown-content">
+                <li style="width:200px;">@Html.ActionLink("Sales Person Report", "SPR", "Inventory", new { @style = "color:White;" })</li>
+
+            </ul>
+        </li>
+    </ul>
+</div>
+    
+    
+    
+     
+}
+
+
+

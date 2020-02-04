@@ -1,0 +1,193 @@
+﻿@model ERPMBA.Models.AccountOpportunities
+@{
+    ViewBag.Title = "AccountOpportunities";
+}
+@Html.Partial("Home")
+<script>
+
+    var myApp = angular.module("myApp", []);
+
+
+
+
+    myApp.controller("ActOppsctrl", function ($scope, $http) {
+
+        $scope.AccountoppsDetails = "";
+        $http.get("/CRM/GetActOppsInfo")
+        .then(function (result) {
+            $scope.AccountoppsDetails = result.data;
+            $scope.editAdd = true;
+            $scope.editupdate = false;
+
+        })
+
+        $scope.NewInsert = {
+            NewActOpps: {}
+        }
+        $scope.AddRecord = function () {
+
+
+
+            $scope.AccountoppsDetails1 = true;
+
+        }
+        $scope.Submit = function () {
+            $http.post("/Administrator/InsertUsers", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Record");
+
+            })
+        }
+
+
+        $scope.removeRec = function (ActOpps) {
+            $http.post("/CRM/DeleteAccountOpps", ActOpps)
+             .then(function (data) {
+                 location.reload();
+                 return response;
+
+
+             })
+        }
+
+        $scope.EditRecord = function (ActOpps1) {
+            $scope.NewInsert.NewActOpps.memberid = ActOpps1.memberid;
+            $scope.NewInsert.NewActOpps.accountid = ActOpps1.accountid;
+            $scope.NewInsert.NewActOpps.opportunitiesid = ActOpps1.opportunitiesid;
+            $scope.NewInsert.NewActOpps.date_entered = ActOpps1.date_entered;
+            $scope.NewInsert.NewActOpps.date_modified = ActOpps1.date_modified;
+            $scope.NewInsert.NewActOpps.deleted = ActOpps1.deleted;
+            $scope.AccountoppsDetails1 = true;
+            $scope.editupdate = true;
+            $scope.editAdd = false;
+            alert("Edit");
+        }
+        $scope.Submit = function () {
+            $http.post("/CRM/InsertAccountOpps", $scope.NewInsert.NewActOpps)
+            .then(function (data) {
+                location.reload();
+                alert("Save Actcon");
+
+            })
+        }
+        $scope.Update = function () {
+            $http.post("/CRM/UpdateAccountOpps", $scope.NewInsert.NewActOpps)
+            .then(function (data) {
+                location.reload();
+                alert("Save Update");
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+        }
+
+
+
+    });
+
+
+</script>
+
+<div ng-app="myApp" style="float:left; width:60%; padding-top:100px; border-color:#333300">
+
+    <div ng-controller="ActOppsctrl">
+
+        <h3 align="center"> Account Opportunities</h3>
+        <table ng-show="AccountoppsDetails1" align="center">
+            <tr>
+                <td>memberid</td>
+                <td>
+                    @Html.TextBoxFor(model => model.memberid, new { @class = "form-control", placeholder = "memberid", required = "required", Data_ng_model = "NewInsert.NewActOpps.memberid" })
+                    <!--<input type="text" class="form-control" placeholder="Imie" id="inputName" required="required">-->
+
+                </td>
+                <td>accountid</td>
+                <td>
+                    @Html.TextBoxFor(model => model.accountid, new { @class = "form-control", placeholder = "accountid", required = "required", Data_ng_model = "NewInsert.NewActOpps.accountid" })
+                    <!--<input type="text" class="form-control" placeholder="Nazwisko" id="inputSurname" required="required">-->
+
+                </td>
+            </tr>
+            <tr>
+                <td>opportunitiesid</td>
+                <td>
+                    @Html.TextBoxFor(model => model.opportunitiesid, new { @class = "form-control", placeholder = "oppotunitiesid", required = "required", Data_ng_model = "NewInsert.NewActOpps.opportunitiesid" })
+                    <!--<input type="text" class="form-control" placeholder="Imie" id="inputName" required="required">-->
+
+                </td>
+                <td>date_entered</td>
+                <td>
+                    @Html.TextBoxFor(model => model.date_entered, new { @class = "form-control", placeholder = "date_entered", required = "required", Data_ng_model = "NewInsert.NewActOpps.date_entered" })
+                    <!--<input type="text" class="form-control" placeholder="Nazwisko" id="inputSurname" required="required">-->
+
+                </td>
+            </tr>
+            <tr>
+                <td>date_modified</td>
+                <td>
+                    @Html.TextBoxFor(model => model.date_modified, new { @class = "form-control", placeholder = "date_modified", required = "required", Data_ng_model = "NewInsert.NewActOpps.date_modified" })
+                    <!--<input type="text" class="form-control" placeholder="Imie" id="inputName" required="required">-->
+
+                </td>
+                <td>deleted</td>
+                <td>
+                    @Html.TextBoxFor(model => model.deleted, new { @class = "form-control", placeholder = "deleted", required = "required", Data_ng_model = "NewInsert.NewActOpps.deleted" })
+                    <!--<input type="text" class="form-control" placeholder="Nazwisko" id="inputSurname" required="required">-->
+
+                </td>
+            </tr>
+        </table>
+
+
+
+        <table align="center" ng-show="AccountoppsDetails1">
+
+            <tr>
+
+                <td>
+                    <input type="button" value="Update" id="btnUpdate" class="btn btn-success" ng-show="editupdate" ng-click="Update()" />
+                </td>
+
+                <td>
+                    <input type="button" value="Submit" id="btnSubmit" class="btn btn-success" ng-show="editAdd" ng-click="Submit()" />
+                </td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-md-2">memberid</th>
+                    <th class="col-md-5">accountid</th>
+                    <th class="col-md-10">opportunitiesid</th>
+                    <th class="col-md-10"><input type="button" value="Add Record" id="btnAdd" ng-model="AddRec" ng-click="AddRecord()"></th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr ng-repeat="actopps in AccountoppsDetails">
+
+
+                    <td>{{actopps.memberid}} </td>
+
+
+                    <td>{{actopps.accountid}}</td>
+                    <td>{{actopps.opportunitiesid}}</td>
+                    <td>
+                        <input type="button" value="Edit Record" id="btnEdit" class="btn btn-success" ng-model="editupdate" ng-click="EditRecord(actopps)">
+                    </td>
+
+                    <td>
+                        <input type="button" value="Delete" id="btnDelete" class="btn btn-danger" ng-click="removeRec(actopps)" />
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+
+
+    </div>
+
+
+</div>

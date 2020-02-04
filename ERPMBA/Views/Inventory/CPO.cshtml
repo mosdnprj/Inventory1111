@@ -1,0 +1,320 @@
+﻿
+
+@{
+    ViewBag.Title = "CPO";
+}
+@Html.Partial("Order")
+<script>
+  var myApp = angular.module("myApp", []);
+
+  myApp.controller("cpoctrl", function ($scope, $http) {
+      $scope.itemDetails = "";
+      $http.get("/Inventory/GetnewpurchaseInfo")
+      .then(function (result) {
+          $scope.itemDetails = result.data;
+          $scope.editAdd = true;
+          $scope.editupdate = false;
+          $scope.grandsum=$scope.itemDetails.amount;
+
+      })
+      $scope.getTotal = function(){
+          var total = 0;
+          for(var i = 0; i < $scope.itemDetails.length; i++){
+              var icd = $scope.itemDetails[i];
+              total +=icd.amount;
+          }
+          return total;
+      }
+      $scope.NewInsert = {
+          Newcpo: {}
+      }
+
+      $scope.CreateList = function () {
+          $http.post("/Inventory/Insertcpo", $scope.NewInsert.Newcpo)
+          .then(function (data) {
+
+              alert("Save Record");
+
+              location.href = '@Url.Action("addorder", "Inventory")'; return false;
+
+
+          })
+
+      }
+
+      $scope.EditRecord = function (User) {
+          $scope.NewInsert.Newcpo.itemdetail = User.itemdetail;
+          $scope.NewInsert.Newcpo.quantity = User.quantity;
+
+          $scope.NewInsert.Newcpo.tax = User.tax;
+          $scope.NewInsert.Newcpo.rate = User.rate;
+          $scope.NewInsert.Newcpo.amount = User.amount;
+
+
+          $scope.editupdate = true;
+          $scope.editAdd = false;
+          alert("Edit");
+      }
+
+
+      $scope.adding = function () {
+          $http.post("/Inventory/Insertaddorder", $scope.NewInsert.Newcpo)
+          .then(function (data) {
+              $scope.itemDetails={};
+              alert("Save Record");
+              location.reload();
+
+          })
+
+      }
+      $scope.Update = function () {
+          $http.post("/Inventory/Updateaddorder", $scope.NewInsert.Newcpo)
+          .then(function (data) {
+              //location.reload();
+              alert("Save Update");
+              $scope.editAdd = true;
+              $scope.editupdate = false;
+
+          })
+      }
+      $scope.removeRec = function (User) {
+          $http.post("/Inventory/Deleteaddorder", User)
+           .then(function (data) {
+               $scope.itemDetails={};
+               return response;
+
+               alert("deleted");
+           })
+      }
+   
+  });
+</script>
+<style>
+    .table1 {
+        width: 900px;
+    }
+
+        .table1 tr, th {
+            padding-left: 50px;
+            padding-bottom: 15px;
+            font-weight: 100;
+        }
+
+        .table1 tr, td {
+            padding-bottom: 15px;
+        }
+</style>
+<div ng-app="myApp" class="tab-content" id="tables" style="float:left; width:65%;height:100%;padding-top:30px;">
+    <div ng-controller="cpoctrl" id="Address" style="width:100%;height:525px;">
+        <div>
+            <center><h4 style="padding-left:150px;font-family:Cambria;font-size:25px;padding-bottom:20px;"> Purchase Order</h4></center>
+
+                <table class="table1">
+                    <tr>
+                        <th style="width:300px" class="form-group">
+                            Purchase Order
+                        </th>
+                        <td>
+
+
+
+                            <input type="text" class="form-control" ng-model="NewInsert.Newcpo.PurchaseOrder1" style="width:200px;" readonly>
+
+
+                        </td>
+
+                        <th style="width:300px" class="form-group">Trader Name</th>
+
+                        <td>
+                            <select name="unit" size="1" style="height:30px;width:200px;" class="form-control" ng-model="NewInsert.Newcpo.TraderName">
+                                <option>Select Trader</option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                            </select>
+                        </td>
+                        
+                        <td>
+                            <button class="btn btn-default" onclick="location.href='@Url.Action("NewVendor", "Inventory")';return false;"><i class="glyphicon glyphicon-plus-sign"></i> Add </button>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            Purchase Number
+                        </th>
+                        <td>
+                            <input type=text name=textnames id="textname" style="width:200px;" class="form-control" ng-model="NewInsert.Newcpo.Purchasenbr">
+                        </td>
+
+                        <th>
+                            Reference
+                        </th>
+                        <td>
+                            <input type=text name=textnames id="textname" style="width:200px;" class="form-control" ng-model="NewInsert.Newcpo.Reference">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            Transaction Date
+                        </th>
+
+                        <td>
+                            <input type="date" name="dbthy" value="DD-MM-YYYY" style="width:200px;height:30px" class="form-control" ng-model="NewInsert.Newcpo.Transdate">
+                        </td>
+
+                        <th>Expected Delivery Date</th>
+                        <td>
+                            <input type="date" name="dbthy" value="DD-MM-YYYY" style="width:200px;height:30px" class="form-control" ng-model="NewInsert.Newcpo.ExpctdDelDate">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Shipment Preference</th>
+
+                        <td>
+                            <select name="unit" size="1" style="width:200px;height:30px;" class="form-control" ng-model="NewInsert.Newcpo.ShipPref">
+                                <option>Select or Type or Add</option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            <div style="padding-left:450px;">
+                <table>
+                    <tr>
+                        <td>
+                            @*<input type="button" class="btn btn-success" value="Submit" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" />*@
+                            <input type="button" ng-click="CreateList()" value="Create Item List" class="btn btn-primary"/>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+        <br /><br />
+        @*<div  ng-show="pD" id="order">
+                    <table border="1" bordercolor="black" width="765px" cellpadding="3" cellspacing="3">
+                        <tr>
+                        <thead>
+
+                            <tr>
+                                <th >Item Details</th>
+                              <th>tax</th>
+                                <th>Quantity</th>
+                                <th>rate</th>
+                                <th>Amount</th>
+                            </tr>
+
+                        </thead>
+                        <tbody >
+                            <tr ng-repeat="icd in itemDetails" >
+
+                                <td>{{icd.itemdetail}}</td>
+                                <td>{{icd.tax}}</td>
+                                <td>{{icd.quantity}} </td>
+                                <td>{{icd.rate}} </td>
+                                <td>{{icd.amount}}</td>
+                                <td>
+                                    <input type="button" value="Edit Record" class="btn btn-success" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(icd)">
+                                </td>
+
+                                <td>
+                                    <input type="button" value="Delete" class="btn btn-danger" id="btnDelete" ng-click="removeRec(icd)" />
+                                </td>
+                            </tr>
+
+                            <tr>
+
+                                <td>
+                                    <input type="text" class="form-control" ng-model="NewInsert.Newcpo.itemdetail" required />
+                                </td>
+
+                                <td>
+                                    <input type="text" class="form-control" ng-model="NewInsert.Newcpo.quantity" required />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" ng-model="NewInsert.Newcpo.rate" required />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" ng-model="NewInsert.Newcpo.tax" required />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" ng-model="NewInsert.Newcpo.amount=(NewInsert.Newcpo.tax)--(NewInsert.Newcpo.quantity*NewInsert.Newcpo.rate)" required />
+                                </td>
+                                <td>
+
+                                    <input type="submit" ng-click="adding()" onclick="location.href='@Url.Action("NewVendor", "Inventory")" value="submit">
+
+                                </td>
+                            </tr>
+                            <tr >
+                                <td></td><td></td>
+                                <td>
+                                       </td>
+                                <td>
+
+                                </td>
+                                 <td >
+                                     Total: {{ getTotal() }}
+                                 </td>
+                                  </tr>
+                        </tbody>
+                    </table>
+
+               <br />
+                <br />
+
+
+
+
+               <form>
+
+                    <table >
+                        <tr>
+                            <td>Sub total</td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ getTotal() }}" >
+                            </td>
+
+
+                            <td>Discount (in percentage)</td>
+                            <td>
+                                <input type=text class="form-control" ng-model="NewInsert.Newcpo.discount">
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>Total(Rs.)</td>
+                            <td>
+                                <input type=text  class="form-control" value="{{total*((100-NewInsert.Newcpo.discount)/100)}}">
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+
+                            <td>
+                                <button id="submit" name="submit" class="btn btn-primary" value="1">Save</button>
+                            </td>
+                            <td></td>
+
+                            <td></td>
+                            <td>
+                                <button id="cancel" name="cancel" class="btn btn-primary" value="1">Cancel</button>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                </form>
+            </div>*@
+    </div>
+</div>

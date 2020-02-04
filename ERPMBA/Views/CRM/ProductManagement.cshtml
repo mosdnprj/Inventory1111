@@ -1,0 +1,178 @@
+﻿@{
+    ViewBag.Title = "ProductManagement";
+}
+@Html.Partial("Index")
+<style>
+    input[type=text], select {
+        width: 30%;
+        padding: 8px 8px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=submit] {
+        width: 30%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+</style>
+
+<div style="float:left; width:800px; padding-top:100px">
+    <form action="/action_page.php">
+        <table>
+            <tr>
+                <td>
+                    <
+                    <label for="Product type">Product type &nbsp &nbsp :</label>
+                    <select id="Product" name="Product">
+                        <option>Select Product</option>
+                        <option value="Product1">Product1</option>
+                        <option value="Product2">Product2</option>
+                        <option value="Product3">Product3</option>
+                    </select></br>
+                </td>
+            </tr>
+        </table>
+        <table>
+
+            <tr>
+                <td>
+                    <label for="fname">Product Name &nbsp :</label>
+                    <input type="text" id="fname" name="firstname" placeholder="Product name..">
+
+                    <br />
+                </td>
+                <td>
+                    <label for="lname">Product Id &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" id="lname" name="lastname" placeholder="Product ID:..">
+                    <br />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="Serial Number">Serial Number &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" id="Sno" name="Serial Number" placeholder="Serial Number:..">
+                    <br />
+                </td>
+                <td>
+                    <label for="Product Description">Product Description &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" id="Prd" name="Product Description" placeholder="Product Des:..">
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="Catageoryid">Catageory Id &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" id="CatId" name="Catageoryid" placeholder="Catageory ID:..">
+                    <br />
+                </td>
+                <td>
+                    <label for="SubCatageoryid">SubCatageory Id &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" id="SubCatid" name="SubCatageoryid" placeholder="SubCatageory ID:..">
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="Discontinued">Discontinued &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" name="Discontinued" placeholder="Discontinued:..">
+                    <br />
+                </td>
+                <td>
+                    <label for="Barcode">Barcode &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" name="Barcode" placeholder="Barcode:..">
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="UnitPrice">UnitPrice &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" name="UnitPrice" placeholder="UnitPrice:..">
+                    <br />
+                </td>
+                <td>
+                    <label for="SalesMarkup">SalesMarkup &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" name="SalesMarkup" placeholder="SalesMarkup:..">
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="Leadtime">Leadtime &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" name="Leadtime" placeholder="Leadtime:..">
+                    <br />
+                </td>
+                <td>
+                    <label for="Annual order Qunatity">Annual order Qunatity &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" name="Annual order Qunatity" placeholder="Annual order Qunatity:..">
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="Annual working day">Annual working day &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" name="Annual working day" placeholder="Annual working day:..">
+                    <br />
+                </td>
+                <td>
+                    <label for="Location Id">Location Id &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" name="Location Id" placeholder="Location Id:..">
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="Units on order">Units on order &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" name="Units on order" placeholder="Units on order:..">
+                    <br />
+                </td>
+                <td>
+                    <label for="Units sold">Units sold &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" name="Units sold" placeholder="Units sold:..">
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="Total inventory">Total inventory &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" name="Total inventory" placeholder="Total inventory:..">
+                    <br />
+                </td>
+                <td>
+                    <label for="Suggest Sales price">Suggest sales Price &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" name="Suggest sales Price" placeholder="Suggest sales Price:..">
+                    <br />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="lname">Valid From &nbsp &nbsp &nbsp &nbsp :</label>
+                    <input type="text" id="lname" name="lastname" placeholder="Valid From:..">
+                    <br />
+                </td>
+                <td>
+                    <label for="lname">Valid To &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp :</label>
+                    <input type="text" id="lname" name="lastname" placeholder="Valid To:">
+                    <br />
+                </td>
+            </tr>
+
+        </table>
+
+    </form>
+    <input type="button" value="Submit">
+</div>

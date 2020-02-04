@@ -1,0 +1,164 @@
+﻿@{
+    ViewBag.Title = "AddLeave";
+}
+
+@Html.Partial("TAM")
+<script>
+    function myFunction() {
+        alert("Saved Successfully");
+    }
+
+    $(function () {
+        $("input[name='l']").click(function () {
+            if ($("#strt1").is(":checked")) {
+                $("#strt").show();
+                $("#end").hide();
+
+            }
+        });
+        $("input[name='l']").click(function () {
+            if ($("#end1").is(":checked")) {
+                $("#end").show();
+                $("#strt").hide();
+            }
+        });
+    });
+</script>
+<script src="~/Scripts/addleave.js"></script>
+
+<div ng-app="myApp1" style="float:left; width:60%; padding-top:50px; border-color:#333300;padding-left:30PX;">
+
+
+    <h3 style="text-align:center">Add Leave </h3>
+    <div ng-controller="AddLeavectrl">
+
+        <table ng-show="AddLeaveDetails">
+
+            <tr>
+                <td><b>Employee Details</b></td>
+            </tr>
+            <tr>
+                <td>Employee Id</td>
+                <td>
+                    <input type="text" class="form-control" ng-model="NewInsert.NewUsers.emplid">
+                </td>
+                <td>
+                    Department:
+                </td>
+                <td>
+                    <select class="form-control" ng-model="NewInsert.NewUsers.Department">
+                        <option>Department1 </option>
+                        <option>Department2</option>
+                        <option>Department3</option>
+                        <option>Department4</option>
+                        <option>Department5</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <th>Leave Details</th>
+            </tr>
+            <tr>
+
+                <td>
+                    Leave Type:
+                </td>
+                <td>
+                    <select class="form-control" ng-model="NewInsert.NewUsers.LeaveType">
+                        <option>Casual Leave(CL) </option>
+                        <option>Paid Leave(PL)</option>
+                        <option>Earned Leave(EL)</option>
+                        <option>Sick Leave(SL)</option>
+                        <option>Marital Leave</option>
+                        <option>Maternity Leave</option>
+                    </select><br />
+                </td>
+                <td>
+                    If Other:
+                </td>
+                <td>
+                    <input name="ls" id="s" value="" type="text" class="form-control" ng-model="NewInsert.NewUsers.Other">
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    <b>Set Leave Days</b>
+                </td>
+                <td>
+                    <label class="radio-inline">
+                        <input name="l" id="strt1" type="radio">Single Day
+                    </label>
+                    <label class="radio-inline">
+                        <input name="l" id="end1" checked="" type="radio">Multiple Day(s)
+                    </label>
+                </td>
+
+            </tr>
+
+            <tr id="strt" style="display:none;">
+                <td>Start Date</td>
+                <td>  <input type="date" class="form-control" ng-model="NewInsert.NewUsers.StartDate" /></td>
+
+            </tr>
+            <tr id="end" style="display:none;">
+                <td>End Date</td>
+                <td> <input type="date" class="form-control" ng-model="NewInsert.NewUsers.EndDate" /></td>
+                <td>No Of Day(s)</td>
+                <td> <input type="text" class="form-control" ng-model="NewInsert.NewUsers.NoOfDays" /></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+
+                <th>Contact Detials During Leave</th>
+            </tr>
+            <tr>
+
+                <td>Contact No During Leave</td>
+                <td><input type="text" class="form-control" ng-model="NewInsert.NewUsers.NoInLeave" /></td>
+            </tr>
+            <tr>
+                <td>Leave Apply Date</td>
+                <td><input type="date" class="form-control" ng-model="NewInsert.NewUsers.AplyDate" /></td>
+            </tr>
+            <tr>
+                <td>Responsible Person During Leave</td>
+                <td><input type="text" class="form-control" ng-model="NewInsert.NewUsers.ResponsiblePerson" /></td>
+            </tr>
+            <tr>
+                <td>
+                    Contact Address During Leave
+                </td>
+                <td>
+                    <textarea class="form-control" ng-model="NewInsert.NewUsers.ContactAddress"></textarea>
+                </td>
+
+            <tr>
+                <td>remarks</td>
+                <td><textarea class="form-control" ng-model="NewInsert.NewUsers.remarks"></textarea></td>
+
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" class="btn-success" value="Update" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                </td>
+
+                <td>
+                    <input type="button" class="btn-success" value="Submit" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" onclick="myFunction()" />
+                </td>
+
+            </tr>
+
+        </table>
+
+        <b>Note:</b>All Lives are in Days
+
+    </div>
+
+
+
+</div>
+

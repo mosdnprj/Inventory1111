@@ -1,0 +1,372 @@
+﻿@{
+    ViewBag.Title = "NewCustomer";
+}
+@Html.Partial("Users")
+
+<script>
+    var myApp1 = angular.module("myApp1", []);
+
+
+    myApp1.controller("NewCustomerctrl", function ($scope, $http) {
+        $scope.NewCustomerDetails = "";
+
+        $http.get("/Inventory/GetNewCustomerInfo")
+        .then(function (result) {
+            $scope.NewCustomerDetails = result.data;
+            $scope.NewCustomerdetails = false;
+            $scope.editAdd = true;
+            $scope.editupdate = false;
+            alert("success");
+
+
+        })
+        $scope.removeRec = function (User) {
+            $http.post("/Inventory/DeleteNewCustomer", User)
+             .then(function (data) {
+                 location.reload();
+                 return response;
+
+
+             })
+        }
+        $scope.NewInsert = {
+            NewUsers: {}
+        }
+        $scope.EditRecord = function (User) {
+            $scope.NewInsert.NewUsers.CustomerID = User.CustomerID;
+            $scope.NewInsert.NewUsers.CustomerName = User.CustomerName;
+            $scope.NewInsert.NewUsers.Companyname = User.Companyname;
+            $scope.NewInsert.NewUsers.Contactdisplayname = User.Contactdisplayname;
+            $scope.NewInsert.NewUsers.Email = User.Email;
+            $scope.NewInsert.NewUsers.Companymail = User.Companymail;
+            $scope.NewInsert.NewUsers.Phoneno = User.Phoneno;
+            $scope.NewInsert.NewUsers.Mobileno = User.Mobileno;
+            $scope.NewInsert.NewUsers.Skype = User.Salutation;
+            $scope.NewInsert.NewUsers.Designation = User.Designation;
+            $scope.NewInsert.NewUsers.Department = User.Department;
+            $scope.NewInsert.NewUsers.Website = User.Website;
+            $scope.NewInsert.NewUsers.Street1 = User.Street1;
+            $scope.NewInsert.NewUsers.Street2 = User.Street2;
+            $scope.NewInsert.NewUsers.City = User.City;
+            $scope.NewInsert.NewUsers.States = User.States;
+            $scope.NewInsert.NewUsers.Zipcode = User.Zipcode;
+            $scope.NewInsert.NewUsers.Country = User.Country;
+            $scope.NewInsert.NewUsers.Currency = User.Currency;
+            $scope.NewInsert.NewUsers.Payment = User.Payment;
+            $scope.NewCustomerdetails = true;
+            $scope.editupdate = true;
+            $scope.editAdd = false;
+            alert("Edit");
+
+        }
+
+        $scope.Submit = function () {
+            $http.post("/Inventory/InsertNewCustomer", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Record");
+
+            })
+        }
+        $scope.addCustomer = function () {
+            $scope.NewCustomerdetails = true;
+           
+
+        }
+        
+        $scope.Update = function () {
+            $http.post("/Inventory/UpdateNewCustomer", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Update");
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+        }
+        $(document).ready(function () {
+            $('#managecusttable').DataTable({
+                "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+                "iDisplayLength": 10
+            });
+        });
+
+
+    });
+</script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+<style>
+    .table1 {width:900px;
+    }
+    .table1 tr,th{
+    padding-left:50px;
+    padding-bottom:15px;
+    font-weight:100;
+    }
+    .table1 tr,td{
+    padding-bottom:15px;
+    }
+    
+</style>
+
+<div ng-app="myApp1" style="float:left; width:60%;height:100%;padding-top:30px;padding-left:50px;">
+
+    <div ng-controller="NewCustomerctrl">
+       
+            <center><h4 style="padding-left:150px;font-family:Cambria;font-size:25px;padding-bottom:20px;"> Customer Details</h4></center>
+
+            <table class="table1" ng-show="NewCustomerdetails">
+                <tr>
+                    <th style="width:300px" class="form-group">
+                        Customer ID
+                    </th>
+                    <td style="width:400px">
+                        <input type=text id="firstn" ng-model="NewInsert.NewUsers.CustomerID" class="form-control" readonly>
+                    </td>
+                    <th style="width:300px;">Customer name<span style="color:red;font-size:20px">*</span></th>
+                    <td style="width:400px">
+                        <input type="text" name="custname" id="firstn" ng-model="NewInsert.NewUsers.CustomerName" ng-minlength="6" class="form-control" placeholder="Enter your Full Name" required>
+                        
+                    </td>
+
+                </tr>
+                <tr>
+                    <th>Company Name</th>
+                    <td>
+                        <input type=text id="companyn" ng-model="NewInsert.NewUsers.Companyname" class="form-control" placeholder="Enter your Company Name">
+                    </td>
+                    <th>Contact Display Name<span style="color:red;font-size:20px">*</span></th>
+                    <td>
+                        <input type=text id="companyn" ng-model="NewInsert.NewUsers.Contactdisplayname" class="form-control" placeholder="Enter your Display Name">
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Email<span style="color:red;font-size:20px">*</span></th>
+                    <td>
+                        <input type=text id="email" ng-model="NewInsert.NewUsers.Email" class="form-control" placeholder="Enter Your Mail">
+                    </td>
+                    <th>Company Mail</th>
+                    <td>
+                        <input type=text id="email" ng-model="NewInsert.NewUsers.Companymail" class="form-control" placeholder="Enter Your Company Mail">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td>
+
+                        <input type=text id="mobno" ng-model="NewInsert.NewUsers.Phoneno" class="form-control" placeholder="Enter Mobile No">
+                    </td>
+                    <th>Mobile<span style="color:red;font-size:20px">*</span></th>
+                    <td>
+
+                        <input type="text" id="mobno" ng-model="NewInsert.NewUsers.Mobileno" class="form-control" placeholder="Enter Mobile No">
+                    </td>
+                </tr>
+                <tr>
+
+                    <th>Skype Number</th>
+                    <td>
+
+                        <input type=text id="desg" ng-model="NewInsert.NewUsers.Skype" class="form-control" placeholder="Skype Name/Number">
+                    </td>
+                    <th>Designation</th>
+                    <td>
+
+                        <input type=text id="desg" ng-model="NewInsert.NewUsers.Designation" class="form-control" placeholder="Enter your Designation">
+                    </td>
+                </tr>
+                <tr>
+
+                    <th>Department</th>
+                    <td>
+
+                        <input type=text id="desg" ng-model="NewInsert.NewUsers.Department" class="form-control" placeholder="Enter Department">
+                    </td>
+                    <th>Website</th>
+                    <td>
+
+                        <input type=text id="desg" ng-model="NewInsert.NewUsers.Website" class="form-control" placeholder="Website Address">
+                    </td>
+                </tr>
+                <tr>
+
+                    <th>
+                        Street Name<span style="color:red;font-size:20px">*</span>
+                    </th>
+                    <td>
+                        <input type=text id="textname" size="20" ng-model="NewInsert.NewUsers.Street1" class="form-control" placeholder="Enter your House Number">
+                    </td>
+
+                    <th>
+                        Street Name<span style="color:red;font-size:20px">*</span>
+                    </th>
+                    <td>
+                        <input type=text id="textname" size="20" ng-model="NewInsert.NewUsers.Street2" class="form-control" placeholder="Enter your Locality Name">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Country<span style="color:red;font-size:20px">*</span></th>
+                    <td>
+                        <input type=text id="textname" size="20" ng-model="NewInsert.NewUsers.Country" class="form-control" placeholder="Enter country">
+                    </td>
+                    <th>State<span style="color:red;font-size:20px">*</span></th>
+                    <td>
+                        <input type=text id="textname" size="20" ng-model="NewInsert.NewUsers.States" class="form-control" placeholder="Enter State">
+                    </td>
+
+                </tr>
+                <tr>
+                    <th>City<span style="color:red;font-size:20px">*</span></th>
+                    <td>
+                        <input type=text id="textname" size="20" ng-model="NewInsert.NewUsers.City" class="form-control" placeholder="Enter City">
+                    </td>
+                    <th>Zipcode<span style="color:red;font-size:20px">*</span></th>
+                    <td>
+                        <input type=text id="textname" size="20" ng-model="NewInsert.NewUsers.Zipcode" class="form-control" placeholder="Enter Pincode">
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <th>
+                        Currency<span style="color:red;font-size:20px">*</span>
+                    </th>
+                    <td>
+                        <select class="form-control" ng-model="NewInsert.NewUsers.Currency">
+                            <option value="">Select Currency</option>
+                            <option value="AUD">Australian Dollar</option>
+                            <option value="BRL">Brazilian Real </option>
+                            <option value="CAD">Canadian Dollar</option>
+                            <option value="CZK">Czech Koruna</option>
+                            <option value="DKK">Danish Krone</option>
+                            <option value="EUR">Euro</option>
+                            <option value="HKD">Hong Kong Dollar</option>
+                            <option value="HUF">Hungarian Forint </option>
+                            <option value="IR">Indian Rupee </option>
+                            <option value="ILS">Israeli New Sheqel</option>
+                            <option value="JPY">Japanese Yen</option>
+                            <option value="MYR">Malaysian Ringgit</option>
+                            <option value="MXN">Mexican Peso</option>
+                            <option value="NOK">Norwegian Krone</option>
+                            <option value="NZD">New Zealand Dollar</option>
+                            <option value="PHP">Philippine Peso</option>
+                            <option value="PLN">Polish Zloty</option>
+                            <option value="GBP">Pound Sterling</option>
+                            <option value="SGD">Singapore Dollar</option>
+                            <option value="SEK">Swedish Krona</option>
+                            <option value="CHF">Swiss Franc</option>
+                            <option value="TWD">Taiwan New Dollar</option>
+                            <option value="THB">Thai Baht</option>
+                            <option value="TRY">Turkish Lira</option>
+                            <option value="USD">U.S. Dollar</option>
+                        </select>
+                    </td>
+
+                    <th>
+                        Payment terms<span style="color:red;font-size:20px">*</span>
+                    </th>
+                    <td>
+                        <select class="form-control" ng-model="NewInsert.NewUsers.Payment">
+                            <option value="">Select</option>
+                            <option value="10">Net 10</option>
+                            <option value="15">Net 15</option>
+                            <option value="20">Net 20</option>
+                            <option value="30">Net 30</option>
+                            <option value="45">Net 45</option>
+                            <option value="60">Net 60</option>
+                            <option value="End">Due On Reciept</option>
+                            <option value="Month">Due End of the Month</option>
+                            <option value="NMonth">Due End of the Next Month</option>
+                            <option value="Cash">Cash On Delivery</option>
+                            <option value="Adv">Cash in Advance</option>
+
+                        </select>
+
+                    </td>
+                </tr>
+
+
+
+            </table>
+
+
+            <div style="padding-left:420px;padding-top:20px;">
+                <table ng-show="NewCustomerdetails">
+                    <tr style="align-items:center">
+
+                        <td>
+                            <input type="button" value="Update" class="btn btn-success" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                        </td>
+
+                        <td>
+                            <input type="button" value="Submit" class="btn btn-success" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" style="width:100px;" />
+                        </td>
+                    </tr>
+
+
+                </table>
+            </div>
+            <br />
+            <br />
+            
+
+            <div style="padding-top:10px;">
+
+                <div class="panel panel-default" style="float:left;width:950px;">
+                    <div class="panel-heading" style="padding-bottom:20px;">
+                        <i class="glyphicon glyphicon-edit">ManageCustomer</i>
+                        <div class="pull-right">
+                            <button class="btn btn-default" ng-click="addCustomer()"><i class="glyphicon glyphicon-plus-sign"></i>Add Customer </button>
+                        </div>
+                    </div>
+
+                    <div class="panel-body" style="float:left;width:950px;">
+
+                        <table class="table table-striped table-bordered" id="managecusttable" style="float:left;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center">Customer ID</th>
+                                    <th style="text-align:center">Customer Name</th>
+                                    <th style="text-align:center">Mobile Number</th>
+                                    <th style="text-align:center">Designation</th>
+                                    <th style="text-align:center">Email</th>
+                                    <th style="text-align:center">Address</th>
+                                    <th style="text-align:center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr  ng-repeat="NewCustomerd in NewCustomerDetails">
+
+                                    <td style="text-align:center">{{NewCustomerd.CustomerID}}</td>
+                                    <td style="text-align:center">{{NewCustomerd.CustomerName}} </td>
+                                    <td style="text-align:center">{{NewCustomerd.Mobileno}}</td>
+                                    <td style="text-align:center">{{NewCustomerd.Designation}} </td>
+                                    <td style="text-align:center">{{NewCustomerd.Email}}</td>
+                                    <td style="text-align:center">{{NewCustomerd.City}}</td>
+                                    <td>
+
+                                        <button style="float:left;" class="btn btn-default" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(NewCustomerd)"><i class="glyphicon glyphicon-edit"></i></button>
+
+                                        <button style="float:right;" class="btn btn-default" id="btnDelete" ng-click="removeRec(NewCustomerd)"><i class="glyphicon glyphicon-trash"></i></button>
+
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        
+                
+                
+            </div>
+            
+        </div>
+ 

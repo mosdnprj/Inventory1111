@@ -1,0 +1,367 @@
+﻿
+
+@{
+    ViewBag.Title = "Items";
+}
+@Html.Partial("Product")
+<script>
+    var myApp1 = angular.module("myApp1", []);
+
+
+    myApp1.controller("Itemsctrl", function ($scope, $http) {
+        $scope.ItemsDetails = "";
+
+        $http.get("/Inventory/GetItemsInfo")
+        .then(function (result) {
+            $scope.ItemsDetails = result.data;
+            $scope.editAdd = true;
+            $scope.editupdate = false;
+            alert("success");
+
+
+        })
+        $http.get("/Inventory/getItemCategorydetail")
+                         .then(function (dataresult) {
+                             $scope.Categorydetails = dataresult.data;
+                             alert("Category");
+                         })
+        $http.get("/Inventory/getItemBranddetail")
+                        .then(function (dataresult) {
+                            $scope.Branddetails = dataresult.data;
+                            alert("Brand");
+                        })
+
+        $scope.removeRec = function (User) {
+            $http.post("/Inventory/DeleteItems", User)
+             .then(function (data) {
+                 location.reload();
+                 return response;
+
+
+             })
+        }
+        $scope.NewInsert = {
+            NewUsers: {}
+        }
+        $scope.EditRecord = function (User) {
+            $scope.NewInsert.NewUsers.Image_Item = User.Image_Item;
+            $scope.NewInsert.NewUsers.ProductID = User.ProductID;
+            $scope.NewInsert.NewUsers.Productname = User.Productname;
+            $scope.NewInsert.NewUsers.Unit = User.Unit;
+            $scope.NewInsert.NewUsers.Quantity = User.Quantity;
+            $scope.NewInsert.NewUsers.Categoryname = User.Categoryname;
+            $scope.NewInsert.NewUsers.Brandname = User.Brandname;
+            $scope.NewInsert.NewUsers.UPC = User.UPC;
+            $scope.NewInsert.NewUsers.MPN = User.MPN;
+            $scope.NewInsert.NewUsers.EAN = User.EAN;
+            $scope.NewInsert.NewUsers.SupplierID = User.SupplierID;
+            $scope.NewInsert.NewUsers.SellingPrice = User.SellingPrice;
+            $scope.NewInsert.NewUsers.PurchasePrice = User.PurchasePrice;
+
+            $scope.Itemsdetails = true;
+            $scope.editupdate = true;
+            $scope.editAdd = false;
+            alert("Edit");
+
+        }
+
+        $scope.change = 'data';
+        $scope.getVal = function () {
+
+            console.log($scope.Itemtype);
+            $scope.change = $scope.Itemtype;
+        }
+
+        $scope.LoadFileData = function (event) {
+
+            var selectedFile = event.target.files[0];
+            var reader = new FileReader();
+
+            var imgtag = document.getElementById("NewInsert.NewUsers.Image_Item");
+            imgtag.title = selectedFile.name;
+
+            reader.onload = function (event) {
+                imgtag.src = event.target.result;
+                $scope.NewInsert.NewUsers.Image_Item = event.target.result;
+            };
+
+            reader.readAsDataURL(selectedFile);
+        }
+
+        $scope.CallBrand = function (FetchBrand) {
+
+            $scope.Brand = (FetchBrand)
+
+        }
+
+
+
+
+        $scope.Submit = function () {
+            $http.post("/Inventory/InsertItems", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Record");
+
+            })
+        }
+
+        $scope.addProduct = function () {
+            $scope.Itemsdetails = true;
+
+
+        }
+
+
+        $scope.Update = function () {
+            $http.post("/Inventory/UpdateItems", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Update");
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+        }
+
+        $http.get("/Inventory/GetSupplierInfo")
+              .then(function (dataresult) {
+                  $scope.Supplier = dataresult.data;
+
+
+              })
+        $(document).ready(function () {
+            $('#manageitemstable').DataTable({
+                "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+                "iDisplayLength": 10
+            });
+        });
+
+
+
+    });
+</script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+<style>
+    .table1 {
+        width: 900px;
+    }
+
+        .table1 tr, th {
+            padding-left: 50px;
+            padding-bottom: 15px;
+            font-weight: 100;
+        }
+
+        .table1 tr, td {
+            padding-bottom: 15px;
+        }
+</style>
+
+<div ng-app="myApp1" style="float:left; width:60%;height:100%;padding-top:30px;padding-left:50px;">
+    <div ng-controller="Itemsctrl">
+
+
+
+        <center><h4 style="padding-left:150px;font-family:Cambria;font-size:25px;padding-bottom:20px;"> Item Details</h4></center>
+
+        <table ng-show="Itemsdetails">
+
+            <tr>
+                <th style="width:350px" class="form-group">Product ID </th>
+                <td style="width:400px">
+                    <input type=text name=textnames id="textname" class="form-control" ng-model="NewInsert.NewUsers.ProductID" readonly>
+                </td>
+
+                <td rowspan="5">
+                    <img id="NewInsert.NewUsers.Image_Item" ng-src="{{NewInsert.NewUsers.Image_Item}}" style="height:150px; width:200px;padding-left:30px;">
+                    <input type="file" onchange="angular.element(this).scope().LoadFileData(event)" ng-model="NewInsert.NewUsers.Image_Item" style="padding-left:30px;padding-top:5px;">
+                </td>
+            </tr>
+            <tr>
+
+                <th>
+                    Product Name
+                </th>
+                <td>
+
+                    <input type=text name=textnames id="textname" class="form-control" ng-model="NewInsert.NewUsers.Productname">
+                </td>
+            </tr>
+            <tr>
+                <th>Unit<span class="glyphicon glyphicon-question-sign" title="Unit of Measurement"></span></th>
+                <td>
+                    <select class="form-control" ng-model="NewInsert.NewUsers.Unit">
+                        <option value="">Select Unit</option>
+                        <option>Pieces</option>
+                        <option>KgS</option>
+                        <option>Litres</option>
+                        <option>Cartoon</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+
+
+                <th>Quantity<span class="glyphicon glyphicon-question-sign" title="Unit of Measurement"></span></th>
+                <td>
+                    <input type=text name=textnames id="textname" class="form-control" ng-model="NewInsert.NewUsers.Quantity">
+                </td>
+
+            </tr>
+        </table>
+        <table ng-show="Itemsdetails" class="table1">
+            <tr>
+                <th style="width:300px" class="form-group">Category</th>
+                <td style="width:400px">
+
+                    <select name="catgname" ng-click="CallBrand(NewInsert.NewUsers.Categoryname)" ng-model="NewInsert.NewUsers.Categoryname" class="form-control" title="Select Category">
+                        <option value="" disabled>Select</option>
+                        <option ng-repeat="CatgdBrand in Categorydetails" value="{{CatgdBrand.Categoryname}}">{{CatgdBrand.Categoryname}}</option>
+
+                    </select>
+                </td>
+
+                <th style="width:300px" class="form-group">Brand</th>
+                <td style="width:400px">
+                    <select name="Brandname" ng-model="NewInsert.NewUsers.Brandname" class="form-control" title="Select Brand">
+                        <option value="" disabled>Select</option>
+                        <option ng-repeat="ItemBrand in Branddetails | filter:{Categoryname:NewInsert.NewUsers.Categoryname}" value="{{ItemBrand.Brandname}}">{{ItemBrand.Brandname}}</option>
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>UPC<span class="glyphicon glyphicon-question-sign" title="Universal Product Code(12-digit)"></span> </th>
+                <td>
+
+                    <input type=text name=textnames id="textname" class="form-control" ng-model="NewInsert.NewUsers.UPC">
+                </td>
+
+                <th>MPN<span class="glyphicon glyphicon-question-sign" title="Manufacturing Port Number"></span></th>
+                <td>
+
+                    <input type=text name=textnames id="textname" class="form-control" ng-model="NewInsert.NewUsers.MPN">
+                </td>
+            </tr>
+            <tr>
+                <th>EAN<span class="glyphicon glyphicon-question-sign" title="International Article Number"></span></th>
+                <td>
+
+                    <input type=text name=textnames id="textname" class="form-control" ng-model="NewInsert.NewUsers.EAN">
+                </td>
+
+                <th>
+                    Supplier
+                </th>
+                <td>
+                    <select class="form-control" ng-model="NewInsert.NewUsers.SupplierID">
+                        <option value="">Select Supplier</option>
+                        <option ng-repeat="supplierd in Supplier">{{supplierd.SupplierID }} </option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+
+                <th>Selling Price</th>
+                <td>
+                    <input type=text name=textnames id="textname" size="20" class="form-control" ng-model="NewInsert.NewUsers.SellingPrice">
+                </td>
+                <th>Purchase Price</th>
+                <td>
+                    <input type=text name=textnames id="textname" size="20" class="form-control" ng-model="NewInsert.NewUsers.PurchasePrice">
+                </td>
+            </tr>
+
+
+
+
+        </table>
+
+        <div style="padding-left:420px;padding-top:20px;">
+            <table ng-show="Itemsdetails">
+                <tr style="align-items:center">
+
+                    <td>
+                        <input type="button" value="Update" class="btn btn-success" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                    </td>
+
+                    <td>
+                        <input type="button" value="Submit" class="btn btn-success" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" style="width:100px;" />
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+
+        <br />
+        <br />
+        
+        
+        <div style="padding-top:10px;">
+
+            <div class="panel panel-default" style="float:left;width:950px;">
+                <div class="panel-heading" style="padding-bottom:20px;">
+                    <i class="glyphicon glyphicon-edit">ManageProduct</i>
+                    <div class="pull-right">
+                        <button class="btn btn-default" ng-click="addProduct()"><i class="glyphicon glyphicon-plus-sign"></i>Add Product </button>
+                    </div>
+                </div>
+
+                <div class="panel-body" style="float:left;width:950px;">
+
+                    <table class="table table-striped table-bordered" id="manageitemstable" style="float:left;">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center">Product ID</th>
+                                <th style="text-align:center">Name</th>
+                                <th style="text-align:center">Unit</th>
+                                <th style="text-align:center">Quantity</th>
+                                <th style="text-align:center">Selling Price</th>
+                                <th style="text-align:center">Purchase Price</th>
+                                <th style="text-align:center">Supplier</th>
+                                <th style="text-align:center">Actions</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="Itemsd in ItemsDetails">
+
+                                <td style="text-align:center">{{Itemsd.ProductID}}</td>
+                                <td style="text-align:center">{{Itemsd.Productname }} </td>
+                                <td style="text-align:center">{{Itemsd.Unit }}</td>
+                                <td style="text-align:center">{{Itemsd.Quantity }}</td>
+                                <td style="text-align:center">{{Itemsd.SellingPrice }}  </td>
+                                <td style="text-align:center">{{Itemsd.PurchasePrice }}</td>
+                                <td style="text-align:center">{{Itemsd.SupplierID }}</td>
+
+                                <td>
+
+                                    <button style="float:left;" class="btn btn-default" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(Itemsd)"><i class="glyphicon glyphicon-edit"></i></button>
+
+                                    <button style="float:right;" class="btn btn-default" id="btnDelete" ng-click="removeRec(Itemsd)"><i class="glyphicon glyphicon-trash"></i></button>
+
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+</div>
+
+
+

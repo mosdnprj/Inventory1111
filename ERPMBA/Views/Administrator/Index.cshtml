@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Style/MasterPage.cshtml";
+
+
+}
+@section featured{
+
+
+
+
+    <ul class="nav nav-pills" style="background: linear-gradient(to right, #e1eec3, #f05053);">
+        <li style="width: 200px;  text-align:center">@Html.ActionLink("Users", "UserInf", "Administrator", new { @style = "color:Black;" })</li>
+        <li style="width: 200px;  text-align:center">@Html.ActionLink("Item", "ItemAdmin", "Administrator", new { @style = "color:Black;" })</li>
+        <li style="width: 200px;  text-align:center">@Html.ActionLink("Customer", "CustomerAdmin", "Administrator", new { @style = "color:Black;" })</li>
+        <li style="width: 200px;  text-align:center">@Html.ActionLink("Supplier", "SupplierAdmin", "Administrator", new { @style = "color:Black;" })</li>
+    </ul>
+
+}
+

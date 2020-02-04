@@ -1,0 +1,22 @@
+﻿
+
+@{
+    ViewBag.Title = "DM";
+}
+@Html.Partial("Index")
+
+<div style="float:left; width:200px; padding-top:100px; border-color:#333300">
+    <ul class="nav nav-pills nav-stacked" style="float:left;">
+        <li style="width: 200px; background : linear-gradient(to right, #ccffff, #eaecc6 100%); text-align:center">
+            @Html.ActionLink("Form", "Form", "HR", new { @style = "color:Black;" })
+
+        </li>
+        <li style="width: 200px;background : linear-gradient(to right, #ccffff, #eaecc6 100%);text-align:center">
+            @Html.ActionLink("Tab", "Tab", "HR", new { @style = "color:Black;" })
+
+        </li>
+
+
+    </ul>
+</div>
+

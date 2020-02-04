@@ -1,0 +1,218 @@
+/* CRM */
+ 
+
+create table MMSdatabaseInf
+	(
+	id int identity(1,1),		
+        Membername varchar(50),
+        Email varchar(50),
+        Phone int,
+        Jobtitle varchar(50),
+        Company varchar(50),
+        Employees varchar(50),
+        Productintrest varchar(50),
+        Country varchar(50),
+        Languages varchar(50),
+        Addr varchar(50),
+        Postalcode int
+		)
+ALTER TABLE MMSdatabaseInf ADD Memberid AS ('NEXTM' + RIGHT('000' + CONVERT(varchar(3), id), 3));
+GO
+
+
+CREATE table Accounts(
+	id int identity(1,1),
+	Memberid varchar(50),
+	membername varchar(50),
+	city varchar(50) ,
+	state varchar(50) ,
+	country varchar(50) ,
+	date_entered varchar(50) ,
+	date_modified varchar(50) ,
+	deleted varchar(50) ,
+	organisationtype varchar(50) ,
+	organisationindustry varchar(50) ,
+	phone varchar(50)
+)
+ALTER TABLE Accounts ADD accountid  AS ('Nextoff' + RIGHT('000' + CONVERT(varchar(3), id), 3));
+GO
+
+
+
+  Create table ActconInf
+    (
+       id int identity(1,1),
+       Memberid Varchar(50),
+       accountid Varchar(50),
+       date_entered  varchar(50),
+       date_modified varchar(50),
+       deleted Varchar(50)
+        
+    )
+ALTER TABLE ActconInf ADD contactid AS ('Nextoff' + RIGHT('000' + CONVERT(varchar(3), id), 3));
+GO
+
+
+Create table ActtransInf
+    (
+         id int identity(1,1),
+         Memberid Varchar(50),
+         accountid Varchar(50),
+         date_entered varcharI(50),
+         date_modified varchar(50) ,
+         deleted Varchar(50)
+    )
+ALTER TABLE ActtransInf ADD Transactionid AS ('Nextoff' + RIGHT('000' + CONVERT(varchar(3), id), 3));
+GO
+
+
+Create table ActoppsInf
+(      
+         id int identity(1,1),
+         Memberid Varchar(50),
+         accountid Varchar(50),
+         date_entered varchar(50),
+         date_modified varchar(50) ,
+         deleted Varchar(50)
+)
+ALTER TABLE ActoppsInf ADD opportunitiesid AS ('oppertunity' + RIGHT('000' + CONVERT(varchar(3), id), 3));
+GO
+
+
+ Create table ContactInf
+    (
+        memberid Varchar(50),
+        fullname Varchar(50),
+        lastname Varchar(50),
+        gender Varchar(50),
+        DOB DateTime,
+        citizenship Varchar(50),
+        Race Varchar(50),
+        mobile Varchar(50),
+        email Varchar(50),
+        postalcode Varchar(50),
+        date_entered DateTime  ,
+        date_modified DateTime ,
+        deleted Varchar(50),
+        assigned_user_id Varchar(50)
+       
+
+
+    )
+
+
+
+
+ Create table OpportunityInf
+    (
+        memberid Varchar(50),
+        fullname Varchar(50),
+        lastname Varchar(50),
+        gender Varchar(50),
+        DOB DateTime,
+        citizenship Varchar(50),
+        Race Varchar(50),
+        mobile Varchar(50),
+        email Varchar(50),
+        postalcode Varchar(50),
+        date_entered DateTime ,
+        date_modified DateTime ,
+        deleted Varchar(50),
+        opportunity_type Varchar(50)
+        
+
+    )
+ALTER TABLE OpportunityInf ADD assigned_user_id AS ('Nextoff' + RIGHT('000' + CONVERT(varchar(3), id), 3));
+GO
+
+
+
+Create table transactionInf
+    (   
+         id int identity(1,1),
+         Memberid Varchar(50),
+         MemberName Varchar(50),
+         PaymentType Varchar(50),
+         CardNumber Varchar(50),
+         Amount Varchar(50),
+         MobileNumber Varchar(50),
+         Email Varchar(50),
+         TransactionDate Varchar(50),
+         TransactionTimeVarchar(50)
+    )
+ALTER TABLE transactionInf ADD TransactionId AS ('Transaction' + RIGHT('000' + CONVERT(varchar(3), id), 3));
+GO
+
+CREATE TABLE  dbo Calendar(
+	ProductId varchar(50) NULL,
+	ProductManager varchar(50) NULL,
+	Salesperson varchar(50) NULL,
+	Client varchar(50) NULL,
+	Meetingdate varchar(50) NULL,
+	Meetingtime varchar(50) NULL,
+	status varchar(50) NULL
+)
+
+
+CREATE TABLE leadInf(
+	Memberid varchar(50) ,
+	Membername varchar(50) ,
+	Email varchar(50) ,
+	Phone int ,
+	Jobtitle varchar(50) ,
+	Company varchar(50) ,
+	Employees varchar(50) ,
+	Productintrest varchar(50) ,
+	Country varchar(50) ,
+	Languages varchar(50) ,
+	Addr1 varchar(50) ,
+	Postalcode int,
+	Status1 varchar(50) ,
+	comments varchar(50) ,
+	contactdate varchar(50)
+) 
+
+
+
+CREATE TABLE taskInf(
+
+        id int identity(1,1),
+	subject varchar(50) ,
+	duedate varchar(50) ,
+	contact varchar(50) ,
+	account varchar(50) ,
+	status varchar(50) ,
+	priority varchar(50) ,
+	nemail varchar(50) ,
+	remainder varchar(50) ,
+	repeat varchar(50)
+)
+ALTER TABLE taskInf ADD taskId AS ('Task' + RIGHT('000' + CONVERT(varchar(3), id), 3));
+GO
+
+
+
+CREATE TABLE products(
+        id int identity(1,1),
+	Producttype varchar(50) ,
+	ProductCategory varchar(50) ,
+	ManuFacturer varchar(50) ,
+	UnitPrice varchar(50) ,
+	VenderName varchar(50) ,
+	Leadtime varchar(50) ,
+	AnnualorderQunatity varchar(50) ,
+	Annualworkingday varchar(50) ,
+	LocationId varchar(50) ,
+	Unitsonorder varchar(50) ,
+	Unitssold varchar(50) ,
+	Totalinventory varchar(50) ,
+	SuggestsalesPrice varchar(50) ,
+	ValidFrom varchar(50) ,
+	ValidTo varchar(50)
+)
+
+ALTER TABLE products ADD ProductId AS ('Product' + RIGHT('000' + CONVERT(varchar(3), id), 3));
+GO
+
+
+

@@ -1,0 +1,160 @@
+﻿@model ERPMBA.Models.Work
+
+@{
+    ViewBag.Title = "Work";
+}
+@Html.Partial("PIM")
+<script>
+    var myApp1 = angular.module("myApp1", []);
+
+    myApp1.controller("Workctrl", function ($scope, $http) {
+        $scope.WorkDetails = "";
+
+        $http.get("/HR/GetWorkInfo")
+        .then(function (result) {
+            $scope.WorkDetails = result.data;
+            $scope.editAdd = true;
+            $scope.editupdate = false;
+
+
+        })
+        $scope.removeRec = function (User) {
+            $http.post("/HR/DeleteWork", User)
+             .then(function (data) {
+                 location.reload();
+                 return response;
+
+
+             })
+        }
+        $scope.NewInsert = {
+            NewUsers: {}
+        }
+        $scope.EditRecord = function (User) {
+            $scope.NewInsert.NewUsers.emplid = User.emplid;
+            $scope.NewInsert.NewUsers.Companyname = User.Companyname;
+            $scope.NewInsert.NewUsers.Workedfrom = User.Workedfrom;
+            $scope.NewInsert.NewUsers.Designation = User.Designation;
+            $scope.NewInsert.NewUsers.WorkedTo = User.WorkedTo;
+            $scope.NewInsert.NewUsers.Category = User.Category;
+
+            $scope.editupdate = true;
+            $scope.editAdd = false;
+            alert("Edit");
+        }
+
+        $scope.Submit = function () {
+            $http.post("/HR/InsertWork", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Record");
+
+            })
+        }
+        $scope.Update = function () {
+            $http.post("/HR/UpdateWork", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Update");
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+        }
+            });
+</script>
+
+<div ng-app="myApp1" style="float:left; width:60%; padding-top:50px; border-color:#333300;padding-left:50PX;">
+    <div ng-controller="Workctrl">
+        <h3 style="text-align:center;">Work Details</h3>
+        <table ng-show="WorkDetails">
+            <tr>
+                <td>
+                    Employee Id
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.emplid, new { @class = "form-control", placeholder = "Employee Id", data_ng_model = "NewInsert.NewUsers.emplid" })
+
+                </td>
+
+
+                <td>
+                    Companyname
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Companyname, new { @class = "form-control", placeholder = "Companyname ", data_ng_model = "NewInsert.NewUsers.Companyname" })
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Workedfrom
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Workedfrom, new { @class = "form-control", placeholder = "Workedfrom", data_ng_model = "NewInsert.NewUsers.Workedfrom" })
+
+                </td>
+                <td>
+                    Designation
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Designation, new { @class = "form-control", placeholder = "Designation", data_ng_model = "NewInsert.NewUsers.Designation" })
+
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    WorkedTo
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.WorkedTo, new { @class = "form-control", placeholder = "WorkedTo", data_ng_model = "NewInsert.NewUsers.WorkedTo" })
+
+
+                </td>
+                <td>
+                    Category
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Category, new { @class = "form-control", placeholder = "Category", data_ng_model = "NewInsert.NewUsers.Category" })
+
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" class="btn-success" value="Update" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                </td>
+
+                <td>
+                    <input type="button" class="btn-success" value="Submit" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" />
+                </td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-md-2">emplid</th>
+                    <th class="col-md-5">Companyname</th>
+                    <th class="col-md-5">Workedfrom</th>
+                    <th class="col-md-2">Designation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="usrd in WorkDetails">
+                    <td>{{usrd.emplid}} </td>
+                    <td>{{usrd.Companyname}} </td>
+                    <td>{{usrd.Workedfrom}} </td>
+                    <td>{{usrd.Designation}} </td>
+                    <td>
+                        <input type="button" class="btn-success" value="Edit Record" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(usrd)">
+                    </td>
+                    <td>
+                        <input type="button" class="btn-danger" value="Delete" id="btnDelete" ng-click="removeRec(usrd)" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

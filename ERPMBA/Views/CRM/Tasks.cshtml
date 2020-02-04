@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Tasks";
+}
+
+@Html.Partial("Index")
+<div style="float:left; width:200px; padding-top:100px; border-color:#333300">
+    <ul class="nav nav-pills nav-stacked" style="float:left;background: linear-gradient(to bottom, #dae2f8, #d6a4a4);">
+        <li style="width: 200px;">@Html.ActionLink("MMSdatabase", "MMSdatabase", "CRM", new { @style = "color:Black;" })</li>
+        <li style="width: 200px;">@Html.ActionLink("Accounts", "Accounts", "CRM", new { @style = "color:Black;" })</li>
+        <li style="width: 200px;">@Html.ActionLink("Leads", "Leads", "CRM", new { @style = "color:Black;" })</li>
+        <li style="width: 200px;">@Html.ActionLink("AccountContacts", "AccountContacts", "CRM", new { @style = "color:Black;" })</li>
+        <li style="width: 200px;">@Html.ActionLink("AccountTransactions", "AccountTransactions", "CRM", new { @style = "color:Black;" })</li>
+        <li style="width: 200px;">@Html.ActionLink("AccountOpportunities", "AccountOpportunities", "CRM", new { @style = "color:Black;" })</li>
+        <li style="width: 200px;">@Html.ActionLink("contact", "contact", "CRM", new { @style = "color:Black;" })</li>
+        <li style="width: 200px;">@Html.ActionLink("opportunities", "opportunities", "CRM", new { @style = "color:Black;" })</li>
+        <li style="width: 200px;">@Html.ActionLink("transaction", "transaction", "CRM", new { @style = "color:Black;" })</li>
+
+
+    </ul>
+</div>

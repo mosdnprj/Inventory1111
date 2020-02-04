@@ -1,0 +1,44 @@
+USE master
+GO
+CREATE DATABASE ERPMBA
+ON 
+( NAME = ERPMBA_dat,
+   FILENAME = 'd:\ERPMBADATABASE\ERPMBAdat.mdf',
+   SIZE = 10,
+   MAXSIZE = 50,
+   FILEGROWTH = 5 )
+LOG ON
+( NAME = 'ERPMBA_log',
+   FILENAME = 'd:\ERPMBADATABASE\ERPMBAlog.ldf',
+   SIZE = 5MB,
+   MAXSIZE = 25MB,
+   FILEGROWTH = 5MB )
+GO
+use ERPMBA;
+Create table Details
+(
+
+ emplid varchar(50);
+        fullname { get; set; }
+        public string designation { get; set; }
+        public string gender { get; set; }
+        public DateTime DOB { get; set; }
+        public int contactNo { get; set; }
+        public string mailId { get; set; }
+        public string supervisorname { get; set; }
+        public int PFNo { get; set; }
+        public int healthcardNo { get; set; }
+        public string customerId { get; set; }
+        public string project { get; set; }
+        public string workinglocation { get; set; }
+        public string BloodGroop { get; set; }
+        public DateTime Dateofjoin { get; set; }
+        public int AlternativecontactNo { get; set; }
+        public string AlternativeEmail { get; set; }
+        public int SupervisorContactNo { get; set; }
+        public int ESINo { get; set; }
+        public DateTime HealthCardvalidity { get; set; }
+
+
+
+)

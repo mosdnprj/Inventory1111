@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "PGS";
+}
+@Html.Partial("Index")
+<div style="float:left; width:200px; padding-top:100px; border-color:#333300">
+    <ul class="nav nav-pills nav-stacked" style="float:left;">
+        <li style="width: 200px; background : linear-gradient(to right, #ccffff, #eaecc6 100%);color:White; text-align:center">@Html.ActionLink("Shipped Packages", "Shippedpackages", "Inventory", new { @style = "color:Black;" })</li>
+        <li style="width: 200px; background : linear-gradient(to right, #ccffff, #eaecc6 100%);color:White; text-align:center">@Html.ActionLink("Non-Shipped Packages", "NSP", "Inventory", new { @style = "color:Black;" })</li>
+        <li style="width: 200px; background : linear-gradient(to right, #ccffff, #eaecc6 100%);color:White; text-align:center">@Html.ActionLink("Delivered Packages", "DP", "Inventory", new { @style = "color:Black;" })</li>
+        <li style="width: 200px; background : linear-gradient(to right, #ccffff, #eaecc6 100%);color:White; text-align:center">@Html.ActionLink("Damaged Packages", "NDP", "Inventory", new { @style = "color:Black;" })</li>
+
+    </ul>
+</div>

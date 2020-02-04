@@ -1,0 +1,388 @@
+
+@model ERPMBA.Models.Details
+
+@{
+    ViewBag.Title = "PIM";
+}
+@Html.Partial("Index")
+<div style="float:left; width:200px; padding-top:100px; border-color:#333300">
+    <ul class="nav nav-pills nav-stacked" style=" float:left; background-color:Black">
+        <li class="active" style="width:200px;  text-align:center; "><a data-toggle="tab" href="#Details" style="background-color:#003366;color:White"> Details</a></li>
+        <li style="width: 200px;   text-align:center"><a data-toggle="tab" href="#Address" style="background-color: #00cc00;color:White"> Address</a></li>
+        <li style="width: 200px;text-align:center"><a data-toggle="tab" href="#Family" style="background-color: #e6e600;color:#333300 "> Family</a></li>
+        <li style="width: 200px;  text-align:center"><a data-toggle="tab" href="#Education" style="background-color: #ff3300;color:White"> Education</a></li>
+        <li style="width: 200px; text-align:center"><a data-toggle="tab" href="#Work" style="background-color: #0000ff;color:White">  Work</a></li>
+    </ul>
+</div>
+
+<div class="tab-content" style=" float:left; width:60%;height:550px;background-color:#f2f2f2;border-style: solid;border-color:#8c8c8c;">
+    <div id="Details" class="tab-pane fade in active" style="color: #ff5c33; width:100%;height:525px;">
+       
+        <form name="contactForm" method="post" action="" class="form-horizontal" role="form">
+            
+            <div class="col-lg-12">
+                <div id="Contact" class="jumbotron contact-form">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Details</h1>
+                    </div>
+                    <table>
+                    <tr>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-addon">employee id</span>
+                                @Html.TextBoxFor(model => model.emplid, new { @class = "form-control", placeholder = "Twoje imie" })
+                                <!--<input type="text" class="form-control" placeholder="Imie" id="inputName" required="required">-->
+                            </div>
+                        </td>
+
+
+                    <td>
+                    <div class="input-group">
+                        <span class="input-group-addon">Full name</span>
+                        @Html.TextBoxFor(model => model.fullname, new { @class = "form-control", placeholder = "Twoje nazwisko" })
+                        <!--<input type="text" class="form-control" placeholder="Nazwisko" id="inputSurname" required="required">-->
+                    </div>
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-addon">customerId</span>
+                                @Html.TextBoxFor(model => model.customerId, new { @class = "form-control", placeholder = "customerId" })
+                                <!--<input type="text" class="form-control" placeholder="Nazwisko" id="inputSurname" required="required">-->
+                            </div>
+                        </td>
+                    </tr>
+
+                        <tr>
+                            <td>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Designation</span>
+                                    @Html.TextBoxFor(model => model.designation, new { @class = "form-control", placeholder = "Adres email" })
+                                    <!--<input type="email" class="form-control" placeholder="Email" id="inputEmail" required="required">-->
+
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Gender</span>
+                                    @Html.TextBoxFor(model => model.gender, new { @class = "form-control", placeholder = "gender" })
+                                    <!--<input type="email" class="form-control" placeholder="Email" id="inputEmail" required="required">-->
+
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <span class="input-group-addon">project</span>
+                                    @Html.TextAreaFor(model => model.project, new { @class = "form-control", placeholder = "project" })
+                                    <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Tresc wiadomosci..." required="required"></textarea>-->
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Date Of Birth</span>
+                                    @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", placeholder = "Date of Birth" })
+                                    <!--<input type="text" class="form-control" placeholder="Imie" id="inputName" required="required">-->
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Contact Number</span>
+                                    @Html.TextAreaFor(model => model.contactNo, new { @class = "form-control", placeholder = "ContactNo" })
+                                    <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Tresc wiadomosci..." required="required"></textarea>-->
+
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <span class="input-group-addon">workinglocation</span>
+                                    @Html.TextAreaFor(model => model.workinglocation, new { @class = "form-control", placeholder = "workinglocation" })
+                                    <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Tresc wiadomosci..." required="required"></textarea>-->
+
+                                </div>
+                            </td>
+                        </tr>
+                    
+                <tr>
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-addon">MailId</span>
+                            @Html.TextAreaFor(model => model.mailId, new { @class = "form-control", placeholder = "MailID" })
+                            <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Tresc wiadomosci..." required="required"></textarea>-->
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-addon">SupervisorName</span>
+                            @Html.TextAreaFor(model => model.supervisorname, new { @class = "form-control", placeholder = "supervisorname" })
+                            <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Tresc wiadomosci..." required="required"></textarea>-->
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-addon">BloodGroop</span>
+                            @Html.TextAreaFor(model => model.BloodGroop, new { @class = "form-control", placeholder = "BloodGroop" })
+                            <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Tresc wiadomosci..." required="required"></textarea>-->
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                   <td>
+                        <div class="input-group">
+                            <span class="input-group-addon">PFNo</span>
+                            @Html.TextAreaFor(model => model.PFNo, new { @class = "form-control", placeholder = "PFNo" })
+                            <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Tresc wiadomosci..." required="required"></textarea>-->
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-addon">healthcardNo</span>
+                            @Html.TextAreaFor(model => model.healthcardNo, new { @class = "form-control", placeholder = "healthcardNo" })
+                            <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Tresc wiadomosci..." required="required"></textarea>-->
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <span class="input-group-addon">Dateofjoin</span>
+                            @Html.TextAreaFor(model => model.Dateofjoin, new { @class = "form-control", placeholder = "Dateofjoin" })
+                            <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Tresc wiadomosci..." required="required"></textarea>-->
+                        </div>
+                    </td>
+                </tr>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-1">
+                                <button type="submit" class="btn btn-default">
+                                    Send Message
+                                </button>
+                            </div>
+                    
+                    
+                    </table>
+</div>
+</div>
+            </div>
+        </form>
+
+
+    </div>
+    <div id="Address" class="tab-pane fade" style="color: #00cc00; width:100%;height:525px;">
+
+
+
+        <style>
+            td, th {
+                padding: 5px;
+            }
+        </style>
+
+        <h3 align="center">My Address Details</h3>
+
+        <center>
+
+            <table border="2" cellpadding="5">
+
+
+
+                </tr>
+                <td>Employ id:</td>
+                <td><input type="text" name="empid"></td>
+                <td>Fullname:</td>
+                <td><input type="text" name="fn"></td>
+                <tr>
+                    <br>
+                    <td>House/Bldg/Apt.No:</td>
+                    <td><input type="text"></td>
+                    <td>Street/Road/Lane:</td>
+                    <td><input type="text"></td>
+
+                </tr>
+
+                <tr>
+                    <td>Landmark/Area:</td>
+                    <td><input type="text"></td>
+                    <td>Town/City:</td>
+                    <td><input type="text"></td>
+
+                </tr>
+                <tr>
+
+                    <td>City/Town:</td>
+                    <td><input type="text"></td>
+                    <td>Pincode:</td>
+                    <td><input type="number"></td>
+                </tr>
+                <tr>
+
+                    <td>State/Provience:</td>
+                    <td><input type="text"></td>
+                    <td>Home Contact No:</td>
+                    <td><input type="number"></td>
+                </tr>
+
+
+
+
+            </table>   <br />
+            <button type="bt" onclick="detawet5rey4til" id="sb" class="btn-success">Submit</button>
+            <button class="btn-success">Cancel</button>
+        </center>
+
+
+
+    </div>
+    <div id="Family" class="tab-pane fade" style="color: #997a00; width:100%;height:525px;">
+
+        <form action="insertfamily.php" method="post">
+
+            <table>
+
+                <tr>
+                    <br>
+                    <td>Father Name:</td>
+                    <td><input type="text" name="fn"></td>
+                    <td>Father Date Of Birth:</td>
+                    <td><input type="date" name="dbthy" value="2014-02-09"></td>
+                </tr>
+                <tr>
+                    <td>Mother Name:</td>
+                    <td><input type="text" name="mn"></td>
+                    <td>Mother Date Of Birth:</td>
+                    <td><input type="date" name="dbthy" value="2014-02-09"></td>
+                </tr>
+                <tr>
+                    <td>Spouse Name:</td>
+                    <td><input type="text" name="sn"></td>
+                    <td>Spouse Date Of Birth:</td>
+                    <td><input type="date" name="dbthy" value="2014-02-09"></td>
+                </tr>
+                <tr>
+                    <td>Child-1 Name:</td>
+                    <td><input type="text" name="c1"></td>
+                    <td>Child-1 Date Of Birth:</td>
+                    <td><input type="date" name="dbthy" value="2014-02-09"></td>
+                </tr>
+                <tr>
+                    <td>Child-2 Name:</td>
+                    <td><input type="text" name="c2"></td>
+                    <td>Child-2 Date Of Birth:</td>
+                    <td><input type="date" name="dbthy" value="2014-02-09"></td>
+                </tr>
+                <tr>
+                    <td>Child-3 Name:</td>
+                    <td><input type="text" name="c3"></td>
+                    <td>Child-3 Date Of Birth:</td>
+                    <td><input type="date" name="dbthy" value="2014-02-09"></td>
+                </tr>
+                <tr>
+                    <td>Child-4 Name:</td>
+                    <td><input type="text" name="c4"></td>
+                    <td>Child-4 Date Of Birth:</td>
+                    <td><input type="date" name="dbthy" value="2014-02-09"></td>
+                </tr>
+            </table>
+
+
+            <td align="left">
+                <button>Submit</button>
+                <button>Cancel</button>
+            </td></tr>
+            </table>
+
+        </form>
+
+    </div>
+    <div id="Education" class="tab-pane fade" style="color: #9999ff; width:100%;height:525px;">
+        <center><h1>MY EDUCATION</h1></center>
+        <center>
+            <table border="2">
+
+                <tr>
+                    <br>
+                    <td>SSC/10th pass year:</td>
+                    <td><input type="number" name="a"></td>
+                    <td>SSC/10th pecentage:</td>
+                    <td><input type="number" name="g"></td>
+                </tr>
+                <tr>
+                    <td>Inter/12th pass year:</td>
+                    <td><input type="number" name="b"></td>
+                    <td>Inter/12th percentage:</td>
+                    <td><input type="number" name="h"></td>
+                </tr>
+                <tr>
+                    <td>Highest degree:</td>
+                    <td><input type="text" name="c"></td>
+                    <td>Highest degree percentage:</td>
+                    <td><input type="number" name="i"></td>
+                </tr>
+                <tr>
+                    <td>Highest degree pass year:</td>
+                    <td><input type="number" name="d"></td>
+                    <td>Highest degree percentage:</td>
+                    <td><input type="number" name="i"></td>
+                </tr>
+                <tr>
+                    <td>Dip/gradu/other pass year:</td>
+                    <td><input type="number" name="e"></td>
+                    <td>Dip/Gradu/other percentage:</td>
+                    <td><input type="number" name="j"></td>
+                </tr>
+                <tr>
+                    <td>Other certification-1:</td>
+                    <td><input type="text" name="f"></td>
+                    <td>Other certification-2:</td>
+                    <td><input type="text" name="k"></td>
+
+                </tr>
+
+            </table>
+            <br />
+            <button class="btn-success">Submit</button>
+            <button class="btn-success">Cancel</button>
+
+        </center>
+    </div>
+    <div id="Work" class="tab-pane fade" style="color: #b300b3; width:100%;height:525px;">
+
+        <center>
+            <form action="insertwork.php" method="post">
+                <center>
+
+                    <table>
+                        <tr>
+                            <br>
+                            <td>Employee id:</td>
+                            <td><input type="text" name='empid'></td>
+
+                            <td>Employee name:</td>
+                            <td><input type="text" name='ename'></td>
+                        </tr>
+
+                        <tr>
+                            <td>Company Name:</td>
+                            <td><input type="text" name='lCompanyname'></td>
+                            <td>Designation</td>
+                            <td><input type="text" name='lDesignation'></td>
+                        </tr>
+                        <tr>
+                            <td>Worked From:</td>
+                            <td><input type="text" name='lWorkedfrom'></td>
+                            <td>Worked To</td>
+                            <td><input type="text" name='lWorkedTo'></td>
+                        </tr>
+
+
+                        <tr>
+                            <td align="center"><button>Submit</button><button>Cancel</button></td>
+                        </tr>
+
+                    </table>
+
+                </center>
+            </form>
+
+        </center>
+
+    </div>
+</div>
+

@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Style/MasterPage.cshtml";
+}
+
+<h2>Index</h2>
+@section featured
+    {
+ <ul  class="list-inline">
+
+                <li>@Html.ActionLink("History1", "Index", "History")</li>
+            
+                <li>@Html.ActionLink("History2", "Index", "History")</li>
+            
+                <li>@Html.ActionLink("History3", "Index", "History")</li>
+          
+                 <li>@Html.ActionLink("History4", "Index", "History")</li>
+       
+               
+            </ul>
+   }

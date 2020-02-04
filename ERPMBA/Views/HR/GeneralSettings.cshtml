@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "GeneralSettings";
+}
+@Html.Partial("Attendance")
+<div class="tab-content" style="float:left; width:60%;height:100%;padding-left:20px;">
+    <div id="Details" class="tab-pane fade in active" style="width:100%;height:100%;padding-left:15px;">
+
+
+
+        <b>
+            General
+        </b>
+        <text style="float:right;"> Update older Attedence Entries   </text>  <hr />
+
+        <form class="form-inline">
+
+            <div class="form-group">
+
+                Entry From<input type="date" class="form-control" />
+                <br /><br />
+                Default Shift Time
+                <select class="form-control" id="emplid">
+                    <option>General</option>
+                    <option>emp1</option>
+                    <option>emp2</option>
+                    <option>emp3</option>
+                    <option>emp4</option>
+                </select><br />
+            </div>
+        </form>
+
+        <b>
+            Working Hours
+        </b><hr />
+
+        Total Hours Calculation
+        <label class="radio-inline">
+            <input name="THC" id="F" value="option1" type="radio"> First Check-In&LastCheck-Out
+        </label>
+        <label class="radio-inline">
+            <input name="THC" id="E" value="option2" checked="" type="radio">Every Valid Check-In&LastCheck-Out
+        </label><br /><br />
+        <form class="form-inline">
+            <div class="form-group">
+
+                Exclude Break Time<input type="time" class="form-control" /><br /><br />
+            </div>
+        </form>
+        Minimum Hours Required per Day
+        <label class="radio-inline">
+            <input name="MinHrs" id="s" value="option1" type="radio">Stric tMode
+        </label>
+        <label class="radio-inline">
+            <input name="MinHrs" id="l" value="option2" checked="" type="radio">Lenient Mode(Expected Hours)
+        </label><br /><br />
+        Maximum Hours Required per Day
+        <label class="radio-inline">
+            <input name="MaxHrs" id="s" value="option1" type="radio">Enable
+        </label>
+        <label class="radio-inline">
+            <input name="MaxHrs" id="l" value="option2" checked="" type="radio">Disable
+        </label><br /><br />
+        <b> Pay days Hours Calculation</b>
+        <hr />
+        <form class="form-inline">
+            <div class="form-group">
+                Include weekend(s)
+                <label class="radio-inline">
+                    <input name="IW" id="s" value="option1" type="radio">Enable
+                </label>
+                <label class="radio-inline">
+                    <input name="IW" id="l" value="option2" checked="" type="radio">Disable
+                </label><br /><br />
+                Include Holiday(s)
+                <label class="radio-inline">
+                    <input name="IH" id="s" value="option1" type="radio">Enable
+                </label>
+                <label class="radio-inline">
+                    <input name="IH" id="l" value="option2" checked="" type="radio">Disable
+                </label><br /><br />
+                Include Leave
+                <label class="radio-inline">
+                    <input name="IL" id="s" value="option1" type="radio">Enable
+                </label>
+                <label class="radio-inline">
+                    <input name="IL" id="l" value="option2" checked="" type="radio">Disable
+                </label><br /><br />
+            </div>
+        </form>
+
+
+        <b>  Shift Settings</b>
+        <hr />
+        <form class="form-inline">
+            <div class="form-group">
+                View Employee Shift Mapping
+                <select class="form-control" id="emplid">
+
+                    <option>Reporting Manager</option>
+
+                    <option>emp1</option>
+                    <option>emp2</option>
+                    <option>emp3</option>
+                    <option>emp4</option>
+                </select><br /><br />
+                Edit Employee Shift Mapping
+                <select class="form-control" id="emplid">
+                    <option>Reporting Manager</option>
+                    <option>emp1</option>
+                    <option>emp2</option>
+                    <option>emp3</option>
+                    <option>emp4</option>
+                </select><br /><br />
+        </form>
+    </div>
+    Email Notification For Shift Modification
+    <label class="radio-inline">
+        <input name="EmailNotify" id="s" value="option1" type="radio">Enable
+    </label>
+    <label class="radio-inline">
+        <input name="EmailNotify" id="l" value="option2" checked="" type="radio">Disable
+    </label><br /><br />
+    Feeds Notification For Shift Modification
+    <label class="radio-inline">
+        <input name="FeedsNotify" id="s" value="option1" type="radio">Enable
+    </label>
+    <label class="radio-inline">
+        <input name="FeedsNotify" id="l" value="option2" checked="" type="radio">Disable
+    </label><br /><br />
+</div>
+        </div>
+ </div>
+       </div>

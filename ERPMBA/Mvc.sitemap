@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="Home" controller="CRM" action="Index">
+    <mvcSiteMapNode title="AT" controller="CRM" action="AccountTransactions"/>
+    <mvcSiteMapNode title="AC" controller="CRM" action="AccountContacts"/>
+  <mvcSiteMapNode title="AI" controller="CRM" action="AccountInf"/>
+    <mvcSiteMapNode title="AO" controller="CRM" action="AccountOpportunities"/>
+  
+  </mvcSiteMapNode>
+
+</mvcSiteMap>

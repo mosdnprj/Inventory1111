@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Style/MasterPage.cshtml";
+
+
+}
+@section featured{
+    <style>
+        .ul {
+            list-style-type: none;
+        }
+
+        .dropbtn {
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            list-style-type: none;
+            display: none;
+            position: absolute;
+            background-color: #0099cc;
+            min-width: 160px;
+            padding-left: 5px;
+            box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                style ="color:black" text-decoration: none;
+                padding: 12px 16px;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: black;
+                }
+
+        .dropdown:hover .dropdown-content {
+            padding-top: 5px;
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: red;
+        }
+
+        .dropdown a {
+            color: black;
+        }
+    </style>
+    <div class="container" style="color:red;float:left;background-color:gainsboro;">
+        <ul class="nav nav-tabs" style="width:1150px;">
+         <li class="dropdown" style="width:125px;padding-top:23px;">
+                <a class="dropdown-toggle" data-toggle="dropdown">PI Management</a>
+                <ul class="dropdown-content">
+
+                    <li>     @Html.ActionLink("Attendance", "Attendance", "HR", new { @style = "color:Black;" })         </li>
+                    <li>     @Html.ActionLink("Leave", "LeaveTracker", "HR", new { @style = "color:Black;" })            </li>
+                    <li>     @Html.ActionLink("Add Leave", "AddLeave", "HR", new { @style = "color:Black;" })            </li>
+                    <li>     @Html.ActionLink("View Leave", "ViewLeave", "HR", new { @style = "color:Black;" })          </li>
+                    <li>     @Html.ActionLink("Leave Status", "LeaveTracker", "HR", new { @style = "color:Black;" })     </li>
+
+                </ul>
+         </li>
+         <li class="dropdown" style="width:125px; padding-top:23px;">
+                <a class="dropdown-toggle" data-toggle="dropdown">TA Management</a>
+                <ul class="dropdown-content">
+
+                    <li>   @Html.ActionLink("Attendance", "Attendance", "HR", new { @style = "color:Black;" })     </li>
+                    <li>   @Html.ActionLink("Leave", "LeaveTracker", "HR", new { @style = "color:Black;" })       </li>
+                    <li>   @Html.ActionLink("Add Leave", "AddLeave", "HR", new { @style = "color:Black;" })      </li>
+                    <li>   @Html.ActionLink("View Leave", "ViewLeave", "HR", new { @style = "color:Black;" })         </li>
+                    <li>  @Html.ActionLink("Leave Status", "LeaveTracker", "HR", new { @style = "color:Black;" })    </li>
+                   <li>   @Html.ActionLink("TimeTracker", "TimeTracker", "HR", new { @style = "color:Black;" })      </li>
+        </ul>
+        </li>
+        <li class="dropdown" style="width:125px; padding-top:23px;">
+            <a class="dropdown-toggle" data-toggle="dropdown">Document Manager</a>
+            <ul class="dropdown-content">
+                <li>   @Html.ActionLink("Form", "Form", "HR", new { @style = "color:Black;" })     </li>
+                <li>   @Html.ActionLink("Tab", "Tab", "HR", new { @style = "color:Black;" })       </li>
+            </ul>
+         </li>
+
+            </ul>
+    </div>
+}

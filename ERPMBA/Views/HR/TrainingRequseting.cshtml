@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "TrainingRequseting";
+}
+@Html.Partial("DM")
+<script>
+$(document).ready(function(){
+    $("#flip").click(function(){
+        $("#panel").show();
+    });
+    $("#remove").click(function () {
+        $("#panel").hide();
+    });
+});
+
+</script>
+<style>
+    #flip:hover {
+        cursor: pointer;
+    }
+
+    #panel {
+        display: none;
+    }
+</style>
+<div class="tab-content" style="float:left; width:60%;height:100%;padding-left:20px;padding-top:80px;">
+    <div id="Details" class="tab-pane fade in active" style="width:100%;height:100%;padding-left:15px;">
+        <div id="flip">
+            +Add Travel Record
+        </div>
+        <hr />
+
+
+
+
+        <div id="panel">
+            <div id="remove">
+                Travel Rquest              <span class="glyphicon glyphicon-remove" style="float:right;"></span>
+
+            </div>
+            <br /><hr />
+            <form class="form-group">
+
+                <div class="form-group">
+                    <div id="left" style="width:300px;float:left; ">
+                        Employee Id<br />
+                        <select class="form-control" id="emplid">
+                            <option>Select Employee ID</option>
+                            <option>emp1</option>
+                            <option>emp2</option>
+                            <option>emp3</option>
+                            <option>emp4</option>
+                        </select><br />
+                        Employee Department<br />
+                        <select class="form-control" id="emplid">
+                            <option>Select Employee ID</option>
+                            <option>emp1</option>
+                            <option>emp2</option>
+                            <option>emp3</option>
+                            <option>emp4</option>
+                        </select><br />
+                        Expected Date Of Departure<input type="date" class="form-control" />
+                        Purpose Of Visit<input type="text" class="form-control" />
+
+                        Place Of Visit<input type="text" class="form-control" />
+                        Expected Duration In Days<input type="text" class="form-control" />
+                        Expected Date Of Arrival<input type="date" class="form-control" />
+                        Customer Name<input type="text" class="form-control" />
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

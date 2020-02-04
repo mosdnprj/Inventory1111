@@ -1,0 +1,252 @@
+﻿@model ERPMBA.Models.Family
+@{
+    ViewBag.Title = "Family";
+}
+@Html.Partial("PIM")
+<script>
+    var myApp1 = angular.module("myApp1", []);
+
+
+    myApp1.controller("Familyctrl", function ($scope, $http) {
+        $scope.FamilyDetails = "";
+
+        $http.get("/HR/GetFamilyInfo")
+        .then(function (result) {
+            $scope.FamilyDetails = result.data;
+            $scope.editAdd = true;
+            $scope.editupdate = false;
+
+
+        })
+        $scope.removeRec = function (User) {
+            $http.post("/HR/DeleteFamily", User)
+             .then(function (data) {
+                 location.reload();
+                 return response;
+
+
+             })
+        }
+        $scope.NewInsert = {
+            NewUsers: {}
+        }
+        $scope.EditRecord = function (User) {
+            $scope.NewInsert.NewUsers.emplid = User.emplid;
+            $scope.NewInsert.NewUsers.empname = User.empname;
+            $scope.NewInsert.NewUsers.fatherName = User.fatherName;
+            $scope.NewInsert.NewUsers.motherName = User.motherName;
+            $scope.NewInsert.NewUsers.Child1Name = User.Child1Name;
+            $scope.NewInsert.NewUsers.Child2Name = User.Child2Name;
+            $scope.NewInsert.NewUsers.Child3Name = User.Child3Name;
+            $scope.NewInsert.NewUsers.Child4Name = User.Child4Name;
+            $scope.NewInsert.NewUsers.faherDOB = User.faherDOB;
+            $scope.NewInsert.NewUsers.motherDOB = User.motherDOB;
+            $scope.NewInsert.NewUsers.Child1DOB = User.Child1DOB;
+            $scope.NewInsert.NewUsers.Child2DOB = User.Child2DOB;
+            $scope.NewInsert.NewUsers.Child3DOB = User.Child3DOB;
+            $scope.NewInsert.NewUsers.Child4DOB = User.Child4DOB;
+
+            $scope.editupdate = true;
+
+            $scope.editAdd = false;
+            alert("Edit");
+
+
+
+        }
+
+        $scope.Submit = function () {
+            $http.post("/HR/InsertFamily", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Record");
+
+            })
+        }
+        $scope.Update = function () {
+            $http.post("/HR/UpdateFamily", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Update");
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+        }
+
+
+
+    });
+</script>
+
+
+<div ng-app="myApp1" style="float:left; width:60%;padding-top:50px; border-color:#333300;padding-left:50px;">
+
+
+
+
+    <div ng-controller="Familyctrl">
+
+        <h3 style="text-align:center;">Family Details</h3>
+        <table ng-show="FamilyDetails">
+            <tr>
+                <td>
+                    Employee id
+                </td>
+                <td>
+                    @Html.TextBoxFor(Family => Family.emplid, new { @class = "form-control", placeholder = "Employee id", data_ng_model = "NewInsert.NewUsers.emplid" })
+
+                </td>
+                <td>
+                    Employee Name
+                </td>
+                <td>
+                    @Html.TextBoxFor(Family => Family.empname, new { @class = "form-control", placeholder = "Employee name", data_ng_model = "NewInsert.NewUsers.empname" })
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Father Name
+                </td>
+                <td>
+                    @Html.TextBoxFor(Family => Family.fatherName, new { @class = "form-control", placeholder = "Father Name", data_ng_model = "NewInsert.NewUsers.fatherName" })
+
+                </td>
+                <td>
+                    Father DOB
+                </td>
+                <td>
+                    @Html.TextBoxFor(Family => Family.faherDOB, new { @class = "form-control", placeholder = "Father DOB", data_ng_model = "NewInsert.NewUsers.faherDOB" })
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Mother Name
+                </td>
+                <td>
+                    @Html.TextBoxFor(Family => Family.motherName, new { @class = "form-control", placeholder = "Mother Name", data_ng_model = "NewInsert.NewUsers.motherName" })
+
+                </td>
+
+                <td>
+                    MotherDOB
+                </td>
+                <td>
+                    @Html.TextBoxFor(Family => Family.motherDOB, new { @class = "form-control", placeholder = "Mother DOB", data_ng_model = "NewInsert.NewUsers.motherDOB" })
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Child1 Name
+                </td>
+                <td>
+                    @Html.TextBoxFor(Family => Family.Child1Name, new { @class = "form-control", placeholder = "Child1 Name", data_ng_model = "NewInsert.NewUsers.Child1Name" })
+
+                </td>
+
+                <td>
+                    Child1 DOB
+                </td>
+                <td>
+                    @Html.TextBoxFor(Family => Family.Child1DOB, new { @class = "form-control", placeholder = "Child1 DOB", data_ng_model = "NewInsert.NewUsers.Child1DOB" })
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Child2 Name
+                </td>
+                <td>
+                    @Html.TextBoxFor(Family => Family.Child2Name, new { @class = "form-control", placeholder = "Child2 Name", data_ng_model = "NewInsert.NewUsers.Child2Name" })
+
+                </td>
+
+                <td>
+                    Child2 DOB
+                </td>
+                <td>
+                    @Html.TextBoxFor(Family => Family.Child2DOB, new { @class = "form-control", placeholder = "Child2 DOB", data_ng_model = "NewInsert.NewUsers.Child2DOB" })
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Child3 Name
+                </td>
+                <td>
+                    @Html.TextBoxFor(Family => Family.Child3Name, new { @class = "form-control", placeholder = "Child3 Name", data_ng_model = "NewInsert.NewUsers.Child3Name" })
+
+                </td>
+                <td>
+                    Child3 DOB
+                </td>
+                <td>
+                    @Html.TextBoxFor(Family => Family.Child3DOB, new { @class = "form-control", placeholder = "Child3 DOB", data_ng_model = "NewInsert.NewUsers.Child3DOB" })
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Child4Name
+                </td>
+                <td>
+                    @Html.TextBoxFor(Family => Family.Child4Name, new { @class = "form-control", placeholder = "Child4Name", data_ng_model = "NewInsert.NewUsers.Child4Name" })
+
+                </td>
+
+                <td>
+                    Child4 DOB
+                </td>
+                <td>
+                    @Html.TextBoxFor(Family => Family.Child4DOB, new { @class = "form-control", placeholder = "Child4 DOB", data_ng_model = "NewInsert.NewUsers.Child4DOB" })
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" class="btn-success" value="Update" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                </td>
+
+                <td>
+                    <input type="button" class="btn-success" value="Submit" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" />
+                </td>
+            </tr>
+
+        </table>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>emplid</th>
+                    <th>empname</th>
+                    <th>fatherName</th>
+                    <th>motherName</th>
+
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr ng-repeat="usrd in FamilyDetails">
+
+
+                    <td>{{usrd.emplid}} </td>
+                    <td>{{usrd.empname}} </td>
+                    <td>{{usrd.fatherName}} </td>
+                    <td>{{usrd.motherName}} </td>
+
+                    <td>
+                        <input type="button" class="btn-success" value="Edit Record" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(usrd)">
+                    </td>
+
+                    <td>
+                        <input type="button" class="btn-danger" value="Delete" id="btnDelete" ng-click="removeRec(usrd)" />
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>

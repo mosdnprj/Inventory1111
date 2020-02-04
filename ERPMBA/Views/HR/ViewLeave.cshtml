@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "ViewLeave";
+}
+
+@Html.Partial("TAM")
+
+<script src="~/Scripts/addleave.js"></script>
+<div ng-app="myApp1" style="float:left; width:60%; padding-top:70px; border-color:#333300">
+    <h3>View Leave </h3>
+    <div ng-controller="AddLeavectrl">
+        <form class="form-inline">
+            <div class="form-group">
+
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Employee Id</th>
+                            <th>Department</th>
+                            <th>LeaveType</th>
+                            <th>Other</th>
+                            <th>StartDate</th>
+                            <th>EndDate</th>
+                            <th>Number Of Days</th>
+                            <th>Contact Number During Leave</th>
+                            <th>AplyDate</th>
+                            <th>ResponsiblePerson</th>
+                            <th>ContactAddress</th>
+                            <th>remarks</th>
+
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="usrd in AddLeaveDetails">
+
+
+                            <td>{{usrd.emplid}} </td>
+                            <td>{{usrd.Department}}</td>
+                            <td>{{usrd.LeaveType}} </td>
+                            <td>{{usrd.Other}}</td>
+                            <td>{{usrd.StartDate}} </td>
+                            <td>{{usrd.EndDate}}</td>
+                            <td>{{usrd.NoOfDays}} </td>
+                            <td>{{usrd.NoInLeave}}</td>
+                            <td>{{usrd.AplyDate}} </td>
+                            <td>{{usrd.ResponsiblePerson}} </td>
+                            <td>{{usrd.ContactAddress}}</td>
+                            <td>{{usrd.remarks}}</td>
+
+
+                        </tr>
+                    </tbody>
+
+                </table>
+
+
+                <a href="#" onClick="window.print()">
+                    <img src="~/images/print.jpg" style="float:right;" />
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

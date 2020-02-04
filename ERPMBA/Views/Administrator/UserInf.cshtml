@@ -1,0 +1,257 @@
+﻿@{
+    ViewBag.Title = "UserInf";
+    Layout = "~/Views/Style/MasterPage.cshtml";
+}
+@section featured{
+
+    @Html.Partial("Index")
+    <div ng-app="myApp" style="float:left; width:60%;padding-left:50px; padding-top:20px; border-color:#333300">
+
+        <script>
+
+        var myApp = angular.module("myApp", []);
+
+
+        myApp.controller("Userctrl", function ($scope, $http) {
+            $scope.userDetails = "";
+            $http.get("/Administrator/GetUserInfo")
+            .then(function (collectdata) {
+                $scope.userDetails = collectdata.data;
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+                $scope.userDetails1 = false;
+
+            })
+
+            $scope.NewInsert =  {
+                NewUsers: {}
+            }
+
+            $scope.removeRec = function (User) {
+                $http.post("/Administrator/DeleteUser", User)
+                 .then(function (data) {
+                     location.reload();
+                     return response;
+
+
+                 })
+            }
+
+            $scope.EditRecord = function (User) {
+                $scope.NewInsert.NewUsers.userid = User.userid;
+                $scope.NewInsert.NewUsers.username = User.username;
+                $scope.NewInsert.NewUsers.dob = User.dob;
+                $scope.NewInsert.NewUsers.email = User.email;
+                $scope.NewInsert.NewUsers.firstname = User.firstname;
+                $scope.NewInsert.NewUsers.secondname = User.secondname;
+                $scope.NewInsert.NewUsers.moblieno = User.moblieno;
+                $scope.NewInsert.NewUsers.password = User.password;
+                $scope.NewInsert.NewUsers.Telephoneno = User.Telephoneno;
+                $scope.NewInsert.NewUsers.Image_User = User.Image_User;
+
+                $scope.userDetails1 = true;
+                $scope.editupdate = true;
+                $scope.editAdd = false;
+                alert("Edit");
+
+
+
+
+            }
+
+            $scope.AddRecord = function () {
+
+
+                $scope.editAdd = true;
+                $scope.userDetails1 = true;
+
+                alert("Add New Record 1");
+            }
+            $scope.Submit = function () {
+                $http.post("/Administrator/InsertUsers",$scope.NewInsert.NewUsers)
+                .then(function (data){
+                    location.reload();
+                              alert("Save Record");
+
+                })
+            }
+
+
+            $scope.Update = function () {
+                $http.post("/Administrator/UpdateUser", $scope.NewInsert.NewUsers)
+                .then(function (data) {
+                    location.reload();
+                    alert("Save Update");
+
+                    $scope.editAdd = true;
+                    $scope.editupdate = false;
+
+                })
+            }
+            $scope.ShowUsers = function () {
+                alert("Show mE");
+            }
+
+            $scope.LoadFileData = function (event) {
+
+                var selectedFile = event.target.files[0];
+                var reader = new FileReader();
+
+                var imgtag = document.getElementById("NewInsert.NewUsers.Image_User");
+                imgtag.title = selectedFile.name;
+
+                reader.onload = function (event) {
+                    imgtag.src = event.target.result;
+                    $scope.NewInsert.NewUsers.Image_User = event.target.result;
+                };
+
+                reader.readAsDataURL(selectedFile);
+            }
+
+
+        });
+
+        </script>
+        <style>
+            table, td, tr {
+                padding: 10px;
+            }
+        </style>
+
+
+        <div ng-controller="Userctrl">
+
+            <div ng-show="userDetails1">
+                <h4 style="text-align:center">User Details</h4>
+                <table>
+                    <tr>
+                        <td>
+
+                            User Id
+                        </td>
+                        <td>
+                            <input id="myid" style="width:250px" class="form-control" placeholder="Enter User Id" type="text" ng-model="NewInsert.NewUsers.userid" name="userid">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            User Name
+                        </td>
+                        <td>
+                            <input type="text" style="width:250px" class="form-control" ng-model="NewInsert.NewUsers.username" name="pusername">
+                        </td>
+
+
+                    </tr>
+                    <tr>
+                        <td>
+
+                            Email Address
+                        </td>
+                        <td>
+                            <input class="form-control" style="width:250px" placeholder="EmailId" type="text" ng-model="NewInsert.NewUsers.email" name="pEmailid">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            First Name
+                        </td>
+                        <td stheight="">
+                            <input type="text" style="width:250px" class="form-control" ng-model="NewInsert.NewUsers.firstname" name="pFirstname">
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+
+                            Second Name
+                        </td>
+                        <td>
+                            <input type="text" style="width:250px" class="form-control" placeholder="Second Name" ng-model="NewInsert.NewUsers.secondname" name="pSecondName">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Password
+                        </td>
+                        <td>
+                            <input type="password" style="width:250px" class="form-control" ng-model="NewInsert.NewUsers.password">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Telephone
+                        </td>
+                        <td>
+                            <input type="text" style="width:250px" class="form-control" ng-model="NewInsert.NewUsers.Telephoneno" name="pTelephoneno">
+                        </td>
+                    </tr>
+                    <tr>
+
+
+                        <td>
+                            <label for="file">Upload your photos :</label>
+                        </td>
+                        <td>
+                            <input class="form-control" type="file" onchange="angular.element(this).scope().LoadFileData(event)" ng-model="NewInsert.NewUsers.Image_User" style="width:250px">
+                            <img id="NewInsert.NewUsers.Image_User" ng-src="{{NewInsert.NewUsers.Image_User}}" style="height:100px; width:250px">
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            <input type="button" class="btn btn-success" value="Update" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                        </td>
+
+                        <td>
+                            <input type="button" class="btn btn-success" value="Submit" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" />
+                        </td>
+                    </tr>
+
+
+
+
+                </table>
+
+                <br />
+
+                <br />
+            </div>
+
+            <input type="button" class="btn btn-primary" value="Add Record" id="btnAdd" ng-model="AddRec" ng-click="AddRecord()">
+            <br /><br />
+            <table class="table table-striped" border="1" style="border-color:lightgray;">
+                <thead style="background-color:lightgray;">
+                    <tr>
+                        <th class="col-md-2">User Id</th>
+                        <th class="col-md-3">username</th>
+                        <th class="col-md-3">Email Address</th>
+                        <th class="col-md-3">Actions</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr ng-repeat="usrd in userDetails">
+
+
+                        <td>{{usrd.userid}} </td>
+
+
+                        <td>{{usrd.username}}</td>
+                        <td>{{usrd.email}}</td>
+                        <td>
+                            <input type="button" class="btn btn-success" value="Edit Record" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(usrd)">
+
+                            <input type="button" class="btn btn-danger" value="Delete" id="btnDelete" ng-click="removeRec(usrd)" />
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+}

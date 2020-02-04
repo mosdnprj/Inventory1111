@@ -1,0 +1,209 @@
+﻿@{
+    ViewBag.Title = "Brand";
+}
+@Html.Partial("Product")
+
+<script>
+    var myApp1 = angular.module("myApp1", []);
+
+
+    myApp1.controller("Brandctrl", function ($scope, $http) {
+        $scope.CategoryDetails = "";
+
+        $http.get("/Inventory/GetBrandInfo")
+        .then(function (result) {
+            $scope.BrandDetails = result.data;
+            $scope.editAdd = true;
+            $scope.editupdate = false;
+            alert("success");
+        })
+            $http.get("/Inventory/getCategorydetail" )
+                         .then(function(dataresult)  {
+                             $scope.Categorydetails=dataresult.data;
+                             alert("Category");
+        })
+        $scope.removeRec = function (User) {
+            $http.post("/Inventory/DeleteBrand", User)
+             .then(function (data) {
+                 location.reload();
+                 return response;
+
+
+             })
+        }
+        $scope.NewInsert = {
+            NewUsers: {}
+        }
+        $scope.EditRecord = function (User) {
+            $scope.NewInsert.NewUsers.Categoryname = User.Categoryname;
+            $scope.NewInsert.NewUsers.Brandname = User.Brandname;
+            $scope.NewInsert.NewUsers.Brandstatus = User.Brandstatus;
+            $scope.Categorydetails = true;
+            $scope.editupdate = true;
+            $scope.editAdd = false;
+            alert("Edit");
+
+        }
+
+        $scope.Submit = function () {
+            $http.post("/Inventory/InsertBrand", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Record");
+
+            })
+        }
+        $scope.addbrand = function () {
+            $scope.Branddetails = true;
+
+
+        }
+        $scope.Update = function () {
+            $http.post("/IntegrationUnit/UpdateBrand", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Update");
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+        }
+        $(document).ready(function () {
+            $('#managebrandtable').DataTable({
+                "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+                "iDisplayLength": 10
+            });
+        });
+
+
+
+    });
+</script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+<style>
+    .table1 {
+        width: 900px;
+    }
+
+        .table1 tr, th {
+            padding-left: 50px;
+            padding-bottom: 15px;
+            font-weight: 100;
+        }
+
+        .table1 tr, td {
+            padding-bottom: 15px;
+        }
+</style>
+
+<div ng-app="myApp1" style="float:left; width:60%;height:100%;padding-top:30px;padding-left:50px;">
+
+    <div ng-controller="Brandctrl">
+
+        <center><h4 style="padding-left:150px;font-family:Cambria;font-size:25px;padding-bottom:20px;"> Item Brand Details</h4></center>
+
+
+        <table ng-show="Branddetails" align="center">
+
+            <tr>
+                <th style="width:200px" class="form-group">Category Name</th>
+                <td style="width:200px">
+                    <select name="catgname" style="width:299px;height:33px; " ng-model="NewInsert.NewUsers.Categoryname" class="form-control" title="Select Category">
+                        <option value="" disabled>Select Category</option>
+                        <option ng-repeat="CatgdBrand in Categorydetails">{{CatgdBrand.Categoryname}}</option>
+
+                    </select>
+                </td>
+
+            </tr>
+            <tr>
+                <th>Brand Name<span style="color:red;font-size:20px">*</span></th>
+                <td>
+                    <input type=text id="firstn" size="30" ng-model="NewInsert.NewUsers.Brandname" class="form-control">
+                </td>
+
+            </tr>
+            <tr>
+                <th>Status<span style="color:red;font-size:20px">*</span></th>
+                <td>
+                    <select name="Status" ng-model="NewInsert.NewUsers.Brandstatus" class="form-control">
+                        <option value="" disabled style="display:none;">Select</option>
+                        <option>Available</option>
+                        <option>Not Available</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <div style="padding-left:420px;padding-top:20px;">
+            <table ng-show="Branddetails">
+                <tr style="align-items:center">
+
+                    <td>
+                        <input type="button" value="Update" class="btn btn-success" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                    </td>
+
+                    <td>
+                        <input type="button" value="Submit" class="btn btn-success" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" />
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+        <br />
+        <br />
+        <div style="padding-top:10px;">
+
+            <div class="panel panel-default" style="float:left;width:950px;">
+                <div class="panel-heading" style="padding-bottom:20px;">
+                    <i class="glyphicon glyphicon-edit">Manage Brand</i>
+                    <div class="pull-right">
+                        <button class="btn btn-default" ng-click="addbrand()"><i class="glyphicon glyphicon-plus-sign"></i>Add Brand </button>
+                    </div>
+                </div>
+
+                <div class="panel-body" style="float:left;width:950px;">
+                    <table class="table table-striped table-bordered" id="managebrandtable">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center">Category Name</th>
+                                <th style="text-align:center">Brand Name</th>
+                                <th style="text-align:center">Status</th>
+                                <th style="text-align:center;width:100px;">Actions</th>
+
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="Brandd in BrandDetails">
+
+                                <td style="text-align:center">{{Brandd.Categoryname}}</td>
+                                <td style="text-align:center">{{Brandd.Brandname}}</td>
+                                <td style="text-align:center">{{Brandd.Brandstatus}}</td>
+                                <td>
+
+                                    <button style="float:left;" class="btn btn-default" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(Brandd)"><i class="glyphicon glyphicon-edit"></i></button>
+
+                                    <button style="float:right;" class="btn btn-default" id="btnDelete" ng-click="removeRec(Brandd)"><i class="glyphicon glyphicon-trash"></i></button>
+
+
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+               
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+
+

@@ -1,0 +1,208 @@
+﻿
+
+@{
+    ViewBag.Title = "CIS";
+}
+
+@Html.Partial("Billing")
+<script>
+    var myApp1 = angular.module("myApp1", []);
+
+
+    myApp1.controller("CISctrl", function ($scope, $http) {
+        $scope.CISetails = "";
+
+        $http.get("/Inventory/GetCISInfo")
+        .then(function (result) {
+            $scope.CISDetails = result.data;
+            $scope.CISdetails = true;
+            $scope.editAdd = true;
+            $scope.editupdate = false;
+            alert("success");
+            $scope.CISdetails1 = true;
+        })
+          $http.get("/Inventory/GetCSOInfo" )
+             .then(function(dataresult)  {
+                 $scope.CICSO = dataresult.data;
+
+
+             })
+
+
+        $scope.removeRec = function (User) {
+            $http.post("/Inventory/DeleteCIS", User)
+             .then(function (data) {
+                 location.reload();
+                 return response;
+
+
+             })
+        }
+        $scope.NewInsert = {
+            NewUsers: {}
+        }
+        $scope.EditRecord = function (User) {
+            $scope.NewInsert.NewUsers = User;
+            $scope.CISdetails = true;
+            $scope.editupdate = true;
+            $scope.editAdd = false;
+            alert("Edit");
+        }
+        $scope.Update = function () {
+            $http.post("/Inventory/UpdateCIS", $scope.NewInsert.NewUsers)
+         .then(function (data) {
+             location.reload();
+             alert("Save Update");
+             $scope.editAdd = true;
+             $scope.editupdate = false;
+
+         })
+        }
+        $scope.Submit = function () {
+            $http.post("/Inventory/InsertCIS", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                $scope.NewItem = true;
+
+                alert("Save Record");
+                location.href = '@Url.Action("Invoice", "Inventory")'; return false;
+            })
+        }
+
+        $scope.Addnew = function () {
+            $http.post("/Inventory/InsertCIS", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                $scope.NewItem = true;
+
+                alert("Save Record");
+
+            })
+        }
+    });
+</script>
+<style>
+
+    table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<div ng-app="myApp1" style="width:100%;height:100%;padding-top:80px;padding-left:50px;">
+
+    <div ng-controller="CISctrl" style="float:left;width:70%;height:100%;">
+        <form>
+            <h3><span class="glyphicon glyphicon-"></span>New Invoice</h3>
+            <hr />
+            <h4>Invoice Details</h4>
+            <hr />
+            <table ng-show="CISDetails">
+                <tr>
+                    <td>
+                        Invoice Number
+                    </td>
+                    <td>
+                        <input type=text name=textnames id="textname" size="38" class="form-control" ng-model="NewInsert.NewUsers.InvoiceNo" readonly />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Invoice Date
+                    </td>
+                    <td>
+                        <input type="date" name="dbthy" value="DD-MM-YYYY" style="width:321px;height:35px" class="form-control" ng-model="NewInsert.NewUsers.InvoiceDate">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Order Number
+                    </td>
+                    <td>
+                        <input type=text name=textnames id="textname" size="38" class="form-control" ng-model="NewInsert.NewUsers.OrderNo">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Reference
+                    </td>
+                    <td>
+                        <input type=text name=textnames id="textname" size="38" class="form-control" ng-model="NewInsert.NewUsers.Reference">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Payment Terms
+                    </td>
+                    <td>
+                        <select name="unit" size="1" style="width:321px;height:35px;" class="form-control" ng-model="NewInsert.NewUsers.Paymentterms">
+                            <option>Due On Receipt</option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Due Date
+                    </td>
+                    <td>
+                        <input type="date" name="dbthy" value="DD-MM-YYYY" style="width:321px;height:35px" class="form-control" ng-model="NewInsert.NewUsers.Duedate">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Customer Name
+                    </td>
+                    <td>
+                        <input type=text name=textnames id="textname" size="38" class="form-control" ng-model="NewInsert.NewUsers.CustomerName">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Shipping Address
+                    </td>
+                    <td>
+                        <textarea rows="2" cols="40" class="form-control" ng-model="NewInsert.NewUsers.ShipAddress"></textarea>
+                    </td>
+                </tr>
+
+            </table>
+
+            <br />
+
+
+
+            <table>
+                <tr>
+                    <td>
+                        <input type="button" value="create Invoice" class="btn btn-success" id="btnSubmit" ng-click="Submit()" />
+
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+
+
+    </div>
+    <div ng-controller="CISctrl"  style="float:right;width:30%;height:100%;;padding-top:80px;">
+        <table>
+            
+                <thead>
+                    <tr>
+                        <th>  Sales Order No</th>
+                        <th style="padding-left:10px;">  Customer Name</th>
+                    </tr>
+                    
+                </thead>
+            <tbody ng-repeat="CSOID in CICSO">
+                <tr>
+                    <td style="text-align:center">{{CSOID.SalesOrder}}</td>
+                    <td style="text-align:center">{{CSOID.CustomerName}}</td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+</div>

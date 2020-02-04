@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "AssetManagement";
+}
+@Html.Partial("ServiceManagement")
+<div ng-app="myApp" class="tab-content" style="float:left; width:50%;height:100%; padding-left:100px;">
+    <script>
+
+        var myApp = angular.module("myApp", []);
+
+
+        myApp.controller("AMctrl", function ($scope, $http) {
+            $scope.AMDetails = "";
+            $http.get("/ITSMS/GetAMInfo")
+            .then(function (result) {
+                $scope.AMDetails = result.data;
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+
+            $scope.NewInsert = {
+                NewUsers: {}
+            }
+
+            $scope.removeRec = function (User) {
+                $http.post("/ITSMS/DeleteAM", User)
+                 .then(function (data) {
+                     location.reload();
+                     return response;
+
+
+                 })
+            }
+
+            $scope.EditRecord = function (User) {
+                $scope.NewInsert.NewUsers.Devicename = User.Devicename;
+                $scope.NewInsert.NewUsers.AMType = User.AMType;
+                $scope.NewInsert.NewUsers.Policy = User.Policy;
+                $scope.NewInsert.NewUsers.Ownership = User.Ownership;
+                $scope.NewInsert.NewUsers.Company = User.Company;
+                $scope.NewInsert.NewUsers.Model = User.Model;
+                $scope.NewInsert.NewUsers.Manufacturer = User.Manufacturer;
+                $scope.NewInsert.NewUsers.OS = User.OS;
+                $scope.NewInsert.NewUsers.IMEI = User.IMEI;
+                $scope.NewInsert.NewUsers.MACaddress = User.MACaddress;
+                $scope.NewInsert.NewUsers.Storage = User.Storage;
+                $scope.editupdate = true;
+                $scope.editAdd = false;
+                alert("Edit");
+
+            }
+
+            $scope.Submit = function () {
+                $http.post("/ITSMS/InsertAM", $scope.NewInsert.NewUsers)
+                .then(function (data) {
+                    location.reload();
+                    alert("Save Record");
+
+                })
+            }
+
+            $scope.Update = function () {
+                $http.post("/ITSMS/UpdateAM", $scope.NewInsert.NewUsers)
+                .then(function (data) {
+                    location.reload();
+                    alert("Save Update");
+                    $scope.editAdd = true;
+                    $scope.editupdate = false;
+
+                })
+            }
+
+
+        });
+
+
+    </script>
+    <div ng-controller="AMctrl">
+        <table ng-show="AMDetails">
+            <tr>
+                <td>Device Name:</td>
+                <td><input type="text" ng-model="NewInsert.NewUsers.Devicename" class="form-control" id="PrType" style="width:200px;" /></td>
+            </tr>
+            <tr>
+                <td>Type:</td>
+                <td><input type="text" ng-model="NewInsert.NewUsers.AMType" class="form-control" id="PrType" style="width:200px;" /></td>
+            </tr>
+            <tr>
+                <td>Policy:</td>
+                <td><input type="text" ng-model="NewInsert.NewUsers.Policy" class="form-control" id="PrType" style="width:200px;" /></td>
+            </tr>
+            <tr>
+                <td>Ownership:</td>
+                <td><input type="text" ng-model="NewInsert.NewUsers.Ownership" class="form-control" id="PrType" style="width:200px;" /></td>
+            </tr>
+            <tr>
+                <td>Company:</td>
+                <td><input type="text" ng-model="NewInsert.NewUsers.Company" class="form-control" id="PrType" style="width:200px;" /></td>
+            </tr>
+            <tr>
+                <td>Model:</td>
+                <td><input type="text" ng-model="NewInsert.NewUsers.Model" class="form-control" id="PrType" style="width:200px;" /></td>
+            </tr>
+            <tr>
+                <td>Manufacturer:</td>
+                <td><input type="text" ng-model="NewInsert.NewUsers.Manufacturer" class="form-control" id="PrType" style="width:200px;" /></td>
+            </tr>
+            <tr>
+                <td>Operating System:</td>
+                <td><input type="text" ng-model="NewInsert.NewUsers.OS" class="form-control" id="PrType" style="width:200px;" /></td>
+            </tr>
+            <tr>
+                <td>IMEI No:</td>
+                <td><input type="text" ng-model="NewInsert.NewUsers.IMEI" class="form-control" id="PrType" style="width:200px;" /></td>
+            </tr>
+            <tr>
+                <td>MAC Address:</td>
+                <td><input type="text" ng-model="NewInsert.NewUsers.MACaddress" class="form-control" id="PrType" style="width:200px;" /></td>
+            </tr>
+            <tr>
+                <td>Storage:</td>
+                <td><input type="text" ng-model="NewInsert.NewUsers.Storage" class="form-control" id="PrType" style="width:200px;" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" class="btn btn-success" value="Update" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                </td>
+
+                <td>
+                    <input type="button" class="btn btn-success" value="Submit" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" />
+                </td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <thead>
+
+                <tr>
+                    <th class="col-md-2">Device Name</th>
+                    <th class="col-md-5">Model</th>
+                    <th class="col-md-5">Manufacturer</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="AM in AMDetails">
+                    <td>{{AM.Devicename}} </td>
+                    <td>{{AM.Model}} </td>
+                    <td>{{AM.Manufacturer}}</td>
+
+                    <td>
+                        <input type="button" value="Edit Record" class="btn btn-success" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(AM)">
+                    </td>
+
+                    <td>
+                        <input type="button" value="Delete" id="btnDelete" class="btn btn-danger" ng-click="removeRec(AM)" />
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>

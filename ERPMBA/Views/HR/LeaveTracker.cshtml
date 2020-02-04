@@ -1,0 +1,180 @@
+﻿@{
+    ViewBag.Title = "LeaveTracker";
+}
+
+
+@Html.Partial("TAM")
+<script>
+    function myFunction() {
+        alert("Saved Successfully");
+    }
+</script>
+<div class="tab-content" style="float:left; width:60%;height:100%;padding-top:70px;">
+    <div id="Details" class="tab-pane fade in active" style="width:100%;height:100%;">
+        <h3><center>Leave Settings </center></h3>
+
+        <form class="form-inline">
+            <div class="form-group">
+
+                <fieldset>
+                    <legend></legend>
+
+                    <table class="">
+                        <thead>
+
+                            <tr>
+                                <td>
+
+                                    <label class="radio-inline">
+                                        <input name="ls" id="s" value="option1" type="radio"><b>General</b>
+                                    </label>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Casual Leave(CL)   <input name="ls" id="s" value="option1" type="number" class="form-control" style="width:100px"></td>
+
+                            </tr>
+                            <tr>
+                                <td>Paid Leave(PL) <input name="ls" id="s" value="option1" type="number" class="form-control" style="width:100px"></td>
+                                <td>Earned Leave(EL) <input name="ls" id="s" value="option1" type="number" class="form-control" style="width:100px"></td>
+                            </tr>
+                            <tr>
+                                <td>Sick Leave(SL)  <input name="ls" id="s" value="option1" type="number" class="form-control" style="width:100px"></td>
+                                <td>Oter Leave(OL)<input name="ls" id="s" value="option1" type="number" class="form-control" style="width:100px"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </fieldset>
+                <table>
+                    <tr>
+                        <td>
+                            <label class="radio-inline">
+                                <input name="ls" id="l" value="option2" checked="" type="radio"><b> Advance</b>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Month</td>
+                        <td>Jan</td>
+                        <td>Feb</td>
+                        <td>Mar</td>
+                        <td>Apr</td>
+                        <td>May</td>
+                        <td>Jun</td>
+                        <td>July</td>
+                        <td>Aug</td>
+                        <td>Sep</td>
+                        <td>Oct</td>
+                        <td>Nov</td>
+                        <td>Dec</td>
+                    </tr>
+                    <tr>
+                        <td>PL</td>
+                        <td><input name="" id="" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                    </tr>
+                    <tr>
+                        <td>EL</td>
+                        <td><input name="" id="" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                    </tr>
+                    <tr>
+                        <td>SL</td>
+                        <td><input name="" id="" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                    </tr>
+                    <tr>
+                        <td>OL</td>
+                        <td><input name="" id="" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                    </tr>
+                    <tr>
+                        <td>CL</td>
+                        <td><input name="" id="" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                        <td><input name="ls" id="s" value="" type="text" class="form-control" style="width:50px"></td>
+                    </tr>
+                </table>
+                <hr />
+                <b> Special Case</b>
+                <table class="table-condensed">
+                    <tr>
+                        <td>Marital Leave <input name="ls" id="s" value="" type="number" class="form-control" style="width:100px"></td>
+                        <td>Maternity Leave<input name="ls" id="s" value="" type="number" class="form-control" style="width:100px"></td>
+                    </tr>
+                </table>
+                <b>Note:</b>All Lives are in Days
+                <center>
+                    <table>
+                        <tr>
+                            <td>
+                                <button type="submit" onclick="myFunction()" class="btn btn-success" ">
+                                    Apply
+                                </button>
+                            </td>
+                            <td>
+                                <button type="clear" class="btn btn-warning">
+                                    clear
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+            </div>
+
+
+        </form>
+    </div>
+</div>

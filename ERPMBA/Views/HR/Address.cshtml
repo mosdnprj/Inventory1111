@@ -1,0 +1,228 @@
+﻿@model ERPMBA.Models.Address
+@{
+    ViewBag.Title = "Address";
+}
+@Html.Partial("PIM")
+<script>
+    var myApp1 = angular.module("myApp1", []);
+
+    myApp1.controller('MyAppAddress',
+       function ($scope) {
+           $scope.Pemplid = "";
+           $scope.setid = function ($Getid) {
+               $scope.Pemplid = $Getid;
+
+           }
+
+       });
+    myApp1.controller("Addressctrl", function ($scope, $http) {
+        $scope.AddressDetails = "";
+
+        $http.get("/HR/GetAddressInfo")
+        .then(function (result) {
+            $scope.AddressDetails = result.data;
+            $scope.editAdd = true;
+            $scope.editupdate = false;
+
+
+        })
+        $scope.removeRec = function (User) {
+            $http.post("/HR/DeleteAddress", User)
+             .then(function (data) {
+                 location.reload();
+                 return response;
+
+
+             })
+        }
+        $scope.NewInsert = {
+            NewUsers: {}
+        }
+        $scope.EditRecord = function (User) {
+            $scope.NewInsert.NewUsers.addresstype = User.addresstype;
+            $scope.NewInsert.NewUsers.emplid = User.emplid;
+            $scope.NewInsert.NewUsers.HouseBlogAptno = User.HouseBlogAptno;
+            $scope.NewInsert.NewUsers.StreetRoadLane = User.StreetRoadLane;
+            $scope.NewInsert.NewUsers.Landmark = User.Landmark;
+            $scope.NewInsert.NewUsers.citytown = User.citytown;
+            $scope.NewInsert.NewUsers.pincode = User.pincode;
+            $scope.NewInsert.NewUsers.stateprovince = User.stateprovince;
+            $scope.NewInsert.NewUsers.HomeContactNo = User.HomeContactNo;
+
+            $scope.editupdate = true;
+            $scope.editAdd = false;
+            alert("Edit");
+
+
+
+
+        }
+
+        $scope.Submit = function () {
+            $http.post("/HR/InsertAddress", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Record");
+
+            })
+        }
+        $scope.Update = function () {
+            $http.post("/HR/UpdateAddress", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Update");
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+        }
+
+
+
+    });
+</script>
+<div ng-app="myApp1" style="float:left; width:60%;padding-top:50px; border-color:#333300;padding-left:50PX;">
+    <div ng-controller="MyAppAddress" style="padding-left:20px">
+        <div ng-controller="Addressctrl">
+
+
+            <h3 style="text-align:center;">Address Details</h3>
+            <table ng-show="AddressDetails">
+                <tr>
+                    <td>
+                        Employee ID
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.emplid, new { @class = "form-control", placeholder = "Employee ID", data_ng_model = "NewInsert.NewUsers.emplid" })
+
+                    </td>
+                    <td>
+                        Address Type
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.addresstype, new { @class = "form-control", placeholder = "Address Type", data_ng_model = "NewInsert.NewUsers.addresstype" })
+
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        HouseBlog Apt No
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.HouseBlogAptno, new { @class = "form-control", placeholder = "HouseBlogAptno", data_ng_model = "NewInsert.NewUsers.HouseBlogAptno" })
+
+                    </td>
+
+                    <td>
+                        Street Road Lane
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.StreetRoadLane, new { @class = "form-control", placeholder = "StreetRoadLane", data_ng_model = "NewInsert.NewUsers.StreetRoadLane" })
+
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Land Mark
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Landmark, new { @class = "form-control", placeholder = "Land Mark", data_ng_model = "NewInsert.NewUsers.Landmark" })
+
+
+                    </td>
+                    <td>
+                        citytown
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.citytown, new { @class = "form-control", placeholder = "citytown", data_ng_model = "NewInsert.NewUsers.citytown" })
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Pincode
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.pincode, new { @class = "form-control", placeholder = "Pincode", data_ng_model = "NewInsert.NewUsers.pincode" })
+
+
+                    </td>
+
+                    <td>
+                        State Province
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.stateprovince, new { @class = "form-control", placeholder = "Stateprovince", data_ng_model = "NewInsert.NewUsers.stateprovince" })
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Home ContactNo
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.HomeContactNo, new { @class = "form-control", placeholder = "Home ContactNo", data_ng_model = "NewInsert.NewUsers.HomeContactNo" })
+
+
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        <input type="button" class="btn-success" value="Update" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                    </td>
+
+                    <td>
+                        <input type="button" class="btn-success" value="Submit" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" />
+                    </td>
+                </tr>
+            </table>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="col-md-2">emplid</th>
+                        <th class="col-md-5">addresstype</th>
+
+
+                        <th class="col-md-5">Landmark</th>
+                        <th class="col-md-2">citytown</th>
+
+
+
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr ng-repeat="usrd in AddressDetails">
+
+
+                        <td>{{usrd.emplid}} </td>
+                        <td>{{usrd.addresstype}} </td>
+
+
+                        <td>{{usrd.Landmark}} </td>
+                        <td>{{usrd.citytown}} </td>
+
+
+
+                        <td>
+                            <input type="button" class="btn-success" value="Edit Record" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(usrd)">
+                        </td>
+
+                        <td>
+                            <input type="button" class="btn-danger" value="Delete" id="btnDelete" ng-click="removeRec(usrd)" />
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+</div>

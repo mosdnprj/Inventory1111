@@ -1,0 +1,335 @@
+﻿@model ERPMBA.Models.Details
+@{
+    ViewBag.Title = "Details";
+}
+@Html.Partial("PIM")
+<style>
+    input-group-addon {
+        min-width: 150px;
+    }
+</style>
+
+
+<script>
+    var myApp1 = angular.module("myApp1", []);
+
+    myApp1.controller('MyAppIncident',
+       function ($scope) {
+           $scope.Pemplid = "";
+           $scope.setid = function ($Getid) {
+               $scope.Pemplid = $Getid;
+
+           }
+
+       });
+    myApp1.controller("Incidentctrl", function ($scope, $http) {
+        $scope.IncidentDetails = "";
+
+        $http.get("/HR/GetDetailsInfo")
+        .then(function (result) {
+            $scope.IncidentDetails = result.data;
+            $scope.editAdd = true;
+            $scope.editupdate = false;
+
+
+        })
+        $scope.removeRec = function (User) {
+            $http.post("/HR/DeleteUser", User)
+             .then(function (data) {
+                 location.reload();
+                 return response;
+
+
+             })
+        }
+        $scope.NewInsert = {
+            NewUsers: {}
+        }
+        $scope.EditRecord = function (User) {
+            $scope.NewInsert.NewUsers.emplid = User.emplid;
+            $scope.NewInsert.NewUsers.fullname = User.fullname;
+            $scope.NewInsert.NewUsers.designation = User.designation;
+            $scope.NewInsert.NewUsers.DOB = User.DOB;
+            $scope.NewInsert.NewUsers.gender = User.gender;
+            $scope.NewInsert.NewUsers.contactNo = User.contactNo;
+            $scope.NewInsert.NewUsers.mailId = User.mailId;
+            $scope.NewInsert.NewUsers.supervisorname = User.supervisorname;
+            $scope.NewInsert.NewUsers.PFNo = User.PFNo;
+            $scope.NewInsert.NewUsers.healthcardNo = User.healthcardNo;
+            $scope.NewInsert.NewUsers.customerId = User.customerId;
+            $scope.NewInsert.NewUsers.project = User.project;
+            $scope.NewInsert.NewUsers.workinglocation = User.workinglocation;
+            $scope.NewInsert.NewUsers.BloodGroop = User.BloodGroop;
+            $scope.NewInsert.NewUsers.Dateofjoin = User.Dateofjoin;
+            $scope.NewInsert.NewUsers.AlternativecontactNo = User.AlternativecontactNo;
+            $scope.NewInsert.NewUsers.AlternativeEmail = User.AlternativeEmail;
+            $scope.NewInsert.NewUsers.SupervisorContactNo = User.SupervisorContactNo;
+            $scope.NewInsert.NewUsers.ESINo = User.ESINo;
+            $scope.NewInsert.NewUsers.HealthCardvalidity = User.HealthCardvalidity;
+
+            $scope.editupdate = true;
+            $scope.editAdd = false;
+            alert("Edit");
+
+
+
+
+        }
+
+        $scope.Submit = function () {
+            $http.post("/HR/InsertUsers", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Record");
+
+            })
+        }
+        $scope.Update = function () {
+            $http.post("/HR/UpdateUser", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Update");
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+        }
+
+
+
+    });
+
+
+
+</script>
+
+
+<div ng-app="myApp1" style="float:left; width:60%; padding-top:50px; border-color:#333300">
+    <div ng-controller="MyAppIncident" style="padding-left:20px">
+        <div ng-controller="Incidentctrl">
+
+            <h3 style="text-align:center;">Employee Details</h3>
+
+            <table ng-show="IncidentDetails">
+
+                <tr>
+
+                    <td>Employee id</td>
+                    <td>  @Html.TextBoxFor(model => model.emplid, new { @class = "form-control", placeholder = "Employee id", data_ng_model = "NewInsert.NewUsers.emplid" }) </td>
+
+                    <td> Full name </td>
+                    <td>@Html.TextBoxFor(model => model.fullname, new { @class = "form-control", placeholder = "Full name ", data_ng_model = "NewInsert.NewUsers.fullname" })</td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        Designation
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.designation, new { @class = "form-control", placeholder = "Designation", data_ng_model = "NewInsert.NewUsers.designation" })
+
+                    </td>
+                    <td>
+                        Gender
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.gender, new { @class = "form-control", placeholder = "gender", data_ng_model = "NewInsert.NewUsers.gender" })
+
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        Date Of Birth
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", placeholder = "Date of Birth", data_ng_model = "NewInsert.NewUsers.DOB" })
+
+
+                    </td>
+                    <td>
+                        Contact Number
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.contactNo, new { @class = "form-control", placeholder = "ContactNo", data_ng_model = "NewInsert.NewUsers.contactNo" })
+
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        MailId
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.mailId, new { @class = "form-control", placeholder = "MailID", data_ng_model = "NewInsert.NewUsers.mailId" })
+
+
+                    </td>
+                    <td>
+
+                        SupervisorName
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.supervisorname, new { @class = "form-control", placeholder = "supervisorname", data_ng_model = "NewInsert.NewUsers.supervisorname" })
+
+
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        PFNo
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.PFNo, new { @class = "form-control", placeholder = "PFNo", data_ng_model = "NewInsert.NewUsers.PFNo" })
+
+
+                    </td>
+                    <td>
+                        healthcardNo
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.healthcardNo, new { @class = "form-control", placeholder = "healthcardNo", data_ng_model = "NewInsert.NewUsers.healthcardNo" })
+
+
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        customerId
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.customerId, new { @class = "form-control", placeholder = "customerId", data_ng_model = "NewInsert.NewUsers.customerId" })
+
+                    </td>
+                    <td>
+                        project
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.project, new { @class = "form-control", placeholder = "project", data_ng_model = "NewInsert.NewUsers.project" })
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        workinglocation
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.workinglocation, new { @class = "form-control", placeholder = "workinglocation", data_ng_model = "NewInsert.NewUsers.workinglocation" })
+
+
+                    </td>
+                    <td>
+                        BloodGroop
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.BloodGroop, new { @class = "form-control", placeholder = "BloodGroop", data_ng_model = "NewInsert.NewUsers.BloodGroop" })
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Dateofjoin
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Dateofjoin, new { @class = "form-control", placeholder = "Dateofjoin", data_ng_model = "NewInsert.NewUsers.Dateofjoin" })
+
+
+                    </td>
+                    <td>
+                        AlternativecontactNo
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.AlternativecontactNo, new { @class = "form-control", placeholder = "AlternativecontactNo", data_ng_model = "NewInsert.NewUsers.AlternativecontactNo" })
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        AlternativeEmail
+                    </td>
+                    <td> @Html.TextBoxFor(model => model.AlternativeEmail, new { @class = "form-control", placeholder = "AlternativeEmail", data_ng_model = "NewInsert.NewUsers.AlternativeEmail" })
+
+
+                    <td>
+                        SupervisorContactNo
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.SupervisorContactNo, new { @class = "form-control", placeholder = "SupervisorContactNo", data_ng_model = "NewInsert.NewUsers.SupervisorContactNo" })
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ESINo
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.ESINo, new { @class = "form-control", placeholder = "ESINo", data_ng_model = "NewInsert.NewUsers.ESINo" })
+
+
+                    </td>
+                    <td>
+                        HealthCardvalidity
+                    <td>
+                        @Html.TextBoxFor(model => model.HealthCardvalidity, new { @class = "form-control", placeholder = "HealthCardvalidity", data_ng_model = "NewInsert.NewUsers.HealthCardvalidity" })
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" class="btn-success" value="Update" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                    </td>
+
+                    <td>
+                        <input type="button" class="btn-success" value="Submit" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" />
+                    </td>
+
+                </tr>
+            </table>
+
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>emplid</th>
+                        <th>fullname</th>
+                        <th>designation</th>
+                        <th>gender</th>
+                        <th>DOB</th>
+                        <th>mailId</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr ng-repeat="usrd in IncidentDetails">
+
+
+                        <td>{{usrd.emplid}} </td>
+                        <td>{{usrd.fullname}} </td>
+                        <td>{{usrd.designation}} </td>
+                        <td>{{usrd.gender}} </td>
+                        <td>{{usrd.DOB}} </td>
+                        <td>{{usrd.mailId}} </td>
+                        <td>
+                            <input type="button" class="btn-success" value="Edit Record" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(usrd)">
+                        </td>
+
+                        <td>
+                            <input type="button" class="btn-danger" value="Delete" id="btnDelete" ng-click="removeRec(usrd)" />
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+</div>

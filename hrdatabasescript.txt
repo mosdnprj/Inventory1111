@@ -1,0 +1,400 @@
+use ERPMBA
+go
+drop table
+create table Work
+(
+
+ emplid varchar(50),
+ Companyname varchar(max),
+ Workedfrom varchar(50),
+ Designation varchar(50),
+ WorkedTo varchar(50),
+
+     Image_OfferLetter  varchar(max),
+Image_RelevingLetter  varchar(max)
+);
+drop table
+create table Family
+(
+
+ emplid varchar(50),
+ empname varchar(50),
+        fatherName varchar(50),
+        motherName varchar(50),
+        SpouseName varchar(50),
+        SpouseDOB varchar(50),
+       faherDOB varchar(50),
+motherDOB varchar(50)
+
+);
+drop table AddChild
+
+CREATE TABLE AddChild(SlNo  int identity(1,1),  emplid varchar(50),
+ 
+ ChildName varchar(50),
+ ChildDOB varchar(50));
+GO
+ALTER TABLE AddChild ADD Childid  AS ('NOChA' + RIGHT('0000' + CONVERT(varchar(3), (SlNo ), 3));
+
+
+
+
+
+drop table Education
+create table Education
+(
+        emplid varchar(50),
+        SSCPassYear varchar(50),
+        InterPassYear varchar(50),
+        DegreePassYear varchar(50),
+        PGpassyear varchar(50),
+        SSCPercentage varchar(50),
+        INTERPercentage varchar(50),
+        DEGREEPercentage varchar(50),
+        PGPercentage varchar(50),
+        othercertification varchar(50)     
+
+       
+);
+drop table Salary
+
+create table Salary
+( 
+   emplid varchar(50),
+BasicPay varchar(50),
+HRA varchar(50),
+Conveyance varchar(50),
+SpecialAllowence varchar(50), 
+ESI varchar(50),
+PF varchar(50),
+Insurance varchar(50),
+PT varchar(50),
+ 
+EmprESI varchar(50),
+                   EmprPF varchar(50),
+                  EmprInsr varchar(50),
+             TotalDeductions varchar(50),
+                   VDA varchar(50),
+                    MedicalAllowance varchar(50),
+                GrossSalary varchar(50),
+
+              CTC varchar(50),
+                 NetPay varchar(50)
+
+
+
+);
+drop table Address
+create table Address
+( 
+      
+        emplid varchar(50),
+
+        HouseBlogAptno varchar(max),
+        StreetRoadLane varchar(max),
+        Landmark varchar(max),
+        citytown varchar(max),
+        pincode varchar(50),
+        stateprovince varchar(50),
+       HomeContactNo varchar(50),
+   tHouseBlogAptno varchar(max),
+        tStreetRoadLane varchar(max),
+        tLandmark varchar(max),
+        tcitytown varchar(max),
+        tpincode varchar(50),
+        tstateprovince varchar(50),
+       tHomeContactNo varchar(50)
+
+);
+
+drop table AddLeave
+
+ create table AddLeave
+(
+   
+        emplid varchar(50),
+          Department varchar(50),
+          LeaveType varchar(50),
+          Other varchar(50),
+         StartDate varchar(50),
+         EndDate varchar(50),
+          NoOfDays varchar(50),
+          NoInLeave varchar(50),
+AplyDate varchar(50),
+ResponsiblePerson varchar(50),
+ContactAddress varchar(max),
+remarks varchar(50)
+);
+
+
+
+drop table ExitDetails
+
+
+
+create table ExitDetails
+(
+         emplid varchar(50),
+        DateOfJoin varchar(50),
+         DateOfLeaving varchar(50),
+         
+          YourWorkEnvironment varchar(50),
+          YourWorkSchdule varchar(50),
+          YourCompensation varchar(50),
+          YourBenefitsFromCompany varchar(50),
+          Compensation varchar(50),
+                  Other varchar(50),
+                ConflictWithCoworkers varchar(50),
+               newJob varchar(50),
+                 PersonalReasons varchar(50),
+                     Relocation varchar(50),
+                       Benefit varchar(50)
+);
+drop table Goals
+create table Goals
+(
+  GoalName varchar(50),
+          StartDate varchar(50),
+          EndDate varchar(50),
+          ManagerRating varchar(50),
+          Description varchar(max),
+          Priority varchar(50),
+          UserRating varchar(50),
+          Progress varchar(50)
+     
+);
+
+drop table PerformanceAppraisal
+
+create table PerformanceAppraisal
+(
+        emplid varchar(50),
+         EmployeeName varchar(50),
+Department varchar(50),
+Manager varchar(50),
+GivenDate varchar(50),
+QualityOfWork varchar(50),
+Productivity varchar(50),
+KnowledgeOfJob varchar(50),
+RealiabilityAnddependability varchar(50),
+Attendance varchar(50),
+Intiative varchar(50),
+Creativity varchar(50),
+Comments varchar(50)
+
+ 
+);
+
+
+
+drop table Asset
+
+create table Asset
+(
+ 
+          emplid varchar(50),
+         GivenDate varchar(50),
+       
+          TypeOfAsset varchar(50),
+        
+         Manufacturer varchar(50),
+
+         Model varchar(50),
+Price varchar(50),
+Conditionwhiletaking varchar(50),
+ ReturnDate varchar(50),
+ConditionwhileReturning varchar(50),
+      Image_User varchar(max)
+);
+
+ drop table TravelExpence   
+
+ create table TravelExpence
+(
+           emplid varchar(50),
+          PlaceOfVisit varchar(50),
+       DateOfTravel varchar(50),
+          StartDate varchar(50),
+EndDate varchar(50),
+          Airfare varchar(50),
+          Lodging varchar(50),
+          GrndTrnsp varchar(50),
+          MealsTips varchar(50),
+          Phone varchar(50),
+          Miscellaneous varchar(50),
+          Conference varchar(50),
+Discription varchar(max),
+          Total varchar(50)
+);
+ 
+
+drop table TravelRequest
+ create table TravelRequest
+(
+
+     emplid varchar(50),
+          EmployeeDepartment varchar(50),
+         ExpectedDateOfDeparture varchar(50),
+          PurposeOfVisit varchar(50),       
+          PlaceOfVisit varchar(max),
+          ExpectedDurationInDays varchar(50),
+         ExpectedDateOfArrival varchar(50),
+          CustomerName varchar(50)
+);
+
+drop table Training
+
+create table Training
+(
+     
+           emplid varchar(50),
+          WasItUseful varchar(max),
+          WasItInlineWithYourExpectation varchar(max),
+          ActionList varchar(50),
+          WhichSubjectYouMostEnjoyed varchar(max),
+          WhichSubjectYouLeastEnjoyed varchar(max),
+
+  
+          TrainingId varchar(50),
+          Reason varchar(50),
+          TrainingTitle varchar(50),
+          Venue varchar(max),
+          StartDate varchar(50),
+         EndDate varchar(50),
+          PaidBy varchar(50),
+          AmountPaidByEmployee varchar(50),
+         PaidDate varchar(50),
+          Remarks varchar(50)
+);
+
+drop table Attendance
+
+ create table Attendance
+(
+
+     emplid varchar(50),
+          InTime varchar(10),
+           OutTime varchar(10),
+           dateof varchar(50)
+     
+          
+);
+
+drop table Task
+
+ create table Task
+(
+
+     TaskOwner varchar(50),
+TaskName varchar(50),
+Description varchar(max),
+ StartDate varchar(50),
+DueDate varchar(50),
+Reminder varchar(50),
+AssignedTo varchar(50),
+
+CompletedOn varchar(50),
+
+Creativity varchar(50),
+  Comments varchar(max)
+);
+
+
+
+drop table Project1
+
+
+
+CREATE TABLE Project1(SlNo int identity(1,1), ProjectName varchar(50),    ClientID varchar(50),
+         WorkingLocation varchar(50),
+        
+           ProjectManager varchar(50),
+          ProjectCost varchar(50));
+GO
+ALTER TABLE Project1 ADD ProjectNo AS ('NOPA' + RIGHT('0000' + CONVERT(varchar(3), SlNo ), 3));
+
+
+
+drop table Details
+
+CREATE TABLE Details(SlNo int identity(1,1),  fullname varchar(max),
+        designation varchar(max),
+        gender varchar(50),
+        DOB varchar(50),
+        contactNo varchar(50),
+        mailId varchar(50),
+        supervisorname varchar(max),
+        PFNo varchar(50),
+        healthcardNo varchar(50),
+        customerId varchar(50),
+        project varchar(max),
+        workinglocation varchar(max),
+        BloodGroop varchar(50),
+        Dateofjoin varchar(50),
+        AlternativecontactNo varchar(50),
+       SupervisorEmail varchar(50),
+        SupervisorContactNo varchar(50),
+        ESINo varchar(50),
+        HealthCardvalidity varchar(50),
+        Image_User varchar(max),
+     Image_Aadhar varchar(max),
+            PAN varchar(50),
+              Aadhar varchar(50) );
+GO
+ALTER TABLE Details ADD emplid AS ('NOEA' + RIGHT('00000' + CONVERT(varchar(4), SlNo ), 4));
+
+
+
+drop table Designation1
+
+CREATE TABLE Designation1(SlNo  int identity(1,1), DesignationName varchar(50)   );
+GO
+ALTER TABLE Designation1 ADD DesignationID AS ('NODA' + RIGHT('0000' + CONVERT(varchar(3), SlNo ), 3));
+
+
+drop table ClientDetails
+
+CREATE TABLE ClientDetails(SlNo  int identity(1,1), ClientName varchar(50),
+         Contactno  varchar(50),
+Contactemail  varchar(50),
+     address  varchar(max) );
+GO
+ALTER TABLE ClientDetails ADD ClientID1 AS ('NOCA' + RIGHT('0000' + CONVERT(varchar(3), SlNo ), 3));
+
+
+
+drop table Compensation
+
+
+create table Compensation
+(
+
+  emplid varchar(50),
+         PeriodName varchar(50),        
+         PeriodBeginDate varchar(50),        
+         PeriodEndDate varchar(50),             
+         NetPayableDays varchar(50),       
+         DateofDeposit varchar(50),
+         Basicpay varchar(50),
+         EmployeePF varchar(50),
+         HRA varchar(50),
+         EmployeeESI varchar(50),
+         Conveyance varchar(50),
+         Insurance varchar(50),
+         VDA varchar(50),
+         ProfessionalTax varchar(50),
+         MedicalAllowance varchar(50),
+         SpecialAllowance varchar(50),
+         TotalEarnings varchar(50),
+         TotalDeductions varchar(50),
+         Incentives varchar(50),
+         NetPay varchar(50),
+         TDS varchar(50),
+         Loan varchar(50),
+         WorkingDays varchar(50)
+);
+
+
+
+
+

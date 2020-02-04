@@ -1,0 +1,193 @@
+﻿@{
+    ViewBag.Title = "Category";
+}
+
+@Html.Partial("Product")
+
+<script>
+    var myApp1 = angular.module("myApp1", []);
+
+
+    myApp1.controller("Categoryctrl", function ($scope, $http) {
+        $scope.CategoryDetails = "";
+
+        $http.get("/Inventory/GetCategoryInfo")
+        .then(function (result) {
+            $scope.CategoryDetails = result.data;
+            $scope.Categorydetails = false;
+            $scope.editAdd = true;
+            $scope.editupdate = false;
+            alert("success");
+
+
+        })
+        $scope.removeRec = function (User) {
+            $http.post("/Inventory/DeleteCategory", User)
+             .then(function (data) {
+                 location.reload();
+                 return response;
+
+
+             })
+        }
+        $scope.NewInsert = {
+            NewUsers: {}
+        }
+        $scope.EditRecord = function (User) {
+            $scope.NewInsert.NewUsers.Categoryname = User.Categoryname;
+            $scope.NewInsert.NewUsers.Status = User.CategoryStatus;
+            $scope.Categorydetails = true;
+            $scope.editupdate = true;
+            $scope.editAdd = false;
+            alert("Edit");
+
+        }
+
+        $scope.Submit = function () {
+            $http.post("/Inventory/InsertCategory", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Record");
+
+            })
+        }
+        $scope.addCategory = function () {
+            $scope.Categorydetails = true;
+
+
+        }
+       
+        $scope.Update = function () {
+           
+            $http.post("/Inventory/UpdateCategory", $scope.NewInsert.NewUsers)
+
+            .then(function (data) {
+                location.reload();
+                alert("Save Update");
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+        }
+        $(document).ready(function () {
+            $('#managecatetable').DataTable({
+                "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+                "iDisplayLength": 10
+            });
+        });
+
+
+
+    });
+</script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+<style>
+    .table1 {
+        width: 900px;
+    }
+
+        .table1 tr, th {
+            padding-left: 50px;
+            padding-bottom: 15px;
+            font-weight: 100;
+        }
+
+        .table1 tr, td {
+            padding-bottom: 15px;
+        }
+</style>
+
+<div ng-app="myApp1" style="float:left; width:60%;height:100%;padding-top:30px;padding-left:50px;">
+
+    <div ng-controller="Categoryctrl">
+        <center><h4 style="padding-left:150px;font-family:Cambria;font-size:25px;padding-bottom:20px;"> Product Category Details</h4></center>
+
+        <table ng-show="Categorydetails" align="center">
+
+            <tr>
+                <th style="width:200px">Category Name <span style="color:red;font-size:20px">*</span></th>
+                <td style="width:200px">
+                    <input type=text id="firstn" ng-model="NewInsert.NewUsers.Categoryname" class="form-control">
+                </td>
+
+            </tr>
+            <tr>
+                <th>Status<span style="color:red;font-size:20px">*</span></th>
+                <td>
+                    <select class="form-control" ng-model="NewInsert.NewUsers.CategoryStatus" >
+                        <option value="">Select</option>
+                        <option value="Available">Available</option>
+                        <option value="Not Available">Not Available</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <div style="padding-left:420px;padding-top:20px;">
+            <table ng-show="Categorydetails">
+                <tr style="align-items:center">
+
+                    <td>
+                        <input type="button" value="Update" class="btn btn-success" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                    </td>
+
+                    <td>
+                        <input type="button" value="Submit" class="btn btn-success" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" />
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+        <br />
+        <br />
+        <div style="padding-top:10px;">
+
+            <div class="panel panel-default" style="float:left;width:950px;">
+                <div class="panel-heading" style="padding-bottom:20px;">
+                    <i class="glyphicon glyphicon-edit">Manage Category</i>
+                    <div class="pull-right">
+                        <button class="btn btn-default" ng-click="addCategory()"><i class="glyphicon glyphicon-plus-sign"></i>Add Category </button>
+                    </div>
+                </div>
+
+                <div class="panel-body" style="float:left;width:950px;">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center;">Category Name</th>
+                                <th style="text-align:center;">Status</th>
+                                <th style="text-align:center;width:100px;">Actions</th>
+
+
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="Categoryd in CategoryDetails">
+
+                                <td style="text-align:center">{{Categoryd.Categoryname}}</td>
+                                <td style="text-align:center">{{Categoryd.CategoryStatus}}</td>
+                                <td>
+
+                                    <button style="float:left;" class="btn btn-default" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(Categoryd)"><i class="glyphicon glyphicon-edit"></i></button>
+
+                                    <button style="float:right;" class="btn btn-default" id="btnDelete" ng-click="removeRec(Categoryd)"><i class="glyphicon glyphicon-trash"></i></button>
+
+
+                                </td>
+
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    </div>

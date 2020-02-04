@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+@Html.Partial("Index")
+<style>
+    .dropbtn {
+        color: white;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropdown {
+        display: inline-block;
+        position:relative;
+    }
+
+    .dropdown-content {
+       display: none;
+    background-color: #f9f9f9;
+    position:relative;
+    z-index:1;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px;
+            min-width: 100px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .dropdown-content a:hover {
+                background-color:#ff0000;
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+    }
+
+</style>
+<div style="float:left; width:200px; padding-top:100px; border-color:#333300">
+    <ul class="nav nav-pills nav-stacked" style="float:left;background: linear-gradient(to bottom, #dae2f8, #d6a4a4);">
+        <li style="width:200px;text-align:center;">@Html.ActionLink("MMSdatabaseInf", "MMSdatabaseInf", "CRM", new { @style = "color:Black;" })</li>
+        <div class="dropdown">
+            <button class="dropbtn">
+                <li style="width: 200px;">
+                    @Html.ActionLink("AccountInf", "AccountInf", "CRM", new { @style = "color:Black;" })
+
+                <ul class="dropdown-content" style="left:160px;top:-20px;width:150px">
+
+                    <li style="width: 167px;text-align:center;">@Html.ActionLink("AccountContacts", "AccountContacts", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 167px;text-align:center;">@Html.ActionLink("AccountTransactions", "AccountTransactions", "CRM", new { @style = "color:Black;" })</li>
+                    <li style="width: 167px;text-align:center;">@Html.ActionLink("AccountOpportunities", "AccountOpportunities", "CRM", new { @style = "color:Black;" })</li>
+
+                </ul>
+            </li>
+        </button>
+    </div>
+
+
+    <li style="width: 200px;text-align:center;">@Html.ActionLink("contact", "contact", "CRM", new { @style = "color:Black;" })</li>
+    <li style="width: 200px;text-align:center;">@Html.ActionLink("opportunities", "opportunities", "CRM", new { @style = "color:Black;" })</li>
+    <li style="width: 200px;text-align:center;">@Html.ActionLink("transaction", "transaction", "CRM", new { @style = "color:Black;" })</li>
+
+
+</ul>
+</div>

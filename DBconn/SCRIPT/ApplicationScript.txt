@@ -1,0 +1,488 @@
+USE master
+GO
+CREATE DATABASE ERPMBA
+ON 
+( NAME = ERPMBA_dat,
+   FILENAME = 'd:\ERPMBADATABASE\ERPMBAdat.mdf',
+   SIZE = 10,
+   MAXSIZE = 50,
+   FILEGROWTH = 5 )
+LOG ON
+( NAME = 'ERPMBA_log',
+   FILENAME = 'd:\ERPMBADATABASE\ERPMBAlog.ldf',
+   SIZE = 5MB,
+   MAXSIZE = 25MB,
+   FILEGROWTH = 5MB )
+GO
+/*HR Application   */
+use ERPMBA;
+go
+
+create table Work
+(
+
+ emplid varchar(50),
+ Companyname varchar(max),
+ Workedfrom DateTime,
+ Designation varchar(50),
+ WorkedTo DateTime,
+ Category varchar(max)
+       
+);
+
+
+
+create table Education
+(
+        emplid varchar(50),
+        SSCPassYear DateTime,
+        InterPassYear DateTime,
+        DegreePassYear DateTime,
+        PGpassyear DateTime,
+        SSCPercentage int,
+        INTERPercentage int,
+        DEGREEPercentage int,
+        PGPercentage int,
+        othercertification varchar(50)     
+
+       
+);
+
+
+create table Address
+( 
+      
+        emplid varchar(50),
+        HouseBlogAptno varchar(max),
+        StreetRoadLane varchar(max),
+        Landmark varchar(max),
+        citytown varchar(max),
+        pincode int,
+        stateprovince varchar(50),
+       HomeContactNo varchar(50)
+
+);
+
+
+create table Family
+( 
+         emplid varchar(50),
+        empname varchar(max),
+        fatherName varchar(max),
+        motherName varchar(max),
+        Child1Name varchar(max),
+        Child2Name varchar(max),
+        Child3Name varchar(max),
+        Child4Name varchar(max),
+        faherDOB DateTime,
+       motherDOB DateTime,
+       Child1DOB DateTime,
+       Child2DOB DateTime,
+       Child3DOB DateTime,
+       Child4DOB DateTime
+ );
+
+ create table Details
+(
+        emplid varchar(50),
+        fullname varchar(max),
+        designation varchar(max),
+        gender varchar(50),
+        DOB DateTime,
+        contactNo varchar(50),
+        mailId varchar(50),
+        supervisorname varchar(max),
+        PFNo varchar(50),
+        healthcardNo varchar(50),
+        customerId varchar(50),
+        project varchar(max),
+        workinglocation varchar(max),
+        BloodGroop varchar(50),
+        Dateofjoin DateTime,
+        AlternativecontactNo varchar(50),
+        AlternativeEmail varchar(50),
+        SupervisorContactNo varchar(50),
+        ESINo varchar(50),
+        HealthCardvalidity DateTime
+      
+);
+
+ create table Leave
+(
+   
+        emplid varchar(50),
+          TeamID varchar(50),
+          LeaveType varchar(50),
+          FromDate DateTime,
+         DateofRequest DateTime,
+         HoursTaken DateTime,
+          Reasonsforleave varchar(50),
+          MedicalCertificate varchar(50)
+);
+
+
+
+create table Project
+(
+         emplid varchar(50),
+          ProjectNmae varchar(50),
+          ClientName varchar(50),
+          ProjectCost varchar(50),
+          ProjectManager varchar(50),
+          ProjectUsers varchar(50)
+
+);
+
+
+
+create table Job
+(
+             emplid varchar(50),
+          Project varchar(50),
+          Assignes varchar(50),
+         StartDate DateTime,
+       
+          EndDate DateTime,
+          Hours DateTime,
+          RatePerHour varchar(50),
+          Discription varchar(max),
+          Attachment varchar(50),
+          ReminderTime varchar(50),
+          BillableStatus varchar(50)
+);
+
+
+
+create table Department
+(
+    emplid varchar(50),
+   DepartmentName varchar(50),
+  mailId varchar(50)
+);
+
+
+
+
+create table Designation
+(
+    emplid varchar(50),
+   DesignationName varchar(50),
+  mailId varchar(50)
+);
+
+
+
+
+
+create table EmployeeSalary
+(
+    emplid varchar(50),
+   EmployeeName varchar(max),
+  Salary varchar(50)
+);
+
+
+
+
+create table ExitDetails
+(
+         emplid varchar(50),
+        DateOfJoin DateTime,
+         DateOfLeaving DateTime,
+          ReasonToLeaveTheCompany varchar(50),
+          YourWorkEnvironment varchar(50),
+          YourWorkSchdule varchar(50),
+          YourCompensation varchar(50),
+          YourBenefitsFromCompany varchar(50)
+);
+create table Goals
+(
+  GoalName varchar(50),
+          StartDate DateTime,
+          EndDate DateTime,
+          ManagerRating varchar(50),
+          Description varchar(max),
+          Priority varchar(50),
+          UserRating varchar(50),
+          Progress varchar(50),
+          Job varchar(50)
+);
+
+
+
+create table PerformanceAppraisal
+(
+        emplid varchar(50),
+          Department varchar(50),
+         Date DateTime,
+          PeriodofReview varchar(50),
+          Reviewer varchar(50),
+          JobKnowledge varchar(50),
+          Productivity varchar(50),
+          WorkQuality varchar(50),
+          TechnicalSkils varchar(50),
+          WorkConsistency varchar(50),
+          Enthusiasm varchar(50),
+          Cooperation varchar(50),
+          Attitude varchar(50),
+          Intiative varchar(50),
+          WorkRelations varchar(50),
+          Creativity varchar(50),
+          Puntuality varchar(50),
+          Attendance varchar(50),
+          CommunicationSkills varchar(50),
+          OveralRating varchar(50)
+);
+
+
+
+
+
+create table Asset
+(
+ 
+          emplid varchar(50),
+         GivenDate DateTime,
+          AssetDetails varchar(50),
+          TypeofAsset varchar(50),
+         ReturnDate DateTime
+);
+create table Benefit
+(
+ 
+          emplid varchar(50),
+         EducationaAllowance varchar(50),
+            Lunch varchar(50),
+         Housingallowance varchar(50)
+);
+ create table TravelExpence
+(
+           emplid varchar(50),
+          PurposeOfVisit varchar(50),
+        DateOfVisit  DateTime,
+          DiscriptionOfExpense varchar(max),
+          Airfare varchar(50),
+          Lodging varchar(50),
+          GroundTransportation varchar(50),
+          MealsTips varchar(50),
+          Phone varchar(50),
+          Miscellaneous varchar(50),
+          ConferenceSeminors varchar(50),
+          Total varchar(50)
+);
+ 
+
+
+ create table TravelRequest
+(
+
+     emplid varchar(50),
+          EmployeeDepartment varchar(50),
+         ExpectedDateOfDeparture DateTime,
+          PurposeOfVisit varchar(50),       
+          PlaceOfVisit varchar(max),
+          ExpectedDurationInDays varchar(50),
+         ExpectedDateOfArrival DateTime,
+          CustomerName varchar(50)
+);
+
+
+
+create table TrainingFeedback
+(
+     
+           emplid varchar(50),
+          WasItUseful varchar(max),
+          WasItInlineWithYourExpectation varchar(max),
+          ActionList varchar(50),
+          WhichSubjectYouMostEnjoyed varchar(50),
+          WhichSubjectYouLeastEnjoyed varchar(50)
+);
+create table TrainingRegistration
+(
+   emplid varchar(50),
+          TrainingId varchar(50),
+          Reason varchar(50),
+          TrainingTitle varchar(50),
+          Venue varchar(max),
+          StartDate DateTime,
+         EndDate DateTime,
+          PaidBy varchar(50),
+          AmountPaidByEmployee varchar(50),
+         PaidDate DateTime,
+          Remarks varchar(50)
+);
+/*  ITSMS */
+
+
+create table NewIncident
+(
+loginuser varchar(50),
+        Category  varchar(50),
+        ContactPerson  varchar(50),
+        incidenttype  varchar(50),
+        Servicetype  varchar(50),
+        businessimpact  varchar(max),
+        Urgency  varchar(50),
+        serviceitem  varchar(max),
+        IncidentSource  varchar(max),
+        AffectedEquipment  varchar(max),
+        AssignmentRule  varchar(50),
+        Attachfile  varchar(max),
+        incidentsummary  varchar(max),
+        DOI  varchar(50),
+        tcktid varchar(50)
+)
+create table Currentstatusreport(
+reporter varchar(50),
+Emailid varchar(50),
+Product varchar(50),
+Component varchar(50),
+Version varchar(50),
+DOM varchar(50),
+Currentstatus varchar(150),
+Resolution varchar(50),
+HW varchar(150),
+SW varchar(150),
+Changedin varchar(150),
+Remarks varchar(150),
+cUpdate varchar(150)
+
+)
+
+create table ServiceRequest(
+
+details varchar(max),
+description varchar(max),
+helpcenter varchar(max),
+Attachments varchar(max)
+)
+
+create table CreateProblem(
+writeproblem varchar(200),
+ticketId varchar(100)
+)
+
+
+create table AssetManagement(
+
+Devicename varchar(max),
+AMType varchar(max),
+Policy varchar(max),
+Ownership varchar(max),
+Company varchar(max),
+Model varchar(max),
+Manufacturer varchar(max),
+OS varchar(max),
+IMEI varchar(max),
+MACaddress varchar(max),
+Storage varchar(max)
+)
+
+create table CreateArticle(
+
+PrimaryProblem varchar(max),
+Labels varchar(max),
+Template varchar(max)
+
+)
+create table Problem(
+
+Facility varchar(max),
+Dept varchar(max),
+ReasonForSending varchar(max)
+Section varchar(max),
+Information varchar(max),
+DOD varchar(max),
+PInvestigator varchar(max),
+ProblemNbr varchar(max),
+Problemcomments varchar(max)
+
+)
+
+/* CRM */
+ Create table MMSdatabase
+    (
+         memberid Varchar(50),
+         memberdata Varchar(max)
+    )
+
+
+Create table Accounts
+    (
+        memberid Varchar(50),
+        membername Varchar(50),
+        city Varchar(50),
+        state Varchar(50),
+        country Varchar(50),
+        date_entered DateTime,
+        date_modified DateTime ,
+        deleted Varchar(50),
+        organisationtype Varchar(50),
+        organisationindustry Varchar(50),
+        phone Varchar(50),
+        assigned_user_id Varchar(50)
+        
+    )
+  Create table AccountsContact
+    (
+       memberid Varchar(50),
+       accountid Varchar(50),
+       contactid Varchar(50),
+       date_entered  DateTime,
+       date_modified DateTime,
+       deleted Varchar(50)
+        
+    )
+Create table AccountTransaction
+    (
+         memberid Varchar(50),
+         accountid Varchar(50),
+         Transactionid Varchar(50),
+         date_entered DateTime,
+         date_modified DateTime ,
+         deleted Varchar(50)
+    )
+ Create table contact
+    (
+        memberid Varchar(50),
+        fullname Varchar(50),
+        lastname Varchar(50),
+        gender Varchar(50),
+        DOB DateTime,
+        citizenship Varchar(50),
+        Race Varchar(50),
+        mobile Varchar(50),
+        email Varchar(50),
+        postalcode Varchar(50),
+        date_entered DateTime  ,
+        date_modified DateTime ,
+        deleted Varchar(50),
+        assigned_user_id Varchar(50)
+       
+
+
+    )
+ Create table opportunities
+    (
+        memberid Varchar(50),
+        fullname Varchar(50),
+        lastname Varchar(50),
+        gender Varchar(50),
+        DOB DateTime,
+        citizenship Varchar(50),
+        Race Varchar(50),
+        mobile Varchar(50),
+        email Varchar(50),
+        postalcode Varchar(50),
+        date_entered DateTime ,
+        date_modified DateTime ,
+        deleted Varchar(50),
+        opportunity_type Varchar(50),
+        assigned_user_id Varchar(50)
+
+    )
+Create table Ctransaction
+    (
+         memberid Varchar(50)
+    )

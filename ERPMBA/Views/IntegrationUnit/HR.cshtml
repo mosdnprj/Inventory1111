@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "HR";
+}
+
+@Html.Partial("Index")
+
+              
+   
+   <div style=" width:30%; height:100%;float:left;  ">    		  
+                     <form role="form" action="" method="post" class="admin-form" >
+			                    	<div style=" background-color: #FFCC00; padding:20px">
+                                    <div class="form-group">
+                                        <label for="Name">Company Name</label>
+			                    		<label class="sr-only" for="form-first-name">First name</label>
+			                        	<input type="text" name="form-first-name" placeholder="First name..." class="form-first-name form-control" id="form-first-name" required>
+			                        </div>
+			                        
+                                    <label for="Name">Department Name</label>
+			                        <div class="form-group">
+			                        	<label class="sr-only" for="form-email">Email</label>
+			                        	<input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email" required >
+			                        </div>
+                              <div class="form-group">
+                                           <label for="Name">Extension No</label>
+			                        	<label class="sr-only" for="form-dob">Mobile</label>
+			                        	<input type="date" aria-controls name="form-last-name" placeholder="Mobile Number..." class="form-number form-control" id="form-Mobile" >
+			                 </div>
+                                        <label for="Name">Contact Person</label>
+                                    <div class="form-group">
+			                        	<label class="sr-only" for="form-password">password</label>
+			                        	<input type="password" name="form-last-name" placeholder="Password..." class="form-password form-control" id="form-password" required>
+			                        </div>
+                                    
+                                     
+                                   </div>
+                                       </form>
+                         </div>
+      @{
+          var grid = new WebGrid();
+          grid.Columns(
+          grid.Column(columnName:"Company Name",header: "1"),
+          grid.Column(columnName:"Company Name",header: "1"),
+          grid.Column(columnName:"Company Name",header: "1"),
+          grid.Column(columnName:"Company Name",header: "1"),
+          grid.Column(columnName:"Company Name",header: "1")
+                    
+                    );
+         
+          
+          
+          }
+                               

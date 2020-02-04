@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Style/MasterPage.cshtml";
+
+
+}
+@section featured{
+    <script src="~/Scripts/Transferorderscript.js"></script>
+
+
+
+
+    <ul class="nav nav-pills" style="background: linear-gradient(to right, #e1eec3, #f05053);">
+        <li style="width: 200px;  text-align:center">@Html.ActionLink("Item", "ItemAdmin", "IntegrationUnit", new { @style = "color:Black;" })</li>
+        <li style="width: 200px;  text-align:center">@Html.ActionLink("Customer", "CustomerAdmin", "IntegrationUnit", new { @style = "color:Black;" })</li>
+        <li style="width: 200px;  text-align:center">@Html.ActionLink("Supplier", "SupplierAdmin", "IntegrationUnit", new { @style = "color:Black;" })</li>
+    </ul>
+
+}
+

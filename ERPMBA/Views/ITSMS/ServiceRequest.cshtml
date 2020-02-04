@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "ServiceRequest";
+}
+
+@Html.Partial("ServiceManagement")
+<div ng-app="myApp" class="tab-content" style="float:left; width:50%;height:100%; padding-left:100px;">
+
+    <script>
+
+        var myApp = angular.module("myApp", []);
+
+
+        myApp.controller("SRctrl", function ($scope, $http) {
+            $scope.SRDetails = "";
+            $http.get("/ITSMS/GetSRInfo")
+            .then(function (result) {
+                $scope.SRDetails = result.data;
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+
+            $scope.NewInsert = {
+                NewUsers: {}
+            }
+
+            $scope.removeRec = function (User) {
+                $http.post("/ITSMS/DeleteSR", User)
+                 .then(function (data) {
+                     location.reload();
+                     return response;
+
+
+                 })
+            }
+
+            $scope.EditRecord = function (User) {
+                $scope.NewInsert.NewUsers.details = User.details;
+                $scope.NewInsert.NewUsers.description = User.description;
+
+
+                $scope.NewInsert.NewUsers.helpcenter = User.helpcenter;
+                $scope.NewInsert.NewUsers.Attachments = User.Attachments;
+
+                $scope.editupdate = true;
+                $scope.editAdd = false;
+                alert("Edit");
+
+            }
+
+            $scope.Submit = function () {
+                $http.post("/ITSMS/InsertSR", $scope.NewInsert.NewUsers)
+                .then(function (data) {
+                    location.reload();
+                    alert("Save Record");
+
+                })
+            }
+
+            $scope.Update = function () {
+                $http.post("/ITSMS/UpdateSR", $scope.NewInsert.NewUsers)
+                .then(function (data) {
+                    location.reload();
+                    alert("Save Update");
+                    $scope.editAdd = true;
+                    $scope.editupdate = false;
+
+                })
+            }
+
+
+        });
+
+
+    </script>
+
+    <div ng-controller="SRctrl">
+
+        <table ng-show="SRDetails">
+            <tr>
+                <td>
+                    Help center
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" class="form-control" ng-model="NewInsert.NewUsers.helpcenter" />
+                </td>
+            </tr>
+            <tr>
+                <td>     <p>Resolve the issue</p></td>
+            </tr>
+            <tr>
+                <td>
+                    Details
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" class="form-control" ng-model="NewInsert.NewUsers.details" cols="60" rows="2" style="width:200px; height:50px;" />
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Description
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" class="form-control" ng-model="NewInsert.NewUsers.description" cols="60" rows="4" style="width:200px; height:50px;" />
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>* Please enter the details of your request.a member of our support staff will respond as soon as possible.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>Attachments</td>
+
+            </tr>
+            <tr><td><input type="file" class="form-control" ng-model="NewInsert.NewUsers.Attachments" /></td></tr>
+            <tr>
+                <td>
+                    <input type="button" class="btn btn-success" class="form-control" value="Update" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                </td>
+
+                <td>
+                    <input type="button" class="btn btn-success" value="Submit" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" />
+                </td>
+            </tr>
+
+        </table>
+        <table class="table table-bordered">
+            <thead>
+
+                <tr>
+                    <th class="col-md-2">Details </th>
+                    <th class="col-md-5">Description</th>
+                    <th class="col-md-10">Attachments</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="SRD in SRDetails">
+                    <td>{{SRD.details}} </td>
+                    <td>{{SRD.description}}</td>
+                    <td>{{SRD.Attachments}}</td>
+                    <td>
+                        <input type="button" value="Edit Record" class="btn btn-success" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(SRD)">
+                    </td>
+
+                    <td>
+                        <input type="button" value="Delete" class="btn btn-danger" id="btnDelete" ng-click="removeRec(SRD)" />
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>

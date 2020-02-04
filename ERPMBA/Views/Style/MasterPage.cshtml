@@ -1,0 +1,146 @@
+﻿
+@{
+    Layout = null;
+}
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/angular.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+   
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                margin-left: 50px;
+                padding-top:69px;
+               left: 0;
+            }
+
+            .sidenav .openbtn {
+                position: absolute;
+                
+                right: 25px;
+                
+            }
+
+        @@media screen and (max-height: 50px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" style="height:25px;background:linear-gradient(to right, #0099cc, #0099cc);" id="myNavbar">
+
+
+
+        <div style="margin-left:25px; padding-top:25px;display:inline;font-family:Cambria;font-size:30px;">Haayat Developers</div>
+
+
+
+        <ul class="nav nav-pills navbar-right" style="padding-right:18px;padding-top:5px;">
+            <li style="background-color:white; text-align:center;"><a href="@Url.Action("Index", "signup")"><span class="glyphicon glyphicon-user"></span> Welcome, User01</a></li>
+            <li style="background-color: white; text-align:center"><a href="@Url.Action("Index", "login")"> <span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+
+    </div>
+
+    <div id="mySidenav" class="sidenav" style="">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+
+
+        <nav class="navbar navbar-inverse" role="navigation">
+
+            <ul class="nav sidebar-nav">
+
+
+                <li style=" text-align:left;width:200px;"><a href="@Url.Action("Index", "Dashboard")" , style="color:#ff0000"><span class="glyphicon glyphicon-signal" style="color:white "></span> Dashboard</a></li>
+                <li style=" text-align:left;width:200px;"><a href="@Url.Action("Index", "HR")" , style="color:White"> <span class="glyphicon glyphicon-usd" style="color:white;"></span>  HR</a></li>
+                <li style=" text-align:left;width:200px;"><a href="@Url.Action("Index", "CRM")" , style="color:White"> <span class="glyphicon glyphicon-cog" style="color:white;"></span> CRM</a></li>
+                <li style="text-align:left;width:200px;"><a href="@Url.Action("Index", "ITSMS")" , style="color:White"><span class="glyphicon glyphicon-search" style="color:white;"></span> ITServices Management</a></li>
+
+                <li style="text-align:left;width:200px;">
+                    <a href="@Url.Action("Index", "Inventory")" , style="color:white"><span class="glyphicon glyphicon-barcode" style="color:White;"></span> Inventory</a>
+                </li>
+                </li>
+
+                <li style=" text-align:left;width:200px;"><a href="@Url.Action("Index", "IntegrationUnit")" , style="color:White"><span class="glyphicon glyphicon-earphone" style="color:white;"></span> Integration Unit</a></li>
+                <li style=" text-align:left;width:200px;"><a href="@Url.Action("Index", "Administrator")" , style="color:White"><span class="glyphicon glyphicon-cog" style="color:white;"></span> Administrator</a></liclass="one">
+                <li style=" text-align:left;width:200px;"><a href="@Url.Action("Index", "Aboutus")" , style="color:White"> <span class="glyphicon glyphicon-th-large" style="color:white;"></span> About Us</a></li>
+
+
+            </ul>
+        </nav>
+
+    </div>
+
+    <span style="font-size:30px;cursor:pointer;float:left;padding-top:50px" onclick="openNav()">&#9776; </span>
+    <div  style="width:100%;position:inherit;padding-top:50px; color:white">
+        @RenderSection("featured", false)
+
+    </div>
+
+
+
+
+
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+﻿@model ERPMBA.Models.AccountsContact
+@{
+    ViewBag.Title = "AccountsContact";
+}
+@Html.Partial("Home")
+<script>
+
+    var myApp = angular.module("myApp", []);
+
+
+
+
+    myApp.controller("Actconctrl", function ($scope, $http) {
+
+        $scope.AccountconDetails = "";
+        $http.get("/CRM/GetActconInfo")
+        .then(function (result) {
+            $scope.AccountconDetails = result.data;
+            $scope.editAdd = true;
+            $scope.editupdate = false;
+
+        })
+
+        $scope.NewInsert = {
+            NewActcons: {}
+        }
+        $scope.AddRecord = function () {
+
+
+
+            $scope.AccountconDetails1 = true;
+
+        }
+
+
+
+        $scope.removeRec = function (Actcon) {
+            $http.post("/CRM/DeleteAccountcon", Actcon)
+             .then(function (data) {
+                 location.reload();
+                 return response;
+
+
+             })
+        }
+
+        $scope.EditRecord = function (Actcon1) {
+            $scope.NewInsert.NewActcons.memberid = Actcon1.memberid;
+            $scope.NewInsert.NewActcons.accountid = Actcon1.accountid;
+            $scope.NewInsert.NewActcons.contactid = Actcon1.contactid;
+            $scope.NewInsert.NewActcons.date_entered = Actcon1.date_entered;
+            $scope.NewInsert.NewActcons.date_modified = Actcon1.date_modified;
+            $scope.NewInsert.NewActcons.deleted = Actcon1.deleted;
+            $scope.AccountconDetails1 = true;
+            $scope.editupdate = true;
+            $scope.editAdd = false;
+            alert("Edit");
+
+
+
+
+        }
+
+
+
+
+        $scope.Submit = function () {
+            $http.post("/CRM/InsertAccountcon", $scope.NewInsert.NewActcons)
+            .then(function (data) {
+                location.reload();
+                alert("Save Actcon");
+
+            })
+        }
+
+
+        $scope.Update = function () {
+            $http.post("/CRM/UpdateAccountcon", $scope.NewInsert.NewActcons)
+            .then(function (data) {
+                location.reload();
+                alert("Save Update");
+
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+        }
+
+
+
+    });
+
+
+</script>
+
+
+<div ng-app="myApp" style="float:left; width:60%; padding-top:100px; border-color:#333300">
+
+    <div ng-controller="Actconctrl">
+
+        <h3 align="center"> Account Contacts</h3>
+        <table ng-show="AccountconDetails1" align="center">
+            <tr>
+                <td>memberid</td>
+                <td>
+                    @Html.TextBoxFor(model => model.memberid, new { @class = "form-control", placeholder = "memberid", required = "required", Data_ng_model = "NewInsert.NewActcons.memberid" })
+                    <!--<input type="text" class="form-control" placeholder="Imie" id="inputName" required="required">-->
+
+                </td>
+                <td>accountid</td>
+                <td>
+                    @Html.TextBoxFor(model => model.accountid, new { @class = "form-control", placeholder = "accountid", required = "required", Data_ng_model = "NewInsert.NewActcons.accountid" })
+                    <!--<input type="text" class="form-control" placeholder="Nazwisko" id="inputSurname" required="required">-->
+
+                </td>
+            </tr>
+            <tr>
+                <td>contactid</td>
+                <td>
+                    @Html.TextBoxFor(model => model.contactid, new { @class = "form-control", placeholder = "contactid", required = "required", Data_ng_model = "NewInsert.NewActcons.contactid" })
+                    <!--<input type="text" class="form-control" placeholder="Imie" id="inputName" required="required">-->
+
+                </td>
+                <td>date_entered</td>
+                <td>
+                    @Html.TextBoxFor(model => model.date_entered, new { @class = "form-control", placeholder = "date_entered", required = "required", Data_ng_model = "NewInsert.NewActcons.date_entered" })
+                    <!--<input type="text" class="form-control" placeholder="Nazwisko" id="inputSurname" required="required">-->
+
+                </td>
+            </tr>
+            <tr>
+                <td>date_modified</td>
+                <td>
+                    @Html.TextBoxFor(model => model.date_modified, new { @class = "form-control", placeholder = "date_modified", required = "required", Data_ng_model = "NewInsert.NewActcons.date_modified" })
+                    <!--<input type="text" class="form-control" placeholder="Imie" id="inputName" required="required">-->
+
+                </td>
+                <td>deleted</td>
+                <td>
+                    @Html.TextBoxFor(model => model.deleted, new { @class = "form-control", placeholder = "deleted", required = "required", Data_ng_model = "NewInsert.NewActcons.deleted" })
+                    <!--<input type="text" class="form-control" placeholder="Nazwisko" id="inputSurname" required="required">-->
+
+                </td>
+            </tr>
+        </table>
+        <br />
+        <table align="center" ng-show="AccountconDetails1">
+            <tr>
+
+                <td>
+                    <input type="button" value="Update" id="btnUpdate" class="btn btn-success" ng-show="editupdate" ng-click="Update()" />
+                </td>
+
+                <td>
+                    <input type="button" value="Submit" id="btnSubmit" class="btn btn-success" ng-show="editAdd" ng-click="Submit()" />
+                </td>
+            </tr>
+        </table>
+        <br />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-md-2">memberid</th>
+                    <th class="col-md-5">accountid</th>
+                    <th class="col-md-10">contactid</th>
+                    <th class="col-md-10"><input type="button" value="Add Record" id="btnAdd" ng-model="AddRec" ng-click="AddRecord()"></th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr ng-repeat="actcon in AccountconDetails">
+
+
+                    <td>{{actcon.memberid}} </td>
+
+
+                    <td>{{actcon.accountid}}</td>
+                    <td>{{actcon.contactid}}</td>
+                    <td>
+                        <input type="button" value="Edit Record" id="btnEdit" class="btn btn-success" ng-model="editupdate" ng-click="EditRecord(actcon)">
+                    </td>
+
+                    <td>
+                        <input type="button" value="Delete" id="btnDelete" class="btn btn-danger" ng-click="removeRec(actcon)" />
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+
+
+    </div>
+
+
+</div>

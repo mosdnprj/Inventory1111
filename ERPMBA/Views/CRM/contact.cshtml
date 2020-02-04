@@ -1,0 +1,291 @@
+﻿
+@model ERPMBA.Models.contact
+
+@{
+    ViewBag.Title = "contact";
+}
+@Html.Partial("Home")
+<script>
+
+    var myApp = angular.module("myApp", []);
+
+
+
+
+    myApp.controller("contactctrl", function ($scope, $http) {
+
+        $scope.contactDetails = "";
+        $http.get("/CRM/GetcontactInfo")
+        .then(function (result) {
+            $scope.contactDetails = result.data;
+            $scope.editAdd = true;
+            $scope.editupdate = false;
+            alert("get started");
+        })
+
+        $scope.NewInsert = {
+            Newcontacts: {}
+        }
+
+        $scope.removeRec = function (con) {
+            $http.post("/CRM/Deletecontact", con)
+             .then(function (data) {
+                 location.reload();
+                 return response;
+
+
+             })
+        }
+
+        $scope.EditRecord = function (con) {
+            $scope.NewInsert.Newcontacts.memberid = con.memberid;
+            $scope.NewInsert.Newcontacts.fullname = con.fullname;
+            $scope.NewInsert.Newcontacts.lastname = con.lastname;
+            $scope.NewInsert.Newcontacts.gender = con.gender;
+            $scope.NewInsert.Newcontacts.DOB = con.DOB;
+            $scope.NewInsert.Newcontacts.citizenship = con.citizenship;
+            $scope.NewInsert.Newcontacts.Race = con.Race;
+            $scope.NewInsert.Newcontacts.mobile = con.mobile;
+            $scope.NewInsert.Newcontacts.email = con.email;
+            $scope.NewInsert.Newcontacts.postalcode = con.postalcode;
+            $scope.NewInsert.Newcontacts.date_entered = con.date_entered;
+            $scope.NewInsert.Newcontacts.date_modified = con.date_modified;
+            $scope.NewInsert.Newcontacts.deleted = con.deleted;
+            $scope.NewInsert.Newcontacts.assigned_user_id = con.assigned_user_id;
+            $scope.editupdate = true;
+            $scope.editAdd = false;
+            alert("Edit");
+
+
+
+
+        }
+
+
+
+
+        $scope.Submit = function () {
+            $http.post("/CRM/Insertcontact", $scope.NewInsert.Newcontacts)
+            .then(function (data) {
+                location.reload();
+                alert("Save Record");
+
+            })
+        }
+
+
+        $scope.Update = function () {
+            $http.post("/CRM/Updatecontact", $scope.NewInsert.Newcontacts)
+            .then(function (data) {
+                location.reload();
+                alert("Save Update");
+
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+        }
+
+
+
+    });
+
+
+</script>
+<style>
+    input[type=text] {
+        padding-top: 10px;
+        padding-right: 20px;
+    }
+
+    td {
+        padding-top: 10px;
+        padding-right: 20px;
+    }
+</style>
+
+<div ng-app="myApp" style="float:left; width:60%; padding-top:100px; border-color:#333300">
+
+    <div ng-controller="contactctrl">
+
+        <h3 align="center"> Contacts</h3>
+
+        <table ng-show="contactDetails" align="center">
+            <tr>
+
+
+                <td>memberid</td>
+                <td>
+                    @Html.TextBoxFor(model => model.memberid, new { @class = "form-control", placeholder = "memberid", Data_ng_model = "NewInsert.Newcontacts.memberid" })
+                    <!--<input type="text" class="form-control" placeholder="Imie" id="inputName" required="required">-->
+
+                </td>
+
+
+
+                <td>Full name</td>
+                <td>
+                    @Html.TextBoxFor(model => model.fullname, new { @class = "form-control", placeholder = "fullname", Data_ng_model = "NewInsert.Newcontacts.fullname" })
+                <!--<input type="text" class="form-control" placeholder="Nazwisko" id="inputSurname" required="required">-->
+
+            </td>
+        </tr>
+
+        <tr>
+
+
+            <td>lastname</td>
+            <td>
+                @Html.TextBoxFor(model => model.lastname, new { @class = "form-control", placeholder = "lastname", Data_ng_model = "NewInsert.Newcontacts.lastname" })
+            <!--<input type="email" class="form-control" placeholder="Email" id="inputEmail" required="required">-->
+
+
+        </td>
+        <td>gender</td>
+        <td>
+
+            @Html.TextBoxFor(model => model.gender, new { @class = "form-control", placeholder = "gender", Data_ng_model = "NewInsert.Newcontacts.gender" })
+            <!--<input type="email" class="form-control" placeholder="Email" id="inputEmail" required="required">-->
+
+
+        </td>
+
+    </tr>
+    <tr>
+
+
+        <td>Date Of Birth</td>
+        <td>
+            @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", placeholder = "Date of Birth", Data_ng_model = "NewInsert.Newcontacts.DOB" })
+        <!--<input type="text" class="form-control" placeholder="Imie" id="inputName" required="required">-->
+
+    </td>
+
+
+    <td>citizenship</td>
+    <td>
+        @Html.TextBoxFor(model => model.citizenship, new { @class = "form-control", placeholder = "citizenship", Data_ng_model = "NewInsert.Newcontacts.citizenship" })
+    <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Treść wiadomości..." required="required"></textarea>-->
+
+
+</td>
+
+</tr>
+
+<tr>
+
+
+    <td>Race</td>
+    <td>
+        @Html.TextBoxFor(model => model.Race, new { @class = "form-control", placeholder = "Race", Data_ng_model = "NewInsert.Newcontacts.Race" })
+        <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Treść wiadomości..." required="required"></textarea>-->
+
+    </td>
+
+
+    <td>mobile</td>
+    <td>
+        @Html.TextBoxFor(model => model.mobile, new { @class = "form-control", placeholder = "mobile", Data_ng_model = "NewInsert.Newcontacts.mobile" })
+    <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Treść wiadomości..." required="required"></textarea>-->
+
+</td>
+
+</tr>
+<tr>
+    <td>email</td>
+    <td>
+        @Html.TextBoxFor(model => model.email, new { @class = "email", placeholder = "email", Data_ng_model = "NewInsert.Newcontacts.email" })
+    <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Treść wiadomości..." required="required"></textarea>-->
+
+</td>
+<td>postalcode</td>
+<td>
+    @Html.TextBoxFor(model => model.postalcode, new { @class = "form-control", placeholder = "postalcode", Data_ng_model = "NewInsert.Newcontacts.postalcode" })
+    <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Treść wiadomości..." required="required"></textarea>-->
+
+</td>
+
+</tr>
+<tr>
+    <td>date_entered</td>
+    <td>
+        @Html.TextBoxFor(model => model.date_entered, new { @class = "form-control", placeholder = "date_entered", Data_ng_model = "NewInsert.Newcontacts.date_entered" })
+        <!--<input type="text" class="form-control" placeholder="Nazwisko" id="inputSurname" required="required">-->
+
+    </td>
+    <td>date_modified</td>
+    <td>
+        @Html.TextBoxFor(model => model.date_modified, new { @class = "form-control", placeholder = "date_modified", Data_ng_model = "NewInsert.Newcontacts.date_modified" })
+    <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Treść wiadomości..." required="required"></textarea>-->
+
+</td>
+</tr>
+<tr>
+
+    <td>deleted</td>
+    <td>
+        @Html.TextBoxFor(model => model.deleted, new { @class = "form-control", placeholder = "deleted", Data_ng_model = "NewInsert.Newcontacts.deleted" })
+        <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Treść wiadomości..." required="required"></textarea>-->
+
+
+    </td>
+
+    <td>assigned_user_id</td>
+    <td>
+        @Html.TextBoxFor(model => model.assigned_user_id, new { @class = "form-control", placeholder = "assigned_user_id", Data_ng_model = "NewInsert.Newcontacts.assigned_user_id" })
+    <!--<textarea class="form-control" rows="4" id="inputMessage" name="inputMessage" placeholder="Treść wiadomości..." required="required"></textarea>-->
+
+</td>
+</tr>
+</table>
+<br />
+<table align="center">
+    <tr>
+
+        <td>
+            <input type="button" value="Update" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+        </td>
+
+        <td>
+            <input type="button" value="Submit" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" />
+        </td>
+    </tr>
+</table>
+<br />
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="col-md-2">memberid</th>
+            <th class="col-md-5">fullname</th>
+            <th class="col-md-10">lastname</th>
+
+        </tr>
+
+    </thead>
+    <tbody>
+        <tr ng-repeat="con in contactDetails">
+
+
+            <td>{{con.memberid}} </td>
+
+
+            <td>{{con.fullname}}</td>
+            <td>{{con.lastname}}</td>
+            <td>
+                <input type="button" value="Edit Record" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(con)">
+            </td>
+
+            <td>
+                <input type="button" value="Delete" id="btnDelete" ng-click="removeRec(con)" />
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+
+
+
+</div>
+</div>

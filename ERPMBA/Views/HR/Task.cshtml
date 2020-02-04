@@ -1,0 +1,114 @@
+﻿@model ERPMBA.Models.Task
+@{
+    ViewBag.Title = "Task";
+}
+@Html.Partial("DM")
+
+<div class="tab-content" style="float:left; width:60%;height:100%;padding-left:30px;">
+    <div id="Details" class="tab-pane fade in active" style="width:100%;height:100%;padding-left:15px;padding-top:80px;">
+
+        <div class="form-group">
+            <fieldset>
+                <div id="legend">
+                    <legend>Task</legend>
+                </div>
+
+                <style>
+                    table {
+                        padding: 30px;
+                    }
+                </style>
+                <table>
+                    <tr>
+                        <td>
+                            TaskOwner<br /><input type="text" class="form-control" />
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            TaskName<br /><input type="text" class="form-control" />
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Description<br /><textarea class="form-control"></textarea>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Start Date<br /><input type="date" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            DueDate<br /><input type="date" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Reminder<br /><input type="date" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            AssignedTo<br /><input type="text" class="form-control" />
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            Priority<br />
+                            <select class="form-control" id="emplid">
+                                <option>Select Employee ID</option>
+                                <option>emp1</option>
+                                <option>emp2</option>
+                                <option>emp3</option>
+                                <option>emp4</option>
+                            </select>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Status<br />
+                            <select class="form-control" id="emplid">
+                                <option>Select Employee ID</option>
+                                <option>emp1</option>
+                                <option>emp2</option>
+                                <option>emp3</option>
+                                <option>emp4</option>
+                            </select>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            CompletedOn<br /><input type="date" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            CompletedBy<br />
+                            <select class="form-control" id="emplid">
+                                <option>Select Employee ID</option>
+                                <option>emp1</option>
+                                <option>emp2</option>
+                                <option>emp3</option>
+                                <option>emp4</option>
+                            </select>
+
+                        </td>
+                    </tr>
+                </table>
+
+            </fieldset>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,300 @@
+﻿
+@{
+    ViewBag.Title = "CSO";
+}
+@Html.Partial("Order")
+<script>
+    var myApp1 = angular.module("myApp1", []);
+
+
+    myApp1.controller("CSOctrl", function ($scope, $http) {
+        $scope.CSODetails = "";
+
+        $http.get("/Inventory/GetCSOInfo")
+        .then(function (result) {
+            $scope.CSODetails = result.data;
+            $scope.CSOdetails = true;
+            $scope.editAdd = true;
+            $scope.editupdate = false;
+            alert("success");
+            $scope.CSOdetails1 = true;
+        })
+
+        $http.get("/Inventory/GetNewCustomerInfo" )
+              .then(function(dataresult)  {
+                  $scope.Customerdetails=dataresult.data;
+                  alert("Customer Details");
+
+              })
+        $http.get("/Inventory/GetCSOInfo" )
+             .then(function(dataresult)  {
+                 $scope.CSO = dataresult.data;
+
+
+             })
+        $http.get("/Inventory/GetSalespersonInfo" )
+              .then(function(dataresult1)  {
+                  $scope.Salespersondetails=dataresult1.data;
+                  alert("Salesperson");
+
+              })
+        $scope.removeRec = function (User) {
+            $http.post("/Inventory/DeleteCSO", User)
+             .then(function (data) {
+                 location.reload();
+                 return response;
+
+
+             })
+        }
+        $scope.NewInsert = {
+            NewUsers: {}
+        }
+        $scope.EditRecord = function (User) {
+            $scope.NewInsert.NewUsers = User;
+
+            $scope.CSOdetails = true;
+            $scope.editupdate = true;
+            $scope.editAdd = false;
+            alert("Edit");
+
+
+
+
+        }
+
+
+        $scope.callItem1 = function () {
+            $scope.CSOdetails = true;
+            $scope.NewItemdetails = true;
+            $scope.CSOdetails1 = false;
+            $scope.CSOdetails2 = true;
+        }
+
+
+
+        $scope.Update = function () {
+            $http.post("/Inventory/UpdateCSO", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                location.reload();
+                alert("Save Update");
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+        }
+        $scope.Submit = function () {
+            $http.post("/Inventory/InsertCSO", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                $scope.NewItem=true;
+
+                alert("Save Record");
+                location.href='@Url.Action("Newsale", "Inventory")';return false;
+            })
+        }
+
+        $scope.Addnew = function () {
+            $http.post("/Inventory/InsertCSO", $scope.NewInsert.NewUsers)
+            .then(function (data) {
+                $scope.NewItem=true;
+
+                alert("Save Record");
+
+            })
+        }
+
+        $(document).ready(function () {
+            $('#manageCSOtable').DataTable({
+                "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+                "iDisplayLength": 10
+            });
+        });
+
+    });
+</script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+<style>
+    .table1 {
+        width: 900px;
+    }
+
+        .table1 tr, th {
+            padding-left: 50px;
+            padding-bottom: 15px;
+            font-weight: 100;
+        }
+
+        .table1 tr, td {
+            padding-bottom: 15px;
+        }
+
+    #myDIV {
+       
+        background-color: lightblue;
+      
+    }
+    
+.toggleDisplay {
+  display: none;
+}
+.toggleDisplay.in {
+  display: table-cell;
+
+</style>
+
+<div ng-app="myApp1" style="float:left; width:60%;height:100%;padding-top:80px;padding-left:50px;">
+
+    <div ng-controller="CSOctrl">
+
+
+
+        <center><h4 style="padding-left:150px;font-family:Cambria;font-size:25px;padding-bottom:20px;"> Sales Order</h4></center>
+
+        <table ng-show="CSOdetails" class="table1">
+            <tr>
+                <th>
+                    Sales Order
+                </th>
+                <td>
+                    <input type=text id="salesorder" size="20" class="form-control" ng-model="NewInsert.NewUsers.SalesOrder" readonly>
+                </td>
+                <th> Customer Name</th>
+
+                <td>
+                    <select name="custname" class="form-control" title="Select Customer" ng-model="NewInsert.NewUsers.CustomerName">
+                        <option value="" disabled>Select Customer</option>
+                        <option ng-repeat="CSOdcust in Customerdetails">{{CSOdcust.CustomerName}}</option>
+
+                    </select>
+                </td>
+                <td>
+                    <button class="btn btn-default" onclick="location.href='@Url.Action("NewCustomer", "Inventory")';return false;"><i class="glyphicon glyphicon-plus-sign"></i> Add </button>
+
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    Reference
+                </th>
+                <td>
+                    <input type=text id="ref" size="20" class="form-control" ng-model="NewInsert.NewUsers.Reference">
+                </td>
+                <th>
+                    Order Date
+                </th>
+
+                <td>
+                    <input type="date" size="30" name="orderdate" class="form-control" ng-model="NewInsert.NewUsers.SalesOrderdate">
+                </td>
+            </tr>
+
+            <tr>
+                <th>Shipment Date</th>
+                <td>
+                    <input type="date" name="shipdate" class="form-control" ng-model="NewInsert.NewUsers.ExpecShipDate">
+                </td>
+                <th>Sales Person</th>
+
+
+                <td>
+                    <select name="seller" class="form-control">
+                        <option value="">Select Sales Person</option>
+                        <option ng-repeat="CSOdsales in Salespersondetails">{{CSOdsales.Sellername}}</option>
+                    </select>
+                </td>
+                <td>
+                    <button class="btn btn-default" onclick="location.href='@Url.Action("Salesperson", "Inventory")';return false;"><i class="glyphicon glyphicon-plus-sign"></i>Add</button>
+
+                </td>
+            </tr>
+
+            <tr>
+                <th>Delivery Method</th>
+
+                <td>
+                    <select name="delmethod" size="1" class="form-control" ng-model="NewInsert.NewUsers.DeliveryMethod">
+                        <option value="" disabled>Select Delivery Method </option>
+                        <option>USPS First Class</option>
+                        <option>USPS First Class International</option>
+                        <option>USPS Priority</option>
+                        <option>USPS MediaMail</option>
+                        <option>UPS Two-Day</option>
+                        <option>UPS Ground</option>
+                        <option>Fedex Overnight</option>
+                    </select>
+                </td>
+                <th>Payment Type</th>
+
+                <td>
+                    <select name="delmethod" class="form-control" ng-model="NewInsert.NewUsers.PaymentType">
+                        <option value="" disabled>Select Payment Type</option>
+                        <option>Cash</option>
+                        <option>Cheque</option>
+                        <option>Credit Card</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <div style="padding-top:25px;padding-left:200px;">
+            <table align="center">
+                <tr>
+                    <td>
+                        <input type="button" value="Create New Item" class="btn btn-primary" id="btnSubmit" ng-show="CSODetails" ng-click="Submit()" />
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <table class="table table-bordered" style="text-align:center;width:800px;" ng-app="myApp1" ng-controller="CSOctrl">
+        <colgroup>
+            <col span="2" style="background-color:red">
+            <col style="background-color:yellow">
+        </colgroup>
+
+        <thead>
+            <tr>
+                <th class="toggleDisplay" style="text-align:center;">Sale Order no</th>
+                <th class="toggleDisplay" style="text-align:center;">Customer Name</th>
+                <th class="toggleDisplay" style="text-align:center;">Sales Order date</th>
+
+
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr ng-repeat="CSOd in CSO">
+
+                <td style="text-align:center;width:20%;">{{CSOd.SalesOrder}}</td>
+
+                <td style="text-align:center;width:20%;">{{CSOd.CustomerName}}</td>
+                <td style="text-align:center;width:40%;">{{CSOd.SalesOrderdate}}</td>
+
+                <td style="text-align:center;width:20%;">
+
+                    <button style="float:left;" class="btn btn-default" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(Categoryd)"><i class="glyphicon glyphicon-edit"></i></button>
+
+                    <button style="float:right;" class="btn btn-default" id="click-me"><i class="glyphicon glyphicon-arrow-right"></i></button>
+
+
+                </td>
+
+            </tr>
+        </tbody>
+
+    </table>
+
+    <script>
+        $("#click-me").click(function () {
+            $(".table .toggleDisplay").toggleClass("in");
+        });
+
+    </script>

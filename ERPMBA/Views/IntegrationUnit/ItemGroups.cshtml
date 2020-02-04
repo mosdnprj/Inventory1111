@@ -1,0 +1,123 @@
+﻿
+@model ERPMBA.Models.ItemGroups
+
+@{
+    ViewBag.Title = "ItemGroups";
+}
+@Html.Partial("ItemAdmin")
+<div style="float:left; width:60%;height:100%;padding-top:40px;padding-left:0px;">
+    <div id="Address" style="width:100%;height:525px;">
+
+        <form name="contactForm" method="post" action="" class="form-horizontal" role="form">
+
+
+            <h3> New Item Group</h3>
+
+            <hr />
+            <table>
+                <tr>
+                    <td>
+                        Type
+                    </td>
+                    <td>
+                        <div class="input-group">
+
+
+                            <input type="radio" name="Type" value="product" />Product&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="Type" value="Service" />Service
+
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Item Group Name</td>
+                    <td>
+                        <input type=text name=textnames id="textname" size="30" class="form-control">
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td>
+
+                        <input type=text name=textnames id="textname" size="30" class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Unit</td>
+                    <td>
+                        <select name="unit" style="width:265px;height:35px;" class="form-control">
+                            <option>Select Unit</option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </td>
+
+
+                </tr>
+                <tr>
+                    <td>Manufacturer</td>
+                    <td>
+
+                        <select name="mnfcr" style="width:265px;height:35px;" class="form-control">
+                            <option>Select Manufacturer</option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </td>
+                <tr>
+                    <td>Brand</td>
+                    <td>
+
+                        <select name="brnd" style="width:265px;height:35px;" class="form-control">
+                            <option>Select Brand</option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Multiple Items</td>
+                    <td>
+
+                        <input type="checkbox" value="">Create Attributes & Options
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        Atrribute
+                        <select name="attr" style="width:244px;height:35px;" class="form-control">
+                            <option>eg:color</option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </td>
+                    <td>
+                        Options
+                        <select name="opts" style="width:244px;height:35px;" class="form-control">
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </td>
+                </tr>
+
+
+            </table>
+        </form>
+    </div>
+</div>

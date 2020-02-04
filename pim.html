@@ -1,0 +1,345 @@
+@{
+    ViewBag.Title = "PIM";
+}
+@Html.Partial("Index")
+<div style="float:left; width:200px; padding-top:100px; border-color:#333300">
+    <ul class="nav nav-pills nav-stacked" style=" float:left; background-color:Black">
+        <li class="active" style="width:200px;  text-align:center; "><a data-toggle="tab" href="#Details" style="background-color:#003366;color:White"> Details</a></li>
+        <li style="width: 200px;   text-align:center"><a data-toggle="tab" href="#Address" style="background-color:  #ffcc99;color:White"> Address</a></li>
+        <li style="width: 200px;text-align:center"><a data-toggle="tab" href="#Family" style="background-color: #e6e600;color:#333300 "> Family</a></li>
+        <li style="width: 200px;  text-align:center"><a data-toggle="tab" href="#Education" style="background-color: #ff3300;color:White"> Education</a></li>
+        <li style="width: 200px; text-align:center"><a data-toggle="tab" href="#Work" style="background-color: #0000ff;color:White">  Work</a></li>
+    </ul>
+</div>
+<body style="background-image:C:\noa\pr.jpg">
+    <div class="tab-content" style=" float:left; width:60%;height:550px; border-style:solid;border-color:#003300;background-color:#e0e0eb; ">
+        <div id="Details" class="tab-pane fade in active" style="color: #003300; width:100%;height:525px; padding-top:10px;">
+            <center>
+                <h3 align="center"> Details</h3>
+
+                <table border="2" cellpadding="5">
+
+                    <tr>
+                        <td>Employee id:</td>
+                        <td><input type="text" name="empid"></td>
+
+
+                        <td>Fullname:</td>
+                        <td><input type="text" name="fn"></td>
+                    </tr>
+                    <tr>
+                        <td>Designation:</td>
+                        <td><input type="text" name="dsg"></td>
+
+
+                        <td>Gender:</td>
+                        <td><input type="text" name="gndr"></td>
+                    </tr>
+                    <tr>
+                        <td>D.O.B:</td>
+                        <td><input type="date" name="dbthy" value="2014-02-09"></td>
+
+                        <td>Contact Number:</td>
+                        <td><input type="number" name="cn"></td>
+                    </tr>
+                    <tr>
+                        <td>Email-id:</td>
+                        <td><input type="text" name="email"></td>
+
+                        <td>Supervisor name:</td>
+                        <td><input type="text" name="suname"></td>
+                    </tr>
+                    <tr>
+                        <td>PF number:</td>
+                        <td><input type="number" name="pfno"></td>
+
+                        <td>Healthcard No:</td>
+                        <td><input type="number" name="hcno"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Customer id:</td>
+                        <td><input type="text" name="custid"></td>
+
+                        <td>Project:</td>
+                        <td><input type="text" name="proj"></td>
+                    </tr>
+                    <tr>
+                        <td>Work Locaion:</td>
+                        <td><input type="text" name="wrkloc"></td>
+
+                        <td>Blood group:</td>
+                        <td><input type="text" name="bldgrp"></td>
+                    </tr>
+                    <tr>
+                        <td>Date of joining:</td>
+                        <td><input type="date" name="dtofjn" value="2014-02-09"></td>
+
+                        <td>Alternate account no:</td>
+                        <td><input type="number" name="altaccno"></td>
+                    </tr>
+                    <tr>
+                        <td>Alternate Email-id:</td>
+                        <td><input type="text" name="altemail"></td>
+
+                        <td>Supervisor contact No:</td>
+                        <td><input type="number" name="scno"></td>
+                    </tr>
+                    <tr>
+                        <td>ESI number:</td>
+                        <td><input type="number" name="esi"></td>
+
+                        <td>Health card validity:</td>
+                        <td><input type="date" name="hcv" value="2014-02-09"></td>
+                    </tr>
+
+
+
+                </table>
+                <table>
+                    <tr>
+                        <td align="left">
+                            <button class="btn-success">Submit</button>
+                            <button class="btn-success">Cancel</button>
+                        </td>
+                    </tr>
+                </table>
+
+            </center>
+
+
+
+
+        </div>
+        <div id="Address" class="tab-pane fade" style="color:  #003300; width:100%;height:525px;">
+
+
+
+            <style>
+                td, th {
+                    padding: 5px;
+                }
+            </style>
+
+            <h3 align="center">Address Details</h3>
+
+            <center>
+
+                <table border="2" cellpadding="5">
+
+
+
+                    </tr>
+                    <td>Employ id:</td>
+                    <td><input type="text" name="empid"></td>
+                    <td>Fullname:</td>
+                    <td><input type="text" name="fn"></td>
+                    <tr>
+                        <br>
+                        <td>House/Bldg/Apt.No:</td>
+                        <td><input type="text"></td>
+                        <td>Street/Road/Lane:</td>
+                        <td><input type="text"></td>
+
+                    </tr>
+
+                    <tr>
+                        <td>Landmark/Area:</td>
+                        <td><input type="text"></td>
+                        <td>Town/City:</td>
+                        <td><input type="text"></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>City/Town:</td>
+                        <td><input type="text"></td>
+                        <td>Pincode:</td>
+                        <td><input type="number"></td>
+                    </tr>
+                    <tr>
+
+                        <td>State/Provience:</td>
+                        <td><input type="text"></td>
+                        <td>Home Contact No:</td>
+                        <td><input type="number"></td>
+                    </tr>
+
+
+
+
+                </table>   <br />
+                <td align="left">
+                    <button class="btn-success">Submit</button>
+                    <button class="btn-success">Cancel</button>
+                </td></tr>
+
+            </center>
+
+
+
+        </div>
+        <div id="Family" class="tab-pane fade" style="color: #003300; width:100%;height:525px;padding-top:10px;">
+
+
+            <center>
+                <table border="2" cellpadding="5">
+                    <h3 align="center">Family Details</h3>
+
+
+                    <tr>
+                        <br>
+                        <td>Father Name:</td>
+                        <td><input type="text" name="fn"></td>
+                        <td>Father Date Of Birth:</td>
+                        <td><input type="date" name="dbthy" value="2014-02-09"></td>
+                    </tr>
+                    <tr>
+                        <td>Mother Name:</td>
+                        <td><input type="text" name="mn"></td>
+                        <td>Mother Date Of Birth:</td>
+                        <td><input type="date" name="dbthy" value="2014-02-09"></td>
+                    </tr>
+                    <tr>
+                        <td>Spouse Name:</td>
+                        <td><input type="text" name="sn"></td>
+                        <td>Spouse Date Of Birth:</td>
+                        <td><input type="date" name="dbthy" value="2014-02-09"></td>
+                    </tr>
+                    <tr>
+                        <td>Child-1 Name:</td>
+                        <td><input type="text" name="c1"></td>
+                        <td>Child-1 Date Of Birth:</td>
+                        <td><input type="date" name="dbthy" value="2014-02-09"></td>
+                    </tr>
+                    <tr>
+                        <td>Child-2 Name:</td>
+                        <td><input type="text" name="c2"></td>
+                        <td>Child-2 Date Of Birth:</td>
+                        <td><input type="date" name="dbthy" value="2014-02-09"></td>
+                    </tr>
+                    <tr>
+                        <td>Child-3 Name:</td>
+                        <td><input type="text" name="c3"></td>
+                        <td>Child-3 Date Of Birth:</td>
+                        <td><input type="date" name="dbthy" value="2014-02-09"></td>
+                    </tr>
+                    <tr>
+                        <td>Child-4 Name:</td>
+                        <td><input type="text" name="c4"></td>
+                        <td>Child-4 Date Of Birth:</td>
+                        <td><input type="date" name="dbthy" value="2014-02-09"></td>
+                    </tr>
+
+
+
+                </table>
+                <table>
+                    <td align="left">
+                        <button class="btn-success">Submit</button>
+                        <button class="btn-success">Cancel</button>
+                    </td></tr>
+                </table>
+                </form>
+            </center>
+        </div>
+        <div id="Education" class="tab-pane fade" style="color: #003300; width:100%;height:525px;padding-top:10px;">
+            <center><h3>Education Details</h3></center>
+            <center>
+                <table border="2">
+
+                    <tr>
+                        <br>
+                        <td>SSC/10th pass year:</td>
+                        <td><input type="number" name="a"></td>
+                        <td>SSC/10th pecentage:</td>
+                        <td><input type="number" name="g"></td>
+                    </tr>
+                    <tr>
+                        <td>Inter/12th pass year:</td>
+                        <td><input type="number" name="b"></td>
+                        <td>Inter/12th percentage:</td>
+                        <td><input type="number" name="h"></td>
+                    </tr>
+                    <tr>
+                        <td>Highest degree:</td>
+                        <td><input type="text" name="c"></td>
+                        <td>Highest degree percentage:</td>
+                        <td><input type="number" name="i"></td>
+                    </tr>
+                    <tr>
+                        <td>Highest degree pass year:</td>
+                        <td><input type="number" name="d"></td>
+                        <td>Highest degree percentage:</td>
+                        <td><input type="number" name="i"></td>
+                    </tr>
+                    <tr>
+                        <td>Dip/gradu/other pass year:</td>
+                        <td><input type="number" name="e"></td>
+                        <td>Dip/Gradu/other percentage:</td>
+                        <td><input type="number" name="j"></td>
+                    </tr>
+                    <tr>
+                        <td>Other certification-1:</td>
+                        <td><input type="text" name="f"></td>
+                        <td>Other certification-2:</td>
+                        <td><input type="text" name="k"></td>
+
+                    </tr>
+
+                </table>
+                <br />
+                <button class="btn-success">Submit</button>
+                <button class="btn-success">Cancel</button>
+
+            </center>
+        </div>
+        <div id="Work" class="tab-pane fade" style="color:  #003300; width:100%;height:525px;">
+            <center><h3>Work Details</h3></center>
+            <center>
+                <form action="insertwork.php" method="post">
+                    <center>
+
+                        <table border="2" cellpadding="5">
+                            <tr>
+                                <br>
+                                <td>Employee id:</td>
+                                <td><input type="text" name='empid'></td>
+
+                                <td>Employee name:</td>
+                                <td><input type="text" name='ename'></td>
+                            </tr>
+
+                            <tr>
+                                <td>Company Name:</td>
+                                <td><input type="text" name='lCompanyname'></td>
+                                <td>Designation</td>
+                                <td><input type="text" name='lDesignation'></td>
+                            </tr>
+                            <tr>
+                                <td>Worked From:</td>
+                                <td><input type="text" name='lWorkedfrom'></td>
+                                <td>Worked To</td>
+                                <td><input type="text" name='lWorkedTo'></td>
+                            </tr>
+
+
+
+
+                        </table>
+                        <table>
+                            <tr>
+                                <td align="center">
+                                    <button class="btn-success">Submit</button>
+                                    <button class="btn-success">Cancel</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
+                </form>
+
+            </center>
+
+        </div>
+
+</body>

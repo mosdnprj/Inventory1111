@@ -1,0 +1,157 @@
+﻿
+
+@{
+    ViewBag.Title = "Create1";
+}
+@Html.Partial("ProblemManagement")
+<style>
+    input[type=button][disabled=disabled] {
+        opacity: 0.65;
+        cursor: not-allowed;
+    }
+
+    table tr th {
+        padding: 10px 30px;
+    }
+
+    table tr td {
+        padding: 10px 30px;
+    }
+</style>
+<script>
+
+        var myApp = angular.module("myApp", []);
+
+
+        myApp.controller("CRTctrl", function ($scope, $http) {
+            $scope.CRTDetails = "";
+            $http.get("/ITSMS/GetCRTInfo")
+            .then(function (result) {
+                $scope.CRTDetails = result.data;
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+
+            $scope.NewInsert = {
+                NewUsers: {}
+            }
+
+            $scope.removeRec = function (User) {
+                $http.post("/ITSMS/DeleteCRT", User)
+                 .then(function (data) {
+                     location.reload();
+                     return response;
+
+
+                 })
+            }
+
+            $scope.EditRecord = function (User) {
+                $scope.NewInsert.NewUsers.ticketId = User.ticketId;
+                $scope.NewInsert.NewUsers.writeproblem = User.writeproblem;
+                $scope.editupdate = true;
+                $scope.editAdd = false;
+                alert("Edit");
+
+            }
+
+            $scope.Submit = function () {
+                $http.post("/ITSMS/InsertCRT", $scope.NewInsert.NewUsers)
+                .then(function (data) {
+                    location.reload();
+                    alert("Save Record");
+
+                })
+            }
+
+            $scope.Update = function () {
+                $http.post("/ITSMS/UpdateCRT", $scope.NewInsert.NewUsers)
+                .then(function (data) {
+                    location.reload();
+                    alert("Save Update");
+                    $scope.editAdd = true;
+                    $scope.editupdate = false;
+
+                })
+            }
+
+
+        });
+
+
+</script>
+
+<div ng-app="myApp" style="float:left; width:60%;height:100%;padding-top:30px;">
+    <div ng-controller="CRTctrl">
+
+        <table ng-show="CRTDetails" cellpadding="12">
+            <tr>
+                <td>
+                    ticketId
+                </td>
+
+                <td>
+                    <input type="text" ng-model="NewInsert.NewUsers.ticketId" class="form-control" id="PrType" style="width:150px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    writeproblem
+                </td>
+
+                <td>
+                    <input type="text" ng-model="NewInsert.NewUsers.writeproblem" class="form-control" id="PrType" style="width:150px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" class="btn btn-success" value="Update" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                </td>
+
+                <td>
+                    <input type="button" class="btn btn-success" value="Submit" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" />
+                </td>
+            </tr>
+
+        </table>
+        <table class="table table-bordered">
+            <thead>
+
+                <tr>
+                    <th class="col-md-2">Ticket Id </th>
+                    <th class="col-md-5">Write Problem</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="CRT in CRTDetails">
+                    <td>{{CRT.ticketId}} </td>
+                    <td>{{CRT.writeproblem}}</td>
+
+                    <td>
+                        <input type="button" value="Edit Record" id="btnEdit" class="btn btn-success" ng-model="editupdate" ng-click="EditRecord(CRT)">
+                    </td>
+
+                    <td>
+                        <input type="button" value="Delete" id="btnDelete" class="btn btn-danger" ng-click="removeRec(CRT)" />
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+

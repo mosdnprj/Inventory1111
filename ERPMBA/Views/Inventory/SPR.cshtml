@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "SPR";
+}
+
+@Html.Partial("Users")
+
+
+<script>
+
+    var myApp1 = angular.module("myApp1", []);
+
+
+    myApp1.controller("Salespersonctrl", function ($scope, $http) {
+
+        $http.get("/Inventory/GetSalespersonInfo")
+            .then(function (result) {
+                $scope.SalespersonDetails = result.data;
+                alert("Employee suceess");
+
+            });
+    });
+</script>
+
+<body ng-app="myApp1">
+    <div ng-controller="Salespersonctrl">
+        <center><h4>SalesPerson</h4></center>
+        <hr />
+
+        <table>
+            <tr>
+                <th>Seller ID</th>
+                <th>Seller Name</th>
+                <th>Seller Contact No</th>
+
+            </tr>
+            <tbody>
+                <tr ng-repeat="Salesd in SalespersonDetails">
+
+                    <td style="text-align:center">{{Salesd.Sellerid}} </td>
+                    <td style="text-align:center">{{Salesd.Sellername}}</td>
+                    <td style="text-align:center">{{Salesd.Sellercontactno}}</td>
+
+                </tr>
+
+        </table>
+
+
+
+
+    </div>
+    
+</body>

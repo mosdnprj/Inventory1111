@@ -1,0 +1,186 @@
+﻿
+@{
+    ViewBag.Title = "Chatter";
+    Layout = "~/Views/Style/MasterPage.cshtml";
+}
+
+@section featured
+{
+    @Html.Partial("Index")
+
+
+    <div class="container" style="width:100%;">
+        <div style="width:70%;float:left;">
+            <div class="col-sm-6 text" style="float:left; width:50%;height:100%;padding-top:50px;">
+                <center>
+                    <div class="dropdown" style="width:50%;height:40%;">
+
+                        <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">
+                            Invite
+                            <span class="caret"></span>
+                        </button>
+
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="left:117px;top:-10px;background: linear-gradient(to bottom, #dae2f8, #d6a4a4);">
+                            <li role="presentation"><a role="menuitem" tabindex="0" href="#">User1</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="0" href="#">User2</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="0" href="#">User3</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="0" href="#">User4</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="0" href="#">User5</a></li>
+                        </ul>
+                    </div>
+
+                    <div style="height:40%;width:50%;">
+
+                        <h3>Selected List</h3>
+                        <textarea style="height:350px;width:200px;"></textarea>
+                    </div>
+                    <div style="height:10%;width:50%;"><button type="button" class="btn btn-success">chat</button></div></br>
+                    <div class="dropdown" style="height:30%;width:50%;">
+                        <button class="btn btn-info dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">
+                            Users
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="left:50px;background: linear-gradient(to bottom, #dae2f8, #d6a4a4);">
+                            <li role="presentation"><a role="menuitem" tabindex="0" href="#">User1</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="0" href="#">User2</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="0" href="#">User3</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="0" href="#">User4</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="0" href="#">User5</a></li>
+                        </ul>
+                    </div>
+                </center>
+
+
+            </div>
+            <div style="float:left; width:50%;height:100%;padding-top:50px;">
+                <center>
+                    <div class="dropdown" style="width:50%;height:20%;">
+                        <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">
+                            Users
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="left:117px;top:-10px;background: linear-gradient(to bottom, #dae2f8, #d6a4a4);">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">User1</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">User2</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">User3</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">User4</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">User5</a></li>
+                        </ul>
+                    </div>
+                    <div style="height:40%;width:50%;">
+                        <h3>Conversation</h3>
+                        <textarea style="height:300px;width:200px;"></textarea>
+                        <textarea style="height:50px;width:200px;"></textarea>
+
+                    </div>
+
+                    <div style="height:10%;width:50%;"><button type="button" class="btn btn-success">submit</button></div></br>
+                </center>
+            </div>
+
+
+        </div>
+
+
+
+        <div style="background-color: slategray;width:30%;float:left;">
+            <div class="form-top">
+                <div class="form-top-left">
+                    <h3>Sign up now</h3>
+                    <p>Fill in the form below to get instant access:</p>
+                </div>
+                <div class="form-top-right">
+                    <i class="fa fa-pencil"></i>
+
+                </div>
+
+            </div>
+            <div class="form-bottom">
+
+                <form role="form" action="" method="post" class="registration-form">
+                    <div style="background-color: lightgrey; padding:20px">
+                        <div class="form-group">
+                            <label for="Name">Name</label>
+                            <label class="sr-only" for="form-first-name">First name</label>
+                            <input type="text" name="form-first-name" placeholder="First name..." class="form-first-name form-control" id="form-first-name" style="color:blue;" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="form-last-name">Last name</label>
+                            <input type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name" style="color:blue;" required>
+                        </div>
+                        <label for="Name">E-Mail</label>
+                        <div class="form-group">
+                            <label class="sr-only" for="form-email">Email</label>
+                            <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email" style="color:blue;" required>
+                        </div>
+                        <label for="Name">Password</label>
+                        <div class="form-group">
+                            <label class="sr-only" for="form-password">password</label>
+                            <input type="password" name="form-last-name" placeholder="Password..." class="form-password form-control" id="form-password" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="sr-only" for="form-cpassword">Conform Password</label>
+                            <input type="password" name="form-last-name" placeholder="Conform Password..." class="form-password form-control" id="form-cpassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="Name">Birthday</label>
+                            <label class="sr-only" for="form-dob">Birthday</label>
+                            <input type="date" aria-controls name="form-last-name" placeholder="Birthday..." class="form-number form-control" id="form-dob">
+                        </div>
+                        <label for="Name">Gender</label>
+                        <div class="form-group">
+                            <label class="sr-only" for="gender">Select Gender</label>
+                            <select class="form-gender form-control" id="gender">
+                                <option value="Male">Male</option>
+                                <option value="Female">FeMale</option>
+                                <div class="container">
+
+                            </select>
+
+                            @*  <h1>Bootstrap drop down with country codes</h1>
+                                <p>&nbsp;</p>*@
+                            <div class="form-group" id="country-codes">
+                                <button class="btn btn-primary form-group-toggle" type="button" data-toggle="form-group">
+                                    <span class="value">Select a Country</span>
+                                    <span class="caret"></span>
+                                </button>
+                                <select>
+                                    <ul class="form-group-menu">
+
+                                        <option><a href="#" value="+91">India(+91)</a></option>
+                                        <option><a href="#" value="+61">australia (+61)</a></option>
+                                        <option><a href="#" value="+86">China (+86)</a></option>
+                                        <option><a href="#" value="+47">Norway (+47)</a></option>
+                                        <option><a href="#" value="+46">Sweeden (+46)</a></option>
+                                        <option><a href="#" value="+79">Danmark (+79)</a></option>
+                                    </ul>
+                            </div>
+                        </div>
+
+                        </select>
+                        <label for="file">Upload your photos :</label>
+                        <input type="file" onchange="onFileSelected(event)">
+                        <img id="myimage" style=" height:200px; width:250 ">
+
+                        <script>
+
+ function onFileSelected(event) {
+  var selectedFile = event.target.files[0];
+  var reader = new FileReader();
+
+  var imgtag = document.getElementById("myimage");
+  imgtag.title = selectedFile.name;
+
+  reader.onload = function(event) {
+    imgtag.src = event.target.result;
+  };
+
+  reader.readAsDataURL(selectedFile);
+}
+
+                        </script>
+                        <input type="submit" />
+
+
+}

@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Style/MasterPage.cshtml";
+}
+
+@section featured{
+
+
+
+
+    <ul class="nav nav-pills" style="background: linear-gradient(to right, gainsboro, gainsboro); width:1150px;">
+        <br />
+        <li style="width: 200px;  text-align:center">@Html.ActionLink("incident Management", "CreateIncident", "ITSMS", new { @style = "color:Black;" })</li>
+        <li style="width: 200px;  text-align:center">@Html.ActionLink("Service Management ", "ServiceManagement", "ITSMS", new { @style = "color:Black;" })</li>
+        <li style="width: 200px;  text-align:center">@Html.ActionLink("Knowledge base", "Knowledgebase", "ITSMS", new { @style = "color:Black;" })</li>
+        <li style="width: 200px;  text-align:center">@Html.ActionLink("Problem Management", "ProblemManagement", "ITSMS", new { @style = "color:Black;" })</li>
+
+        <li style="width: 200px;  text-align:center">@Html.ActionLink("Administration", "Administration", "ITSMS", new { @style = "color:Black;" })</li>
+        <br />
+    </ul>
+
+
+}

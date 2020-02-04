@@ -1,0 +1,342 @@
+﻿
+
+@{
+    ViewBag.Title = "NewIncident";
+}
+
+@Html.Partial("CreateIncident")
+<div ng-app="myApp1" class="tab-content" id="tables" style="float:left; width:60%;height:100%;">
+
+    <script>
+
+        var myApp1 = angular.module("myApp1", []);
+
+        myApp1.controller("Incidentctrl", function ($scope, $http) {
+            $scope.IncidentDetails = "";
+            $http.get("/ITSMS/GetIncidentInfo")
+            .then(function (result) {
+                $scope.IncidentDetails = result.data;
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+
+            })
+            $scope.NewInsert = {
+                NewUsers: {}
+            }
+            $scope.removeRec = function (User) {
+                $http.post("/ITSMS/DeleteIncident", User)
+                 .then(function (data) {
+                     location.reload();
+                     return response;
+
+
+                 })
+            }
+
+            $scope.EditRecord = function (User) {
+                $scope.NewInsert.NewUsers.loginuser = User.loginuser;
+                $scope.NewInsert.NewUsers.Category = User.Category;
+
+                $scope.NewInsert.NewUsers.ContactPerson = User.ContactPerson;
+                $scope.NewInsert.NewUsers.incidenttype = User.incidenttype;
+                $scope.NewInsert.NewUsers.Servicetype = User.Servicetype;
+                $scope.NewInsert.NewUsers.businessimpact = User.businessimpact;
+                $scope.NewInsert.NewUsers.Urgency = User.Urgency;
+                $scope.NewInsert.NewUsers.serviceitem = User.serviceitem;
+                $scope.NewInsert.NewUsers.IncidentSource = User.IncidentSource;
+                $scope.NewInsert.NewUsers.AffectedEquipment = User.AffectedEquipment;
+                $scope.NewInsert.NewUsers.AssignmentRule = User.AssignmentRule;
+                $scope.NewInsert.NewUsers.Attachfile = User.Attachfile;
+                $scope.NewInsert.NewUsers.incidentsummary = User.incidentsummary;
+                $scope.NewInsert.NewUsers.DOI = User.DOI;
+                $scope.editupdate = true;
+                $scope.editAdd = false;
+                alert("Edit");
+            }
+
+            $scope.Submit = function () {
+                $http.post("/ITSMS/InsertIncident", $scope.NewInsert.NewUsers)
+                .then(function (data) {
+                    location.reload();
+                    alert("Save Record");
+
+                })
+            }
+            $scope.Update = function () {
+                $http.post("/ITSMS/UpdateIncident", $scope.NewInsert.NewUsers)
+                .then(function (data) {
+                    location.reload();
+                    alert("Save Update");
+                    $scope.editAdd = true;
+                    $scope.editupdate = false;
+
+                })
+            }
+
+
+
+        });
+
+    </script>
+    <script>
+
+        var modal = document.getElementById('id01');
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        var modal = document.getElementById('id02');
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        function myfun() {
+            var x = document.getElementById("tcktid")
+            x.innerHTML = Math.floor((Math.random() * 100) + 1) + Math.floor((Math.random() * 100) + 1)
+                + Math.floor((Math.random() * 100) + 1) + "i" + "d";
+        }
+
+
+
+    </script>
+    <div class="input-group" ng-controller="Incidentctrl" style="padding-top:50px;padding-left:50px;">
+
+        <table id="incident" ng-show="IncidentDetails">
+            <caption> <b> Create Incident</b></caption>
+            <tr>
+                <td>Login User</td>
+                <td>
+                    <input type="text" ng-model="NewInsert.NewUsers.loginuser" class="form-control" id="PrType" name="ploginuser" style="width:200px; ">
+                </td>
+                <td>Category</td>
+                <td>
+                    <input type="text" ng-model="NewInsert.NewUsers.Category" class="form-control" name="pCategory" id="PrType" style="width:200px; ">
+                </td>
+            </tr>
+            <tr>
+                <td>Contact Person</td>
+                <td>
+                    <input type="text" ng-model="NewInsert.NewUsers.ContactPerson" class="form-control" id="PrType" name="pContactPerson" style="width:200px; ">
+
+                </td>
+                <td>Incident Type</td>
+                <td>
+                    <input type="text" class="form-control" ng-model="NewInsert.NewUsers.incidenttype" name="pincidenttype" id="PrType" style="width:200px; ">
+
+                </td>
+            </tr>
+            <tr>
+                <td>Service Type</td>
+                <td>
+                    <input type="text" class="form-control" ng-model="NewInsert.NewUsers.Servicetype" name="pServicetype" id="PrType" style="width:200px; ">
+
+                </td>
+                <td>Business Impact</td>
+                <td>
+                    <input type="text" class="form-control" ng-model="NewInsert.NewUsers.businessimpact" name="pbusinessimpact" id="PrType" style="width:200px; ">
+
+                </td>
+            </tr>
+            <tr>
+                <td>Urgency</td>
+                <td>
+                    <input type="text" class="form-control" ng-model="NewInsert.NewUsers.Urgency" name="pUrgency" id="PrType" style="width:200px; ">
+
+                </td>
+                <td>Service Item</td>
+                <td>
+                    <input type="text" class="form-control" ng-model="NewInsert.NewUsers.serviceitem" name="pserviceitem" id="PrType" style="width:200px; ">
+                </td>
+            </tr>
+            <tr>
+                <td>Incident source </td>
+                <td>
+                    <input type="text" class="form-control" ng-model="NewInsert.NewUsers.IncidentSource" name="pIncidentSource" id="PrType" style="width:200px; ">
+
+                </td>
+                <td>Affected Equipment</td>
+                <td>
+                    <input type="text" class="form-control" id="PrType" ng-model="NewInsert.NewUsers.AffectedEquipment" name="pAffectedEquipment" style="width:200px; ">
+                </td>
+            </tr>
+            <tr>
+                <td>Assignment Rule</td>
+                <td>
+                    <input type="text" class="form-control" ng-model="NewInsert.NewUsers.AssignmentRule" name="pAssignmentRule" id="PrType" style="width:200px; ">
+
+
+                </td>
+                <td>Attach file</td>
+                <td>
+                    <input type="file" name="pAttachfile" ng-model="NewInsert.NewUsers.Attachfile" />
+
+
+                </td>
+            </tr>
+            <tr>
+                <td>Incident Summary</td>
+                <td>
+                    <input type="text" name="pincidentsummary" class="form-control" ng-model="NewInsert.NewUsers.incidentsummary" id="PrType" style="width:200px; ">
+
+
+                </td>
+                <td>Date of Incident</td>
+                <td>
+                    <input type="datetime" name="pincidentsummary" class="form-control" ng-model="NewInsert.NewUsers.DOI" id="PrType" style="width:200px; ">
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="button" value="Update" id="btnUpdate" ng-show="editupdate" ng-click="Update()" />
+                </td>
+
+                <td>
+                    <input type="button" class="btn btn-success" value="Submit" id="btnSubmit" ng-show="editAdd" ng-click="Submit()" />
+                </td>
+            </tr>
+
+        </table>
+
+
+
+
+        <div id="id02" class="modal">
+
+            <form class="modal-content animate">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal"></span>
+                    <div class="container">
+                        Get A ticket ID<br />
+                        <p id="tcktid"></p>
+
+                        <br /><br />
+                        <button type="button" class="btn btn-info" style="padding-right:30px;padding-bottom:5px;">Save</button>
+
+                        <button type="button" class="btn btn-info" onclick="myfun()">Get Id</button>
+                        <br />
+                        <div class="container">
+                            <button type="button" onclick="document.getElementById('id02').style.display='none'" class="btn btn-danger" class="cancelbtn">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <br />
+
+        <ul class="nav nav-tabs" ">
+            <li class="active"><a href="#foo" data-toggle="tab" style="color:blue;">Details</a></li>
+
+        </ul>
+
+
+        <style type="text/css">
+            a:hover {
+                cursor: pointer;
+                opacity: 0.8;
+            }
+
+            .cancelbtn {
+                width: auto;
+                float: left;
+                padding: 10px 18px;
+                background-color: #f44336;
+            }
+
+            .imgcontainer {
+                text-align: center;
+                margin: 24px 0 12px 0;
+                position: relative;
+            }
+
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 4;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+            }
+
+            .modal-content {
+                background-color: #fefefe;
+                margin: 5% auto 15% auto;
+                border: 1px solid #888;
+                width: 80%;
+            }
+
+            .close {
+                position: absolute;
+                right: 25px;
+                top: 0;
+                color: #000;
+                font-size: 35px;
+                font-weight: bold;
+            }
+
+                .close:hover, .close:focus {
+                    color: red;
+                    cursor: pointer;
+                }
+
+            .animate {
+                -webkit-animation: animatezoom 0.6s;
+                animation: animatezoom 0.6s;
+            }
+
+            .btn btn-info {
+                padding: 50px 20px 0px 0px;
+            }
+        </style>
+        <div>
+            <table border="1" bordercolor="black" width="765px" cellpadding="3" cellspacing="3">
+                <tr style="color:blue;">
+                <thead>
+
+                    <tr>
+                        <th class="col-md-2">Date</th>
+                        <th class="col-md-5">Summary</th>
+                        <th class="col-md-5">Type</th>
+                        <th class="col-md-10">Status</th>
+                        <th class="col-md-10">Files Attached</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="icd in IncidentDetails">
+
+                        <td>{{icd.DOI}}</td>
+                        <td>{{icd.incidentsummary}} </td>
+                        <td>{{icd.incidenttype}} </td>
+                        <td></td>
+                        <td>{{icd.Attachfile}}</td>
+                        <td>
+                            <input type="button" value="Edit Record" class="btn btn-success" id="btnEdit" ng-model="editupdate" ng-click="EditRecord(icd)">
+                        </td>
+
+                        <td>
+                            <input type="button" value="Delete" class="btn btn-danger" id="btnDelete" ng-click="removeRec(icd)" />
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+

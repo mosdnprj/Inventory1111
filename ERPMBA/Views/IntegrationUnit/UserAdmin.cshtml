@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "UserAdmin";
+}
+   @Html.Partial("Index")   
+   <div style="float:left; width:200px; padding-top:100px; border-color:#333300">
+  <ul class="nav nav-pills nav-stacked" style=" float:left; background-color:Black">
+  <li class="active" style="width:200px;  text-align:center; ">@Html.ActionLink("New User", "UserInf", "Administrator", new { @style = "color:Black;" })</li>
+  <li  style="width: 200px;   text-align:center"><a data-toggle="tab" href="#menu1" style="background-color: #00cc00;color:White">Catagory</a></li>
+  <li style="width: 200px;text-align:center"><a data-toggle="tab" href="#menu2" style="background-color: #e6e600;color:#333300 ">Role</a></li>
+  <li style="width: 200px;  text-align:center"><a data-toggle="tab" href="#menu3" style="background-color: #ff3300;color:White">Setting 1</a></li>
+  <li style="width: 200px; text-align:center"><a data-toggle="tab" href="#menu4" style="background-color: #0000ff;color:White">Setting 2</a></li>
+</ul>
+</div>

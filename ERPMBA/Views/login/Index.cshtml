@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Style/MasterPage.cshtml";
+}
+
+@section featured{
+    @{
+        ViewBag.Title = "LoginPage";
+    }
+
+
+    <style>
+        #LoginScreen {
+            width: 100%;
+            height: 1080px;
+            background-color: white;
+        }
+
+        #LoginArea {
+            width: 30%;
+            height: 580px;
+            background-color: white;
+            float: right;
+            border-left: 1px solid black;
+        }
+
+        #Mess {
+            width: 50%;
+            height: 580px;
+            float: left;
+        }
+    </style>
+    <script src="~/Scripts/angular.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/UserScript.js"></script>
+    <script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <div ng-app="myApp" ng-controller="LoginCtrl" id="LoginScreen">
+
+        <div id="Mess">
+            <div style="padding-top:30%">
+                <center>
+                    <u>
+                        Welcome To ITCloudModule.COM & NEXTOF Technology
+                    </u>
+                </center><br />
+                <p style="color:red"> <b> <u> Quote Of The Day</u></b></p><br />
+                The strong person is not the good wrestler. Rather,the strong person is the one who controls himself when he is angry.
+                (Sahih al-Bukhari, Book 73, #135)”
+            </div>
+
+        </div>
+        <div id="LoginArea">
+            <div style="padding-top:40%;padding-left:30px">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+
+                        <input style="width:200px;" class="form-control" type="text" id="Email" ng-model="GetLogin.LoginIds.email" placeholder="Enter Your E-Mail Address" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock color-blue"></i></span>
+                        <input style="width:200px;"
+                               class="form-control" type="password" id="Passwd" ng-model="GetLogin.LoginIds.Password" password placeholder="Enter Your Password" />
+                    </div>
+                </div>
+                <!--  BASIC ERROR MESSAGE
+                <div class="form-group">
+                <label class="error-message color-red">*Email & password don't match!</label>
+                </div>
+                -->
+                <div class="form-group" style="padding-left:50px;">
+                    <input type="button" class="btn btn-primary form-control" ng-click="LoginCheck()" style="width:80px;" value="Login">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>}
+

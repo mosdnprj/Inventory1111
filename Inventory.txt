@@ -1,0 +1,312 @@
+USE master
+GO
+CREATE DATABASE ERPMBA
+ON 
+( NAME = ERPMBA_dat,
+   FILENAME = "d:\ERPMBADATABASE\ERPMBAdat.mdf",
+   SIZE = 10,
+   MAXSIZE = 50,
+   FILEGROWTH = 5 )
+LOG ON
+( NAME = ERPMBA_log,
+   FILENAME = "d:\ERPMBADATABASE\ERPMBAlog.ldf",
+   SIZE = 5MB,
+   MAXSIZE = 25MB,
+   FILEGROWTH = 5MB );
+   GO
+use ERPMBA;
+create table login
+(
+userid varchar(50),
+username varchar(max)
+);
+   GO
+use ERPMBA;
+
+Create table NewCustomer
+(
+	 Sno int identity(1,1),
+         CustomerName varchar(50),
+         Companyname varchar(50),
+         Contactdisplayname varchar(50),
+         Email varchar(50),
+	 Companymail varchar(50),
+	 Phoneno int,
+         Mobileno int,
+	 Skype varchar(50),
+         Designation varchar(50),
+         Department varchar(50),
+	 Website varchar(50),
+         Street1 varchar(50),
+         Street2 varchar(50),
+         City varchar(50),
+         States varchar(50),
+         Zipcode int,
+         Country varchar(50),
+         Payment varchar(50),
+         Currency varchar(50)
+)
+
+ALTER TABLE NewCustomer ADD CustomerID AS ('NEXTC' + RIGHT('000' + CONVERT(varchar(3), Sno), 3));
+GO
+
+create table Supplier(
+
+ 	 Sno int identity(1,1),
+	 Salutation varchar(50),
+         SupplierName varchar(50),
+         Companyname varchar(50),
+         Email varchar(50),
+         Mobileno int,
+         Webpage varchar(50),
+         Suppliergroup varchar(50),
+         Businesstype varchar(50),
+         Deliveryterms varchar(50),
+         Tax varchar(50),
+         Street1 varchar(50),
+         Street2 varchar(50),
+         City varchar(50),
+         State varchar(50),
+         Zipcode int,
+         Country varchar(50),
+         Bank varchar(50),
+         Accountno int,
+         Ifsc varchar(50),
+         Paymentdeadline varchar(50),
+         Currency varchar(50),
+         Paymentmethod varchar(50)
+)
+
+ALTER TABLE Supplier ADD SupplierID AS ('NEXTS' + RIGHT('000' + CONVERT(varchar(3), Sno), 3));
+GO
+
+create table Salesperson
+(
+	Sno int identity(1,1),
+	Sellername varchar(50),
+	Sellercontactno varchar(50)
+)
+
+ALTER TABLE Salesperson ADD Sellerid AS ('NEXTSP' + RIGHT('000' + CONVERT(varchar(3), Sno), 3));
+GO
+
+create table Category
+(
+	Categoryname varchar(50),
+	CategoryStatus varchar(50)
+)
+
+create table Brand
+(
+	Brandname varchar(50),
+	Brandstatus varchar(50),
+	Categoryname varchar(50)
+)
+
+Create table Items
+(
+	Sno int identity(1,1),
+	Productname varchar(50),
+	Image_Item varchar(max),
+        Unit varchar(50),
+        Quantity varchar(50),
+	Categoryname varchar(50),
+        Brandname varchar(50),
+        UPC varchar(50),
+        MPN varchar(50),
+        EAN varchar(50),
+        SellingPrice varchar(50),
+        PurchasePrice varchar(50),
+        SupplierID varchar(50)
+        
+)
+
+ALTER TABLE Items ADD ProductID AS ('NEXTPR' + RIGHT('0000' + CONVERT(varchar(3), Sno), 3));
+GO
+
+
+
+
+
+create table Warehouse
+(
+	Sno int identity(1,1),
+	Warehousename varchar(50),
+	Warehouseloc varchar(50)
+)
+
+ALTER TABLE Warehouse ADD Warehouseno AS ('NEXTWH' + RIGHT('000' + CONVERT(varchar(3), Sno), 3));
+GO
+
+
+create table Store
+(
+	Sno int identity(1,1),
+	Warehouseno varchar(50),
+	Storename varchar(50),
+	Rows varchar(50),
+	Cols varchar(50),
+	Storedesc varchar(max)
+)
+
+ALTER TABLE Store ADD Storeno AS ('NEXTST' + RIGHT('000' + CONVERT(varchar(3), Sno), 3));
+GO
+
+
+create table Rack
+(
+	Sno int identity(1,1),
+	Warehouseno varchar(50),
+	Storeno varchar(50),
+	Rackname varchar(50),
+	RRows varchar(50),
+	Rackdesc varchar(max)
+	
+)
+
+ALTER TABLE Rack ADD Rackno AS ('NEXTRK' + RIGHT('000' + CONVERT(varchar(3), Sno), 3));
+GO
+
+
+create table Row
+(
+	Sno int identity(1,1),
+	Warehouseno varchar(50),
+	Storeno varchar(50),
+	Rackno varchar(50),
+	Rowname varchar(50),
+	Rowdesc varchar(50)
+	
+)
+
+ALTER TABLE Row ADD Rowno AS ('NEXTRW' + RIGHT('000' + CONVERT(varchar(3), Sno), 3));
+GO
+
+
+create table Stock
+(
+	
+	Warehouseno varchar(50),
+	Storeno varchar(50),
+	Rackno varchar(50),
+	Rowno varchar(50),
+	ProductID varchar(50),
+	Productname varchar(50),
+	Quantity varchar(50),
+	Unit varchar(50),
+	Price varchar(50),
+	SupplierID varchar(50),
+	
+)
+
+create table addorder
+(
+
+	itemdetail varchar(50),
+	tax varchar(50),
+	quantity varchar(50),
+	rate varchar(50),
+	amount varchar(50)
+)
+
+create table CB
+(
+	Sno int identity(1,1),
+	Name varchar(50),
+	Billdate varchar(50),
+	Duedate varchar(50),
+	
+	
+)
+
+ALTER TABLE CB ADD BillNo AS ('NEXTB' + RIGHT('000' + CONVERT(varchar(3), Sno), 3));
+GO
+
+create table CIS
+(
+	Sno int identity(1,1),
+	InvoiceDate varchar(50),
+	OrderNo varchar(50),
+	Reference varchar(50),
+	Paymentterms varchar(50),
+	Duedate varchar(50),
+	CustomerName varchar(50),
+     	ShipAddress varchar(50)
+	
+)
+
+ALTER TABLE CIS ADD InvoiceNo AS ('NEXTB' + RIGHT('000' + CONVERT(varchar(3), Sno), 3));
+GO
+	
+create table CPO
+(
+	Sno int identity(1,1),
+	TraderName varchar(50),
+	Purchasenbr varchar(50),
+	Reference varchar(50),
+	Transdate varchar(50),
+	ExpctdDelDate varchar(50),
+	ShipPref varchar(50),
+   	
+)
+
+ALTER TABLE CPO ADD PurchaseOrder1 AS ('NEXTPO' + RIGHT('000' + CONVERT(varchar(3), Sno), 3));
+GO
+
+
+create table CSO
+(
+	Sno int identity(1,1),
+	CustomerName varchar(50),
+	Reference varchar(50),
+	SalesOrderdate varchar(50),
+	ExpecShipDate varchar(50),
+	SalesPerson varchar(50),
+	DeliveryMethod varchar(50),
+     	PaymentType varchar(50)
+	
+)
+
+ALTER TABLE CSO ADD SalesOrder AS ('NEXTSO' + RIGHT('000' + CONVERT(varchar(3), Sno), 3));
+GO
+
+create table Invoice
+(
+
+	Itemdetails varchar(50),
+	Quantity varchar(50),
+	Price varchar(50),
+	Amount varchar(50),
+	Tax varchar(50)
+)
+
+
+create table NewBill
+(
+
+	Itemdetails varchar(50),
+	Quantity varchar(50),
+	Price varchar(50),
+	Amount varchar(50),
+	Tax varchar(50)
+)
+
+
+create table Newsale
+(
+
+	Itemdetails varchar(50),
+	Quantity varchar(50),
+	Price varchar(50),
+	Amount varchar(50),
+	Tax varchar(50)
+)
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "SelfAppraisal";
+}
+@Html.Partial("DM")
+<div class="tab-content" style="float:left; width:60%;height:100%;padding-left:30px;">
+    <div id="Details" class="tab-pane fade in active" style="width:100%;height:100%;padding-left:15px;padding-top:80px;">
+
+        <div class="form-group">
+            <fieldset>
+                <div id="legend">
+                    <legend>SelfAppraisal</legend>
+                </div>
+
+                <style>
+                    table {
+                        padding: 30px;
+                    }
+                </style>
+                <table>
+                    <tr>
+                        <td>
+                            SelfAppraisalDo<br /><input type="text" class="form-control" />
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            AppraisalCycle<br />
+                            <select class="form-control" id="emplid">
+                                <option>Select Employee ID</option>
+                                <option>emp1</option>
+                                <option>emp2</option>
+                                <option>emp3</option>
+                                <option>emp4</option>
+                            </select>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Rating<br />
+                            <select class="form-control" id="emplid">
+                                <option>Select Employee ID</option>
+                                <option>emp1</option>
+                                <option>emp2</option>
+                                <option>emp3</option>
+                                <option>emp4</option>
+                            </select>
+
+                        </td>
+                </table>
+
+            </fieldset>
+        </div>
+
+
+    </div>
+</div>

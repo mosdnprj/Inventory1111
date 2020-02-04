@@ -1,0 +1,171 @@
+﻿@model ERPMBA.Models.MMSdatabaseclass
+
+@{
+    ViewBag.Title = "MMSdatabaseInf";
+}
+
+@Html.Partial("Home")
+<script>
+
+        var myApp = angular.module("myApp", []);
+
+
+
+        myApp.controller("MMSctrl", function ($scope, $http) {
+            $scope.MMSDetails = "";
+            $http.get("/CRM/GetMMSdatabaseInf")
+            .then(function (result) {
+                $scope.MMSDetails = result.data;
+                $scope.editAdd = true;
+                $scope.editupdate = false;
+                alert("get started");
+            })
+
+            $scope.NewInsert =  {
+                NewMMS: {}
+            }
+            $scope.AddRecord = function () {
+
+
+
+                $scope.MMSDetails1 = true;
+
+            }
+            $scope.Submit = function () {
+                $http.post("/Administrator/InsertUsers", $scope.NewInsert.NewUsers)
+                .then(function (data) {
+                    location.reload();
+                    alert("Save Record");
+
+                })
+            }
+
+
+            $scope.removeRec = function (mms) {
+                $http.post("/CRM/DeleteMMS", mms)
+                 .then(function (data) {
+                     location.reload();
+                     return response;
+
+
+                 })
+            }
+
+            $scope.EditRecord = function (mms1) {
+
+
+                $scope.NewInsert.NewMMS.memberid = mms1.memberid;
+                $scope.NewInsert.NewMMS.memberdata = mms1.memberdata;
+                $scope.MMSDetails1 = true;
+                $scope.editupdate = true;
+                $scope.editAdd = false;
+                alert("Edit");
+
+
+
+
+            }
+
+            $scope.Submit = function () {
+                $http.post("/CRM/InsertMMS", $scope.NewInsert.NewMMS)
+                .then(function (data){
+                    location.reload();
+                    alert("Save Record");
+
+                })
+            }
+
+
+            $scope.Update = function () {
+                $http.post("/CRM/UpdateMMS", $scope.NewInsert.NewMMS)
+                .then(function (data) {
+                    location.reload();
+                    alert("Save Update");
+
+                    $scope.editAdd = true;
+                    $scope.editupdate = false;
+
+                })
+            }
+
+
+
+        });
+
+
+</script>
+<div ng-app="myApp" style="float:left; width:60%; padding-top:100px; border-color:#333300">
+
+    <div ng-controller="MMSctrl" style="padding-left:20px">
+        <h3 align="center">MMS Details</h3>
+        <table ng-show="MMSDetails1" align="center">
+            <tr>
+                <td>
+
+                    memberid
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.memberid, new { @class = "form-control", placeholder = "memberid", required = "required", Data_ng_model = "NewInsert.NewMMS.memberid" })
+                </td>
+                <td>
+                    memberdata
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.memberdata, new { @class = "form-control", placeholder = "memberdata", required = "required", Data_ng_model = "NewInsert.NewMMS.memberdata" })
+                </td>
+            </tr>
+        </table>
+        <br />
+        <table ng-show="MMSDetails1" align="center">
+            <tr>
+
+                <td>
+                    <input type="button" value="Update" id="btnUpdate" class="btn btn-success" ng-show="editupdate" ng-click="Update()" />
+                </td>
+
+                <td>
+                    <input type="button" value="Submit" id="btnSubmit" class="btn btn-success" ng-show="editAdd" ng-click="Submit()" />
+                </td>
+            </tr>
+
+
+        </table>
+        <br />
+        <br />
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-md-2">memberid</th>
+                    <th class="col-md-5">memberdata</th>
+                    <th class="col-md-10"><input type="button" value="Add Record" id="btnAdd" ng-model="AddRec" ng-click="AddRecord()"></th>
+
+
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr ng-repeat="MMSd in MMSDetails">
+
+
+                    <td>{{MMSd.memberid}} </td>
+
+
+                    <td>{{MMSd.memberdata}}</td>
+
+                    <td>
+                        <input type="button" value="Edit Record" id="btnEdit" class="btn btn-success" ng-model="editupdate" ng-click="EditRecord(MMSd)">
+                    </td>
+
+                    <td>
+                        <input type="button" value="Delete" id="btnDelete" class="btn btn-danger" ng-click="removeRec(MMSd)" />
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+
+
